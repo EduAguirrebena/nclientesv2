@@ -17,7 +17,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <?php
-        include_once('../Spread/include/head.php')
+        include_once('../nclientesv2/include/head.php')
     ?>
 
 
@@ -26,7 +26,7 @@
     <div id="app">
         <!-- SideBar -->
         <?php
-            include_once('../Spread/include/sidebar.php');
+            include_once('../nclientesv2/include/sidebar.php');
         ?>
         
 
@@ -43,45 +43,7 @@
                 <h1> <?php print_r($id_cliente); ?> </h1>
             </div>
             <div class="page-content">
-                <div class="row">
-                <div class="card">
-                                <div class="card-body">
-                                    <div id="carouselExampleFade" class="carousel slide carousel-fade"
-                                        data-bs-ride="carouselfade">
-                                        <ol class="carousel-indicators">
-                                            <li data-bs-target="#carouselExampleFade" data-bs-slide-to="0"
-                                                class="active"></li>
-                                            <li data-bs-target="#carouselExampleFade" data-bs-slide-to="1"></li>
-                                            <li data-bs-target="#carouselExampleFade" data-bs-slide-to="2"></li>
-                                        </ol>
-                                        <div class="carousel-inner">
-                                            <div class="carousel-item active">
-                                                <img id="carouselimg" src="dist/assets/images/carousel/logo1.jpg" class="d-block w-100" alt="...">
-                                               
-                                            </div>
-                                            <div class="carousel-item">
-                                                <img id="carouselimg" src="dist/assets/images/carousel/logo2.jpg" class="d-block w-100" alt="...">
-                                                
-                                            </div>
-                                            <div class="carousel-item">
-                                                <img id="carouselimg" src="dist/assets/images/carousel/logo3.jpg" class="d-block w-100" alt="...">
-                                                
-                                            </div>
-                                        </div>
-                                        <a class="carousel-control-prev" href="#carouselExampleFade" role="button"
-                                            data-bs-slide="prev">
-                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                            <span class="visually-hidden">Previous</span>
-                                        </a>
-                                        <a class="carousel-control-next" href="#carouselExampleFade" role="button"
-                                            data-bs-slide="next">
-                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                            <span class="visually-hidden">Next</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                </div>
+                
                 <section class="row">
                     <div class="col-12 col-lg-12">
                         <div class="row">
@@ -224,7 +186,7 @@
             </div>
 
             <?php
-                include_once('../Spread/include/footer.php')
+                include_once('../nclientesv2/include/footer.php')
             ?>
 </body>
 

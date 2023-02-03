@@ -2,14 +2,14 @@
 <html lang="en">
 
 <?php
-  include_once('../Spread/include/head.php')
+  include_once('../nclientesv2/include/head.php')
 ?>
 
 <body>
     <div id="app">
         <!-- SideBar -->
         <?php
-            include_once('../Spread/include/sidebar.php');
+            include_once('../nclientesv2/include/sidebar.php');
         ?>
        
         <div id="main">
@@ -147,7 +147,7 @@
             
 
            <?php
-            include_once('../Spread/include/footer.php')
+            include_once('../nclientesv2/include/footer.php')
            ?>
         
 
@@ -155,7 +155,7 @@
         </div>
     <!-- Footer contiene div de main app div -->
     <?php
-        include_once('../Spread/include/footer.php')
+        include_once('../nclientesv2/include/footer.php')
     ?>
     
 </body>

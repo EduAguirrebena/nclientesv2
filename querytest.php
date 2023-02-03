@@ -6,7 +6,7 @@
     }
     $id_cli = $_SESSION['cliente']->id_cliente;
 
-    include_once('../Spread/ws/bd/dbconn.php');
+    include_once('../nclientesv2/ws/bd/dbconn.php');
 
     $conn = new bd();
     $conn->conectar();

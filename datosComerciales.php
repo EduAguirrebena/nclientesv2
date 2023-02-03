@@ -3,7 +3,7 @@
 
 <head>
     <?php
-         include_once('../Spread/include/head.php')
+         include_once('../nclientesv2/include/head.php')
     ?>
 </head>
 
@@ -11,7 +11,7 @@
     <div id="app">
         <!-- SideBar -->
         <?php
-             include_once('../Spread/include/sidebar.php');
+             include_once('../nclientesv2/include/sidebar.php');
         ?>
 
         <div id="main">
@@ -142,22 +142,10 @@
             
            
         </div>
-
-            <footer>
-                <div class="footer clearfix mb-0 text-muted">
-                    <div class="float-start">
-                        <p>2021 &copy; Mazer</p>
-                    </div>
-                    <div class="float-end">
-                        <p>Crafted with <span class="text-danger"><i class="bi bi-heart"></i></span> by <a
-                                href="http://ahmadsaugi.com">A. Saugi</a></p>
-                    </div>
-                </div>
-            </footer>
-        </div>
+    </div>
     <!-- Footer contiene div de main app div -->
     <?php
-        include_once('../Spread/include/footer.php')
+        include_once('../nclientesv2/include/footer.php')
     ?>
 </body>
 

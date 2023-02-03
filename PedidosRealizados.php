@@ -6,7 +6,7 @@
     }
     $id_cli = $_SESSION['cliente']->id_cliente;
 
-    include_once('../Spread/ws/bd/dbconn.php');
+    include_once('../nclientesv2/ws/bd/dbconn.php');
 
     $conn = new bd();
     $conn->conectar();
@@ -47,14 +47,14 @@
 <html lang="en">
 
 <?php
-    include_once('../Spread/include/head.php')
+    include_once('../nclientesv2/include/head.php')
 ?>
 
 <body>
     <div id="app">
         <!-- SideBar -->
         <?php
-            include_once('../Spread/include/sidebar.php');
+            include_once('../nclientesv2/include/sidebar.php');
         ?>
 
         <div id="main">
@@ -79,10 +79,10 @@
                 <section class="section">
                     <div class="card">
                         <div class="card-header">
-                            Simple Datatable
+                            <input type="search" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
                         </div>
                         <div class="card-body" id="tablepr">
-                            <table class="table table-striped" id="table1">
+                            <table class="table table-striped" id="myTable">
                                 <thead>
                                     <tr>
                                         <th>Nombre</th>
@@ -110,16 +110,38 @@
                                                     <td><?=date('H:i:s',$pedido->timestamp_pedido)?></td>
                                                     <td ><?=$total?></td>
                                                     <td>
-                                                    <span class="badge bg-success btnSelect">por programar</span>
+                                                        <button
+                                                            class="btn btn-primary"
+                                                            type="button"
+                                                            data-bs-toggle="collapse"
+                                                            data-bs-target="#collapseExample"
+                                                            aria-expanded="false"
+                                                            aria-controls="collapseExample"
+                                                        >
+                                                            Button with data-bs-target
+                                                        </button>
+                                                        </p>
+                                                        
                                                     </td>
+                                                    <div class="collapse" id="collapseExample">
+                                                        Some placeholder content for the collapse component. This
+                                                        panel is hidden by default but revealed when the user
+                                                        activates the relevant trigger.
+                                                        </div>
                                                 </tr>
+
+                                               
+
+
+
+
+
                                 <?php
                                             endforeach;
                                         endif;                                
                                 ?>
                                 </tbody>
-                            </table>
-                        </div>
+                            </table> 
                     </div>
                 </section>
             </div>
@@ -128,22 +150,29 @@
         </div>
    <!-- Footer contiene div de main app div -->
    <?php
-        include_once('../Spread/include/footer.php')
+        include_once('../nclientesv2/include/footer.php')
     ?>
 
-    <!-- <script>
-        $(document).ready(function(){
-
-        $("#table1").on('click', '.btnSelect', function() {
-        // get the current row
-            var currentRow = $(this).closest("tr");
-
-            var col1 = currentRow.find(".idPedido").html();
-            
-            console.log(col1);
-         });
-        });
-    </script> -->
+<script>
+function myFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
 </body>
 
 </html>
