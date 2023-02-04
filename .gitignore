@@ -1,2 +1,5 @@
 .env
-pruebas/
+
+# git add .
+# git commit -m "comentario"
+# git push
