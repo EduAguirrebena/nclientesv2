@@ -64,7 +64,7 @@
                 </a>
             </header>
 
-            <div class="page-heading">
+            <div class="page-heading" style="position: relative !important; margin-top: 10px; margin-bottom: 15px;">
                 <div class="row">
                     <div class="col-sm-9">
                         <h3>Pedidos Realizados || Spread</h3>
@@ -82,7 +82,7 @@
                             <input type="search" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
                         </div>
                         <div class="card-body" id="tablepr">
-                            <table class="table table-striped" id="myTable">
+                            <table class="table table-striped" id="prtable">
                                 <thead>
                                     <tr>
                                         <th>Nombre</th>
@@ -96,6 +96,7 @@
 
 
                                 <?php
+                                    $index =0;
                                     $conn->conectar();
                                         if($existe):
                                             foreach($datapedido as $pedido):
@@ -105,29 +106,43 @@
                                                 $total = $row['precio'];
                                 ?>
                                                 <tr>
-                                                    <td><span class="idPedido"><?=$pedido->id_pedido?></span></td>
+                                                    <td><span class="idpedido"><?=$pedido->id_pedido?></span></td>
                                                     <td><?=date('d/m/Y',$pedido->timestamp_pedido)?></td>
                                                     <td><?=date('H:i:s',$pedido->timestamp_pedido)?></td>
                                                     <td ><?=$total?></td>
                                                     <td>
                                                         <button
-                                                            class="btn btn-primary"
+                                                            class="btnGetData btn btn-primary"
+                                                            id="mybutton"
                                                             type="button"
                                                             data-bs-toggle="collapse"
-                                                            data-bs-target="#collapseExample"
+                                                            data-bs-target="#collapseExample<?php echo $index;?>"
                                                             aria-expanded="false"
-                                                            aria-controls="collapseExample"
-                                                        >
-                                                            Button with data-bs-target
+                                                            aria-controls="collapseExample">
+                                                            resumen pedido
                                                         </button>
+
                                                         </p>
                                                         
                                                     </td>
-                                                    <div class="collapse" id="collapseExample">
-                                                        Some placeholder content for the collapse component. This
-                                                        panel is hidden by default but revealed when the user
-                                                        activates the relevant trigger.
-                                                        </div>
+                                                    <!-- <tr class="collapse" id="collapseExample<?php echo $index;?>">
+                                                            <th class="collapse"  id="collapseExample<?php echo $index;?>">NOMBRE</th>
+                                                            <th class="collapse" id="collapseExample<?php echo $index;?>">DIRECCION</th>
+                                                            <th class="collapse" id="collapseExample<?php echo $index;?>">PRECIO</th>
+                                                    </tr> -->
+                                                   
+                                                           
+                                                    <tr id="collapseExample<?php echo $index;?>">
+
+                                                            
+                                                        <thead class="collapse expandible" id="collapseExample<?php echo $index;?> ">
+                                                        
+
+
+
+                                                        </thead>
+                                                    </tr>
+                                                    
                                                 </tr>
 
                                                
@@ -137,6 +152,7 @@
 
 
                                 <?php
+                                                $index ++;
                                             endforeach;
                                         endif;                                
                                 ?>
@@ -154,24 +170,32 @@
     ?>
 
 <script>
-function myFunction() {
-  var input, filter, table, tr, td, i, txtValue;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("myTable");
-  tr = table.getElementsByTagName("tr");
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
-    if (td) {
-      txtValue = td.textContent || td.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }       
-  }
-}
+    $(document).ready(function(){
+        
+
+        $("#prtable").on('click', '.btnGetData', function() {
+                   
+
+          
+            // get the current row
+                    var currentRow = $(this).closest("tr");
+                    var currentRow = $(this).closest("tr");
+                    var exp = $(".expandible").attr('id');
+                    var colId = currentRow.find(".idpedido").html();
+                    var params = {
+                        "columnid": colId
+                    }
+                    // alert(data);
+                    $.ajax({
+                        data:  params,
+                        url:   'ws/pedidos/getBultoByPedido.php',
+                        type:  'post',
+                        success:  function (response) {
+                                $("#"+exp).html(response);
+                        }
+                    });
+                });
+    });
 </script>
 </body>
 

@@ -17,7 +17,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <?php
-        include_once('../nclientesv2/include/head.php')
+        include_once('../nclientesv2/include/head.php');
     ?>
 
 
