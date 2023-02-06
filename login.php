@@ -69,12 +69,14 @@
       </div>
     </div>
 
-  <script src="dist/assets/js/jquery.js"></script>
-  <script src="dist/assets/js/bootstrap.min.js"></script>
-  <script src="dist/assets/js/ripple.js"></script>
-  <script src="dist/assets/js/pcoded.min.js"></script>
-  <script src="dist/assets/js/jquery-validation/jquery.validate.js"></script>
-  <script src="dist/assets/js/sweetalert.min.js"></script>
+  <script src="assets/extensions/jquery/jquery.js"></script>
+  <script src="assets/js/jquery-validation/jquery.validate.js"></script>
+  <script src="assets/extensions/sweetalert2/sweetalert2.min.js"></script>
+  
+  <!-- <script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/pages/pcoded.min.js"></script>
+  <script src="assets/js/pages/ripple.js"></script> -->
+  
   <script>
     $(document).ready(function(){
       $("#btn-ingresar").click(function() {

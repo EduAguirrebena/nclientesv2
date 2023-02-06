@@ -11,36 +11,30 @@ include_once('../bd/dbconn.php');
         $query ='SELECT nombre_bulto as name, direccion_bulto as dir, precio_bulto as precio from bulto where id_pedido ='.$idpedido;
 
         $existe = false;
-        if($res = $conn->mysqli->query($query)){
-        $datapedido = array();
 
-        while($datares = $res ->fetch_object())
-        {
-            $datapedido [] = $datares;
-        }
-        $size = sizeof($datapedido);
-        $res -> close();
-        $datapedido = (object)$datapedido;
-        $existe = true;
+        if($res = $conn->mysqli->query($query)){
+            $datapedido = array();
+
+            while($datares = mysqli_fetch_array($res))
+                {
+                    $nombre = $datares['name'];
+                    $dir = $datares['dir'];
+                    $precio = $datares['precio'];
+
+                    $return_array[]=array(
+                        "nombre" => $nombre,
+                        "direccion"=>$dir,
+                        "precio" => $precio
+                    );
+
+            }
+
+            echo json_encode($return_array);
         }
         else{
             echo $conn->mysqli->error;
             exit();
         }
-
-          foreach($datapedido as $bulto){
-            echo "<tr>
-                        <td>
-                            <span>".$bulto->name."</span>
-                        </td>
-                        <td>
-                             <span>".$bulto->dir."</span>
-                        </td>
-                        <td>
-                             <span>".$bulto->precio."</span>
-                        </td>
-                </tr>";
-          }
     }
 
 

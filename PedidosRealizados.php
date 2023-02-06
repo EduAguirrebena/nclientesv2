@@ -69,10 +69,7 @@
                     <div class="col-sm-9">
                         <h3>Pedidos Realizados || Spread</h3>
                     </div>
-                    
-                    
                 </div>
-                
             </div>
             <div class="page-content">
 
@@ -95,70 +92,48 @@
                                 <tbody>
 
 
-                                <?php
-                                    $index =0;
-                                    $conn->conectar();
-                                        if($existe):
-                                            foreach($datapedido as $pedido):
-                                                $req = "SELECT sum(precio_bulto)as precio from bulto where id_pedido =".$pedido->id_pedido.";";
-                                                $restotal = mysqli_query($conn->mysqli ,$req);
-                                                $row = mysqli_fetch_assoc ($restotal);
-                                                $total = $row['precio'];
-                                ?>
-                                                <tr>
-                                                    <td><span class="idpedido"><?=$pedido->id_pedido?></span></td>
-                                                    <td><?=date('d/m/Y',$pedido->timestamp_pedido)?></td>
-                                                    <td><?=date('H:i:s',$pedido->timestamp_pedido)?></td>
-                                                    <td ><?=$total?></td>
-                                                    <td>
-                                                        <button
-                                                            class="btnGetData btn btn-primary"
-                                                            id="mybutton"
-                                                            type="button"
-                                                            data-bs-toggle="collapse"
-                                                            data-bs-target="#collapseExample<?php echo $index;?>"
-                                                            aria-expanded="false"
-                                                            aria-controls="collapseExample">
-                                                            resumen pedido
-                                                        </button>
-
-                                                        </p>
+                                    <?php
+                                        $index =0;
+                                        $conn->conectar();
+                                            if($existe):
+                                                foreach($datapedido as $pedido):
+                                                    $req = "SELECT sum(precio_bulto)as precio from bulto where id_pedido =".$pedido->id_pedido.";";
+                                                    $restotal = mysqli_query($conn->mysqli ,$req);
+                                                    $row = mysqli_fetch_assoc ($restotal);
+                                                    $total = $row['precio'];
+                                    ?>
+                                                    <tr>
+                                                        <td><span class="idpedido"><?=$pedido->id_pedido?></span></td>
+                                                        <td><?=date('d/m/Y',$pedido->timestamp_pedido)?></td>
+                                                        <td><?=date('H:i:s',$pedido->timestamp_pedido)?></td>
+                                                        <td ><?=$total?></td>
+                                                        <td>
+                                                            <button
+                                                                class="btn btn-primary btnGetData"
+                                                                id="<?php echo$index?>"
+                                                                type="button"
+                                                                data-bs-toggle="collapse"
+                                                                data-bs-target="#collapseExample<?php echo$index?>"
+                                                                aria-expanded="false"
+                                                                aria-controls="collapseExample<?php echo$index?>"
+                                                            >
+                                                                Resumen Pedido
+                                                            </button>
+                                                        </td>
                                                         
-                                                    </td>
-                                                    <!-- <tr class="collapse" id="collapseExample<?php echo $index;?>">
-                                                            <th class="collapse"  id="collapseExample<?php echo $index;?>">NOMBRE</th>
-                                                            <th class="collapse" id="collapseExample<?php echo $index;?>">DIRECCION</th>
-                                                            <th class="collapse" id="collapseExample<?php echo $index;?>">PRECIO</th>
-                                                    </tr> -->
-                                                   
-                                                           
-                                                    <tr id="collapseExample<?php echo $index;?>">
-
-                                                            
-                                                        <thead class="collapse expandible" id="collapseExample<?php echo $index;?> ">
-                                                        
-
-
-
-                                                        </thead>
                                                     </tr>
-                                                    
-                                                </tr>
-
-                                               
-
-
-
-
-
-                                <?php
-                                                $index ++;
-                                            endforeach;
-                                        endif;                                
-                                ?>
+                                                    <thead class="collapse exp<?php echo$index?>" id="collapseExample<?php echo$index?>">
+                                                   
+                                                    </thead>
+                                    <?php
+                                                    $index ++;
+                                                endforeach;
+                                            endif;                                
+                                    ?>
                                 </tbody>
                             </table> 
-                    </div>
+                        </div>
+                    </div>   
                 </section>
             </div>
 
@@ -179,19 +154,50 @@
           
             // get the current row
                     var currentRow = $(this).closest("tr");
-                    var currentRow = $(this).closest("tr");
-                    var exp = $(".expandible").attr('id');
+                    var id = $(this).attr("id");
+                    var exp = $(".exp"+id).attr('id');
                     var colId = currentRow.find(".idpedido").html();
+                    
+                    var filas = $("#"+exp+" tr").length;
+                    //alert (filas);
                     var params = {
                         "columnid": colId
                     }
-                    // alert(data);
-                    $.ajax({
-                        data:  params,
+                     $.ajax({
+                         data:  params,
                         url:   'ws/pedidos/getBultoByPedido.php',
                         type:  'post',
-                        success:  function (response) {
-                                $("#"+exp).html(response);
+                        dataType: 'JSON',
+                         success:  function (response) {
+                            var head =  " <tr>"+
+                                        '<td style="font-weight:800">Nombre</th>'+
+                                        '<td style="font-weight:800">Direccion</th>'+
+                                        '<td style="font-weight:800">Precio</th>'+
+                                    "</tr>";
+                            if(filas > 0)
+                            {
+
+                            }
+                            else{
+                                    var len = response.length;
+                                        $("#"+exp).append(head);
+                                        for(var i=0; i<len; i++){
+                                            var nombre = response[i].nombre;
+                                            var direccion = response[i].direccion;
+                                            var precio = response[i].precio;
+                                            var tr_str = 
+                                                "<tr>" +
+                                                "<td align='center'>" + nombre + "</td>" +
+                                                "<td align='center'>" + direccion + "</td>" +
+                                                "<td align='center'>" + precio + "</td>" +
+                                                "</tr>";
+                                                $("#"+exp).append(tr_str);
+                                                // $("#"+exp).html(response);
+                                        }
+                                        
+                            }
+                            
+                        
                         }
                     });
                 });
