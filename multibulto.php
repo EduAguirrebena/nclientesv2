@@ -4,10 +4,10 @@
 <head>
 	<title>Add or Remove Input Fields Dynamically</title>
 	<link rel="stylesheet" href=
-"//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-	<link rel="stylesheet" href=
-"https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+	"//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href=
+	"https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
 	</script>
 
 	<style>
@@ -40,7 +40,7 @@
                                 <div class="counter" >
                                     <p id="counterrp" value="1"></p>
                                 </div>
-								<button class="btn btn-danger"
+								<button onclick="substract()" class="btn btn-danger"
 									id="DeleteRow" type="button">
 									<i class="bi bi-trash"></i>
 									Delete
@@ -52,7 +52,7 @@
 					</div>
 
 					<div id="newinput"></div>
-					<button id="rowAdder" type="button"
+					<button id="rowAdder" onclick="add()" type="button"
 						class="btn btn-dark">
 						<span class="bi bi-plus-square-dotted">
 						</span> ADD
@@ -63,32 +63,50 @@
 	</div>
 
 	<script type="text/javascript">
+		count = 1;
+		function add(){
+			
+			
+		}
+
+		function substract(){
+			
+			
+		}
 		$("#rowAdder").click(function () {
-
-            var counter = document.querySelectorAll('[id^="counterrp"]');
-           
-            // var act = counter.getAttribute("value")
-            // var valor = parseInt(act) + 1;
-
-            // const counter = document.getElementById("counterrp");
-            // var valor = counter.attr("value");
-            // console.log(counter);
-			newRowAdd =
-			'<div id="row"> <div class="input-group m-3">' +
-			'<div class="input-group-prepend">' +
-            `<div class="counter"><p id="counterrp" value=""></p></div>`+
-			'<button class="btn btn-danger" id="DeleteRow" type="button">' +
-			'<i class="bi bi-trash"></i> Delete</button> </div>' +
-            `<p id="counterp">numero</p>`+
-			'<input type="text" class="form-control m-input"> </div> </div>';
-            //  console.log(valor);
-             console.log(counter);
-			$('#newinput').append(newRowAdd);
+			if (count >= 10)
+			{
+				console.log("no se pueden tener mas de 10 registros");
+			}
+			else{
+					count++;
+				console.log(count);
+				newRowAdd =
+				'<div id="row"> <div class="input-group m-3">' +
+				'<div class="input-group-prepend">' +
+				`<div class="counter"><p id="counterrp" value="">${count}</p></div>`+
+				'<button class="btn btn-danger" id="DeleteRow" type="button">' +
+				'<i class="bi bi-trash"></i> Delete</button> </div>' +
+				`<p id="counterp">numero</p>`+
+				'<input type="text" class="form-control m-input"> </div> </div>';
+				$('#newinput').append(newRowAdd);
+			}
+			
 		});
-
+	
 		$("body").on("click", "#DeleteRow", function () {
-			$(this).parents("#row").remove();
+
+			if(count<=1){
+				console.log("no se pueden tener 0 registros")
+			}
+			else{
+				count--;
+				console.log(count);
+				$("#DeleteRow").parents("#row").remove();
+			}
 		})
+				
+		
 	</script>
 </body>
 

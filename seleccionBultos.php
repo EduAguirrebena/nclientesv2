@@ -69,7 +69,7 @@
                         <div class="row centerrows">
                         <div class="col-6 col-lg-4 col-md-6" id=bulto-card>
                                     <div class="card">
-                                        <a href="PedidosRealizados.php">
+                                        <a href="multibulto.php">
                                             <div class="card-body px-3 py-4-5" id="imgmenu">
                                                 <div class="row">
                                                     <div class="col-md-4 "id="cardicon">
