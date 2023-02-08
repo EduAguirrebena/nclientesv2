@@ -49,7 +49,7 @@
                         <div class="row">
                             <div class="col-6 col-lg-4 col-md-6">
                                 <div class="card">
-                                    <a  href="querytest.php">
+                                    <a  href="seleccionBultos.php">
                                         <div class="card-body px-3 py-4-5" id="imgmenu">
                                             <div class="row " >
                                                 <div class="col-md-4" id="cardicon">
@@ -81,8 +81,7 @@
                                             </div>
                                         </div>
                                     </a>
-                                    
-                                </div>
+                            </div>
                             </div>
                             <div class="col-6 col-lg-4 col-md-6">
                                 <div class="card">

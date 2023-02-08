@@ -149,9 +149,6 @@
         
 
         $("#prtable").on('click', '.btnGetData', function() {
-                   
-
-          
             // get the current row
                     var currentRow = $(this).closest("tr");
                     var id = $(this).attr("id");

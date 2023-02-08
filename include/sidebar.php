@@ -22,7 +22,7 @@
                         </li>
 
                         <li class="sidebar-item ">
-                            <a href="../querytest.php" class='sidebar-link'>
+                            <a href="seleccionBultos.php" class='sidebar-link'>
                                 <i class="fa-solid fa-paper-plane"></i>
                                 <span>Enviar</span>
                             </a>
@@ -62,6 +62,12 @@
                             <a href="/datosComerciales.php" class='sidebar-link'>
                                 <i class="fa-solid fa-file-invoice"></i>
                                 <span>Datos Comerciales</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item  ">
+                            <a href="/querytest.php" class='sidebar-link'>
+                                <i class="fa-solid fa-warehouse"></i>
+                                <span>Test Query</span>
                             </a>
                         </li>
         
