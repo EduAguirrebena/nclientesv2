@@ -26,9 +26,7 @@ include_once('../bd/dbconn.php');
                         "direccion"=>$dir,
                         "precio" => $precio
                     );
-
             }
-
             echo json_encode($return_array);
         }
         else{

@@ -3,8 +3,6 @@
             header("Location: index.php");
         endif;
 
-
-
         $id_cliente = $_SESSION['cliente']->id_cliente;
 
         require_once('ws/bd/dbconn.php');
@@ -32,16 +30,30 @@
 
         
         <div id="main">
-            <header class="mb-3">
+            <header class="mb-3 d-flex" id=headpage>
                 <a href="#" class="burger-btn d-block d-xl-none">
                     <i class="bi bi-justify fs-3"></i>
                 </a>
+                <h3>Inicio || Spread</h3>
+                <h1> <?php print_r($id_cliente); ?> </h1>
+                <div class="session_close card">
+                    <i class="fa-solid fa-user"></i>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-arrow-down"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/ws/phplogout.php">Cerrar Sesión</a></li>
+                            
+                        </ul>
+                    </div>
+                </div>
             </header>
 
             <div class="page-heading">
-                <h3>Inicio || Spread</h3>
-                <h1> <?php print_r($id_cliente); ?> </h1>
+               
             </div>
+            
             <div class="page-content">
                 
                 <section class="row">
@@ -76,7 +88,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-8 menutxt">
-                                                    <h6 class="font-semibold">Bodegas</h6>
+                                                    <h6 class="font-semibold">Mis direcciones(lugar donde iremos a retirar <labl>)</h6>
                                                 </div>
                                             </div>
                                         </div>
@@ -94,7 +106,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-8 menutxt">
-                                                    <h6 class="font-semibold">Pedidos Realizados</h6>
+                                                    <h6 class="font-semibold">Mis Envios</h6>
                                                 </div>
                                             </div>
                                         </div>
@@ -137,24 +149,7 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-6 col-lg-4 col-md-6">
-                                <div class="card">
-                                    <a href="">
-                                        <div class="card-body px-3 py-4-5" id="imgmenu">
-                                            <div class="row">
-                                                <div class="col-md-4" id="cardicon">
-                                                    <div class="stats-icon green">
-                                                        <i class="fa-solid fa-boxes-stacked"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-8 menutxt">
-                                                    <h6 class=" font-semibold">Pedidos Pendientes</h6>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
+                           
                             
                         </div>
                         <div class="row">

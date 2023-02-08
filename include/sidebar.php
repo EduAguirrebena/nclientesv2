@@ -31,7 +31,7 @@
                         <li class="sidebar-item  ">
                             <a href="/Bodegas.php" class='sidebar-link'>
                                 <i class="fa-solid fa-warehouse"></i>
-                                <span>Bodegas</span>
+                                <span>Puntos de retiro</span>
                             </a>
                         </li>
         

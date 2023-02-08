@@ -1,0 +1,39 @@
+DASHBOARD				AVISAR TIEMPO RESTANTE PARA RETIRO HOY 
+
+
+envios
+Resumen total entregado pendiente 
+alta cliente credito
+
+
+IF RETIROS REALIZADOS
+NO DESPLEGAR SIEMPRE
+DISPLAY NONE EN CASO DE NO TENER RETIROS PENDIENTES
+Retiros
+Total, pendientes, retirados   || CANTIDAD DE ENVIOS PENDIENTES, SOLO DESPLEGAR AL PROCESAR PEDIDO
+MOSTRAR FECHA Y HORA DE RETIRO
+
+
+
+Nuevo envio   Continuar pedidos pendientes
+
+
+
+	MIS PEDIDOS Y ENVIOS
+
+	   Sigue tu pedido
+
+-------------------------------------------------------------------------------
+MIS Envíos
+Todos los estados del seguimiento del envío
+
+Numero pedido, fecha, dirección, nombre cliente final mas estado, linea de tiempo, popup reporteria
+
+
+
+
+-------------------------------------------
+Separar datos de facturacion y datos de envío
+Datos personales mas dirección de envío
+
+

@@ -1,13 +1,13 @@
 <?php
     session_start();
-    include_once('ws/bd/dbconn.php');
+    include('ws/bd/dbconn.php');
 
     $id_cliente = $_SESSION['cliente']->id_cliente;
     $conn = new bd();
 
     $conn -> conectar();
 
-    $query='Select Nombre_comuna as nombre from comuna';
+    $query='Select Nombre_region as nombre,id_region as id from region';
 
     if($res = $conn->mysqli->query($query))
     {
@@ -51,7 +51,7 @@
             <div class="page-content">
                     <section id="basic-vertical-layouts">
                         <div class="row match-height">
-                            <div class="col-md-6 col-12">
+                            <div class="col-md-12 col-12">
                                 <div class="card">
                                 <div class="card-header">
                                     <h4 class="card-title">Formulario de envío(Datos destinatario)</h4>
@@ -61,55 +61,58 @@
                                     <form class="form form-vertical" id="toValdiateBulto">
                                         <div class="form-body">
                                         <div class="row">
-                                            <div class="col-12">
+                                            <div class="col-6">
                                             <div class="form-group">
                                                 <label for="first-name-vertical">Nombre</label>
                                                 <input type="text" id="fname " class="form-control" name="fname" placeholder="Nombre destinatario"/>
                                             </div>
                                             </div>
-                                            <div class="col-12">
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="contact">Teléfono</label >
+                                                    <input id="numtel" class="form-control" name="numtel" placeholder="Teléfono"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
                                             <div class="form-group">
                                                 <label for="email-id-vertical">Dirección</label>
                                                 <input type="text" id="dir" class="form-control" name="dir" placeholder="Dirección"/>
                                             </div>
                                             </div>
-                                            <div class="col-12">
-                                            <div class="form-group">
-                                                <label for="contact-info-vertical">Teléfono</label >
-                                                <input id="numtel" class="form-control" name="numtel" placeholder="Teléfono"/>
-                                            </div>
-                                            </div>
-                                            <div class="col-12">
-                                            <div class="form-group">
-                                                <label for="Correo">Correo </label>
-                                                <input type="email" id="correo" class="form-control" name="correo" placeholder="Correo"/>
+                                            
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="Correo">Correo </label>
+                                                    <input type="email" id="correo" class="form-control" name="correo" placeholder="Correo"/>
+                                                </div>
                                             </div>
                                             
-                                            <div class="col-12">
+                                            <div class="col-6">
                                                 <label for="Comuna">Comuna </label>
-                                                <select name="select_box" class="form-select" id="select_comuna">
+                                                <select name="select_comuna" class="form-select" id="select_comuna">
                                                     <option value=""></option>
                                                     <?php 
                                                     foreach($comunas as $com)
                                                     {
-                                                        echo '<option value="'.$com->nombre.'">'.$com->nombre.'</option>';
+                                                        echo '<option value="'.$com->id.'">'.$com->nombre.'</option>';
                                                     }
                                                     ?>  
                                                 </select>
                                             </div>
-                                            <div class="col-12">
+                                            <div class="col-6">
                                             <div class="form-group">
                                                 <label for="Item">Item a enviar </label>
                                                 <input type="text" id="item" class="form-control" name="item" placeholder="Item"/>
                                             </div>
-                                            <div class="col-12">
+                                            <div class="col-6">
                                             <div class="form-group">
                                                 <label for="Costo">Costo item </label>
                                                 <input type="text" id="cost" class="form-control" name="cost" placeholder="Precio Item"/>
                                             </div>
-                                            <div class="col-12">
+                                            <div class="col-6">
                                             <div class="form-group">
-                                                <select name="select_type" class="form-select" id="select_type">
+                                            <label for="Costo"> Tipo envío </label>
+                                                <select name="select_type" class="form-select" id="select_type" value="">
                                                     <option value="mini">mini</option>
                                                     <option value="medium">medio</option>
                                                 </select>
@@ -142,7 +145,21 @@
     // dselect(select_box_element, {
     //     search: true
     // });
+$("#select_comuna").on('change',function(){
+    var idregion = this.value;
+    $.ajax({
+                    type: "POST",
+                    url: "ws/pedidos/getComunaByRegion.php",
+                    data: {
+                        "idregion" : idregion
+                    },
+                    success: function(data) {
 
+                        console.log(utf8_decode.data );
+                    },
+                    error: function(data){
+                    }
+})})
 
 
     $().ready(function(){
@@ -181,9 +198,32 @@
                 fname:{
                     required : "Debe ingresar un destinatario",
                     minlength : "El nombre debe tener al menos 4 caracteres"
+                },
+                dir:{
+                    required :"Debe ingresar una direccion valida",
+                    minlength :"la direccióndebe tener al menos 8 caracteres"
+                },
+                numtel:{
+                    required: "Debe ingresar el télefono del destinatario",
+                    minlength:"El teléfono debe tener al menos 9 números"
+                },
+                correo:{
+                    required:"Debe ingresar un correo",
+                    email:"Formato de correo no valido ej:'ejemplo@correo.com'"
+                },
+                select_comuna:{
+                    required:"Debe ingresar la comuna de destino"
+                },
+                item:{
+                    required : "Ingrese el objeto que se va a despachar"
+                },
+                cost:{
+                    required:"Ingrese costo del Item a despachar"
+                },
+                select_type:{
+                    required:"Debe Seleccionar el tipo de envío"
                 }
-
-            }
+            }       
         })
 
     })
@@ -195,6 +235,9 @@
 <style>
     .error{
         color:red;
+    }
+    .form-select option{
+        color:black;
     }
 </style>
 </html>
