@@ -1,10 +1,10 @@
-        <footer>
+        <footer style="">
                         <div class="footer clearfix mb-0 text-muted">
                             <div class="float-start">
                                 <p>2023 &copy; Spread</p>
                             </div>
                         </div>
-        </footer>
+        </footer> 
     </div>
 </div>
     <script src="/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>

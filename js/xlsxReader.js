@@ -4,10 +4,8 @@ class Excel{
         this.content = content;
     }
     header(){
-        
         return new row(this.content[0]);
         //return this.content[0];
-       
     }
     rows(){
         return new rowCollection(this.content.slice(1,this.content.length));
@@ -57,8 +55,7 @@ class excelPrinter{
         const  tabla =document.getElementById(table);
 
         for (let i =0; i<= 30 ; i++){
-            
-            if (i == 0 || i==2 || i==3)
+            if (i==0 || i==2 || i==3)
             {
                 let headtotable = excel.header().customrow(i);
                 tabla.querySelector("thead>tr").innerHTML += `<td>${headtotable}</td>`
@@ -75,7 +72,6 @@ class excelPrinter{
                                                         <td>${cliente}</td></tr>`
         }
     }
-
 }
         
 
@@ -86,7 +82,6 @@ const excelInput = document.getElementById('excel-input');
 
 excelInput.addEventListener('change',async function(){
     const content = await readXlsxFile(excelInput.files[0]); 
-
     const excel = new Excel(content);
     //console.log(excel.header());
     // console.log(excel.rows().first());
@@ -95,21 +90,14 @@ excelInput.addEventListener('change',async function(){
     // console.log(excel.rows().first().cliente());
     // console.log(excel.rows().first().trackid());
     // console.log(excel.rows().first().documentNumber());
-
-
     // for(i=0 ; i<100 ;i ++){
     //     console.log(excel.rows().get(i).trackid())
     // }
-
     console.log(excelPrinter.printexc('excel-table',excel));
     // console.log(excel.header());
-
     // console.log(excel.header().trackid());
     // console.log(excel.header().documentNumber());
     // console.log(excel.header().cliente());
-
     //console.log(excel.header().customrow(3));
-    
-
 
 })

@@ -11,8 +11,8 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/92ca8b0db6.js" crossorigin="anonymous"></script>
-
     <!-- <link rel="stylesheet" href="dist/assets/vendors/perfect-scrollbar/perfect-scrollbar.css"> -->
     <link rel="stylesheet" href="/assets/css/main/app.css">
+    <link rel="stylesheet" href="/assets/css/main/ncliapp.css">
     <!-- <link rel="shortcut icon" href="dist/assets/images/favicon.svg" type="image/x-icon"> -->
 </head>

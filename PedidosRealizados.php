@@ -161,7 +161,7 @@
                         "columnid": colId
                     }
                      $.ajax({
-                         data:  params,
+                        data:  params,
                         url:   'ws/pedidos/getBultoByPedido.php',
                         type:  'post',
                         dataType: 'JSON',

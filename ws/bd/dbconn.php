@@ -1,6 +1,5 @@
 
 <?php
-
     class bd{
         protected $servidor;
         protected $usuario;
@@ -12,7 +11,7 @@
         public function __construct() {
 
             /*
-            $this->servidor = getenv('mysql_host');
+            $this->servidor = getenv('mysql_host'); 
             $this->usuario = getenv('mysql_user');
             $this->password = getenv('mysql_password');
             $this->database = getenv('mysql_database');
@@ -43,5 +42,6 @@
         public function desconectar() {
             mysqli_close($this->mysqli);
         }
-}
+    }
+?>
 

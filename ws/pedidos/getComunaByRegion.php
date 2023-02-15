@@ -5,7 +5,7 @@
         $conn = new bd();
         $conn->conectar();
 
-    $query = 'SELECT CONVERT(co.nombre_comuna USING utf8) as nombre FROM provincia pro
+    $query = 'SELECT co.nombre_comuna as nombre, id_comuna as id FROM provincia pro
             inner join comuna co on co.id_provincia = pro.id_provincia
             inner join region re on re.id_region = pro.id_region
             where re.id_region ='.$idregion.";";
@@ -14,12 +14,13 @@
             while($datareg = mysqli_fetch_array($res))
                 {
                     $nombre = $datareg['nombre'];
+                    $id = $datareg["id"];
                     $return_array[]=array(
-                        "nombre" => $nombre
+                        "nombre" => $nombre,
+                        "id"  => $id
                     );
             }
-            echo json_encode($return_array);
-        
+            echo json_encode($return_array, JSON_FORCE_OBJECT);
     }
 
 
