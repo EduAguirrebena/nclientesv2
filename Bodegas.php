@@ -184,7 +184,7 @@ include_once('../nclientesv2/include/head.php');
                                     </div>
                                     <label>Calle </label>
                                     <div class="form-group">
-                                        <input type="password" placeholder="Dirección"
+                                        <input type="text" placeholder="Dirección"
                                             class="form-control">
                                     </div>
                                     <label>Número </label>
@@ -193,15 +193,27 @@ include_once('../nclientesv2/include/head.php');
                                             class="form-control">
                                     </div>
                                     <label>Comuna</label> </label>
+                                    <label for="select_regioncre">Region</label> </label>
                                     <div class="input-group mb-3">
                                         <label class="input-group-text"
-                                            for="inputGroupSelect01">Comunas</label>
-                                        <select class="form-select" id="inputGroupSelect01">
-                                            <option selected>Comuna...</option>
-                                            <option value="1">Talagante</option>
-                                            <option value="2">Quilicura</option>
-                                            <option value="3">Independencia</option>
+                                            for="select_regioncre">Comunas</label>
+                                        <select class="form-select" name="select_regioncre" id="select_regioncre">
+                                            <option value=""></option>
+                                                <?php 
+                                                    foreach($comunas as $com)
+                                                    {
+                                                        echo '<option value="'.$com->id.'">'.$com->nombre.'</option>';
+                                                    }
+                                                ?>  
                                         </select>
+                                    </div>
+                                    <label for="select_comunacre">Comuna</label> </label>
+                                    <div class="input-group mb-3">
+                                        <label class="input-group-text"
+                                            for="select_comunacre">Comunas</label>
+                                            <select class="form-select" name="select_comunacre" id="select_comunacre">
+                                                <option value=""></option>
+                                            </select>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -253,11 +265,11 @@ include_once('../nclientesv2/include/head.php');
                                 <input type="text" placeholder="Número"
                                     class="form-control" name="numero" id="numero">
                             </div>
-                            <label for="select_regioncli">Region</label> </label>
+                            <label for="select_regionmod">Region</label> </label>
                             <div class="input-group mb-3">
                                 <label class="input-group-text"
-                                    for="select_regioncli">Comunas</label>
-                                <select class="form-select" name="select_regioncli" id="select_regioncli">
+                                    for="select_regionmod">Comunas</label>
+                                <select class="form-select" name="select_regionmod" id="select_regionmod">
                                     <option value=""></option>
                                         <?php 
                                             foreach($comunas as $com)
@@ -267,11 +279,11 @@ include_once('../nclientesv2/include/head.php');
                                         ?>  
                                 </select>
                             </div>
-                            <label for="select_comunacli">Comuna</label> </label>
+                            <label for="select_comunamod">Comuna</label> </label>
                             <div class="input-group mb-3">
                                 <label class="input-group-text"
-                                    for="select_comunacli">Comunas</label>
-                                    <select class="form-select" name="select_comunacli" id="select_comunacli">
+                                    for="select_comunamod">Comunas</label>
+                                    <select class="form-select" name="select_comunamod" id="select_comunamod">
                                         <option value=""></option>
                                     </select>
                             </div>
@@ -301,9 +313,10 @@ include_once('../nclientesv2/include/head.php');
 
     <script>
 
-        $("#select_regioncli").on('change',function(){
+        $("#select_regioncre").on('change',function(){
+            
             var idregion = this.value;
-            var comuna = document.getElementById("select_comunacli");
+            var comuna = document.getElementById("select_comunacre");
             comuna.options = new Option("");
             comuna.options.length = 0;
             $.ajax({
@@ -317,7 +330,32 @@ include_once('../nclientesv2/include/head.php');
                                 console.log(data);
 
                                 $.each(data, function (key, value){
-                                    let select = document.getElementById("select_comunacli");
+                                    let select = document.getElementById("select_comunacre");
+                                    select.options[select.options.length] = new Option(value.nombre,value.id);
+                                })
+                            },
+                                error: function(data){
+                            }
+            })
+        })
+
+        $("#select_regionmod").on('change',function(){
+            var idregion = this.value;
+            var comuna = document.getElementById("select_comunamod");
+            comuna.options = new Option("");
+            comuna.options.length = 0;
+            $.ajax({
+                            type: "POST",
+                            url: "ws/pedidos/getComunaByRegion.php",
+                            dataType: 'json',
+                            data: {
+                                "idregion" : idregion
+                            },
+                            success: function(data) {
+                                console.log(data);
+
+                                $.each(data, function (key, value){
+                                    let select = document.getElementById("select_comunamod");
                                     select.options[select.options.length] = new Option(value.nombre);
                                 })
                                 
@@ -326,8 +364,6 @@ include_once('../nclientesv2/include/head.php');
                             }
             })
         })
-
-
 
         ().ready(function(){
             $("#formmodificar").validate({

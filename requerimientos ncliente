@@ -43,10 +43,11 @@ Estados logisticos "Pedido" (retiro)
 Estados logisticos "bulto" Entregas (envios)
 0 -> Creado
 3 -> En CD Spread
+
+-->de aqui en adelante beetrack.
 4 -> En ruta
 5 -> Entregado
 6 -> No entregado (razon deberia ser integración con beetrack)
-
 
 Numero de retiro -> almacenar en tabla pedido
 	se genera "R" retiro . numero pedido . fecha (dia.mes)
@@ -68,3 +69,7 @@ pdf y cote enviar a cliente
 --------------------------------------
 
 
+Item sobre 500k se debe sumar un 0.6% al precio final.
+
+
+añadir Fecha creacion usuario.

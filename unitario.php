@@ -391,7 +391,7 @@
            var value = this.value; 
            var x = document.getElementById("tipoenvio");
            //alert(x.textContent +"   " +value);
-           alert(value);
+           
             if(value==="1"){
                 x.innerHTML = "Rango de peso";
                 
@@ -422,7 +422,7 @@ $("#select_region").on('change',function(){
 
                         $.each(data, function (key, value){
                             let select = document.getElementById("select_comuna");
-                            select.options[select.options.length] = new Option(value.nombre);
+                            select.options[select.options.length] = new Option(value.nombre,value.id);
                         })
                         
                     },
@@ -449,7 +449,7 @@ $("#select_regioncli").on('change',function(){
 
                         $.each(data, function (key, value){
                             let select = document.getElementById("select_comunacli");
-                            select.options[select.options.length] = new Option(value.nombre);
+                            select.options[select.options.length] = new Option(value.nombre,value.id);
                         })
                         
                     },
@@ -570,44 +570,50 @@ $("#select_regioncli").on('change',function(){
                     },
                     submitHandler: function(form){
                             
+                    
                         try{
-                            let dir = document.getElementById('form_dir').value;
-                            let numero = document.getElementById('form_numero').value;
-                            let nombre = document.getElementById('form_nombre').value;
-                            let comuna = document.getElementById('select_comunacli');
-                            let comunavalue = comuna.value;
-                            let region = document.getElementById('select_regioncli').value;
-                            alert(region);
-                            console.log($('#formdir').serialize());
-                            $.ajax({
-                                url: "ws/bodega/newBodega.php",
-                                type: "POST",
-                                data: {
-                                    "direccion" : dir,
-                                    "numero": numero,
-                                    "nombre" : nombre,
-                                    "comuna" : comuna,
-                                    "region":region
-                                },
-                                success:function(resp){
-                                    if(resp==="error"){
-                                        alert("Los datos no existen");
+                            let vdir = document.getElementById('form_dir').value;
+                            let vnumero = document.getElementById('form_numero').value;
+                            let vnombre = document.getElementById('form_nombre').value;
+                            let vcomuna = document.getElementById('select_comunacli');
+                            let vcomunavalue = vcomuna.value;
+                            let vregion = document.getElementById('select_regioncli').value;
+
+                            let dataajax = {direccion : vdir,
+                                            numero: vnumero,
+                                            nombre : vnombre,
+                                            comuna : vcomunavalue,
+                                            region: vregion};
+                            
+                    
+                            alert(JSON.stringify(dataajax));
+                                    $.ajax({
+                                    url: "ws/bodega/newBodega.php",
+                                    type: "POST",
+                                    data: JSON.stringify(dataajax),
+                                    success:function(resp){
+                                        if(resp==="error"){
+                                            console.log("creado");
+                                            return false; 
+                                        }
+                                        else{
+                                            return false;
+                                        }
                                     }
-                                    else{
-                                        
-                                    }
-                                }
-                                
-                            });
+                                    
+                                });
                         }
                         catch(error){
                             console.log(error);
-                            return false; 
-                        }
-                       
-                        return false; 
-                       
+                            return false;
+                        }    
+                        
+                           
+                           
+                            
                     }
+                        
+                    
                 })
    
 
@@ -655,51 +661,6 @@ $("#select_regioncli").on('change',function(){
         }
     })
 
-
-    $('#btnscsdir').click(function(){
-
-        if($('#flexSwitchCheckDefault').is(':checked')){
-            alert("el checkbox esta selecionado");
-        }
-        else{
-
-
-
-            // let calle = document.getElementById("form_dir");
-            // let numero = document.getElementById("form_numero");
-            // let nombre = document.getElementById("form_nombre");
-            // let comuna = document.getElementById("select_regioncli").value;
-            // $.ajax({
-            //             type: "POST",
-            //             url: "ws/bodega/newBodega.php",
-            //             dataType: 'json',
-            //             data: {
-            //                 "direccion": calle,
-            //                 "numero": numero,
-            //                 "nombre":nombre,
-            //                 "comuna":comuna,
-            //             },
-            //             success: function(data) {
-            //                 console.log(data);
-
-            //                 $.each(data, function (key, value){
-            //                     // let select = document.getElementById("select_comunacli");
-            //                     // select.options[select.options.length] = new Option(value.nombre);
-            //                     // console.log(value.nombre);
-            //                 })
-                            
-            //             },
-            //                 error: function(data){
-            //             }
-            //     })
-
-        }
-
-    })
-
-        
-   
-     
 </script>
     
     
