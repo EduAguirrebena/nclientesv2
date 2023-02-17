@@ -26,37 +26,12 @@
         <?php
             include_once('../nclientesv2/include/sidebar.php');
         ?>
-        <div id="headpage" class="d-flex">
-
-            <div>
-                <a href="#" class="burger-btn d-block d-xl-none">
-                    <i class="bi bi-justify fs-3"></i>
-                </a>
-                <h3>Inicio || Spread</h3>
-            </div>
-
-            <div>
-                <h1> <?php print_r($id_cliente); ?> </h1>
-            </div>
-
-            <div class="session_close card">
-                <i class="fa-solid fa-user"></i>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fa-solid fa-arrow-down"></i>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/ws/phplogout.php">Cerrar Sesión</a></li>
-                        
-                    </ul>
-                </div>
-            </div>
-
-        </div>
-        
-
        
-        <div id="main">
+        <div id="main"  class="layout-navbar">
+
+            <?php
+                include_once('./include/topbar.php');
+            ?>
        
 
             <div class="page-content" style="color:3e3e3f;">
@@ -243,9 +218,5 @@
             window.location.href = url;
         })
     })
-
 </script>
-
-
-
 </html>

@@ -24,13 +24,10 @@
     
     $query = "INSERT INTO bodega (id_bodega,nombre_bodega,calle_bodega,numero_bodega,principal_bodega,isDelete,DeleteDate,user_delete_id,id_cliente,id_comuna) 
               VALUES(null,'$nombre','$direccion','$numero','0','0',null,null,'$id_cliente','$comuna')";
-    
-       
-
+              
         if($conn->mysqli->query($query)){
             echo true;
         } else {
             echo false;
         }
-
 ?>

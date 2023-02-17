@@ -65,12 +65,13 @@ include_once('../nclientesv2/include/head.php');
         <?php
               include_once('../nclientesv2/include/sidebar.php');
         ?>
-        <div id="main">
-            <header class="mb-3">
-                <a href="#" class="burger-btn d-block d-xl-none">
-                    <i class="bi bi-justify fs-3"></i>
-                </a>
-            </header>
+        
+        
+        <div id="main" class="layout-navbar">
+       
+            <?php
+                include_once('./include/topbar.php');
+            ?>
 
             <div class="page-heading">
                 <div class="row">
@@ -88,40 +89,49 @@ include_once('../nclientesv2/include/head.php');
             </div>
             <div class="page-content">
 
-            
-                <div class="row">
-                        <?php
-                            foreach($bodegas as $bodega):
-                            $main = $bodega->principal;
-                        ?>
-                            <div class="col-lg-3 col-md-4 col-sm-6 col-12" >
-                                    <div class="card bodega">
-                                        <div class="card-content" style="justify-content: center;">
-                                            <div class="card-body" id="cardbodywarehouse" >
-                                                <div class="row">
-                                                    <h4 class="card-title col-10"><?php echo $bodega->nombre?></h4>
-                                                </div>
-                                                <p style="flex-direction: column-reverse;"><?php echo $bodega->calle?></p>
-                                                <p class="card-text">
-                                                <?php echo $bodega->comuna.', '.$bodega->region?>
-                                                </p>
-                                                <div class="row">
-                                                    <div class="col-4">
-                                                        <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
-                                                            data-bs-target="#ModForm">
-                                                            Modificar
-                                                        </button>
+                <div class="resumen-bodegas">
+                    <div class="row">
+                                <?php
+                                    foreach($bodegas as $bodega):
+                                    $main = $bodega->principal;
+                                ?>
+                                    <div class="card_bodegas col-lg-3 col-md-4 col-sm-6 col-12" >
+                                            <div class="card bodega card_bodegas">
+                                                <div class="card-content" style="justify-content: center;">
+                                                    <div class="card-body" id="cardbodywarehouse" >
+                                                        <div class="row">
+                                                            <h4 class="card-title col-10"><?php echo $bodega->nombre?></h4>
+                                                        </div>
+                                                        <p style="flex-direction: column-reverse;"><?php echo $bodega->calle?></p>
+                                                        <p class="card-text">
+                                                        <?php echo $bodega->comuna.', '.$bodega->region?>
+                                                        </p>
+                                                        <div class="row" style="justify-content: center;">
+                                                            <div class="col-4">
+                                                                <button type="button" class="btn btn-warning" data-bs-toggle="tooltip" title="Modificar" data-bs-toggle="modal"
+                                                                    data-bs-target="#ModForm">
+                                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-4">
+                                                                <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" title="Eliminar" data-bs-toggle="modal"
+                                                                    data-bs-target="#ModForm">
+                                                                    <i class="fa-solid fa-trash"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
                                                     </div>
+                                                    
                                                 </div>
                                             </div>
-                                            
-                                        </div>
                                     </div>
-                            </div>
-                        <?php
-                                endforeach;                                                                    
-                        ?>
+                                <?php
+                                        endforeach;                                                                    
+                                ?>
+                        </div>
+
                 </div>
+                    
             </div>
 
             
@@ -236,75 +246,75 @@ include_once('../nclientesv2/include/head.php');
             
             </div>
             <!--Modificar Bodega form Modal -->
-            <div class="modal fade text-left" id="ModForm"  tabindex="-1" role="dialog"
+            <form action="" class="modal fade text-left" id="ModForm"  tabindex="-1" role="dialog"
             aria-labelledby="myModalLabel33" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-                role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="myModalLabel33">Modificar Bodega</h4>
-                        <button type="button" class="close" data-bs-dismiss="modal"
-                            aria-label="Close">
-                            <i data-feather="x"></i>
-                        </button>
-                    </div>
-                    <form id="formmodificar">
-                        <div class="modal-body">
-                            <label for="nombre">Nombre </label>
-                            <div class="form-group">
-                                <input type="text" placeholder="Nombre"
-                                    class="form-control" name="nombre" id="nombre">
-                            </div>
-                            <label for="calle">Calle </label>
-                            <div class="form-group">
-                                <input type="text" placeholder="Dirección"
-                                    class="form-control" name="calle" id="calle">
-                            </div>
-                            <label for="numero">Número </label>
-                            <div class="form-group">
-                                <input type="text" placeholder="Número"
-                                    class="form-control" name="numero" id="numero">
-                            </div>
-                            <label for="select_regionmod">Region</label> </label>
-                            <div class="input-group mb-3">
-                                <label class="input-group-text"
-                                    for="select_regionmod">Comunas</label>
-                                <select class="form-select" name="select_regionmod" id="select_regionmod">
-                                    <option value=""></option>
-                                        <?php 
-                                            foreach($comunas as $com)
-                                            {
-                                                echo '<option value="'.$com->id.'">'.$com->nombre.'</option>';
-                                            }
-                                        ?>  
-                                </select>
-                            </div>
-                            <label for="select_comunamod">Comuna</label> </label>
-                            <div class="input-group mb-3">
-                                <label class="input-group-text"
-                                    for="select_comunamod">Comunas</label>
-                                    <select class="form-select" name="select_comunamod" id="select_comunamod">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+                    role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel33">Modificar Bodega</h4>
+                            <button type="button" class="close" data-bs-dismiss="modal"
+                                aria-label="Close">
+                                <i data-feather="x"></i>
+                            </button>
+                        </div>
+                        <div id="formmodificar">
+                            <div class="modal-body">
+                                <label for="nombre">Nombre </label>
+                                <div class="form-group">
+                                    <input type="text" placeholder="Nombre"
+                                        class="form-control" name="nombre" id="nombre" required>
+                                </div>
+                                <label for="calle">Calle </label>
+                                <div class="form-group">
+                                    <input type="text" placeholder="Dirección"
+                                        class="form-control" name="calle" id="calle">
+                                </div>
+                                <label for="numero">Número </label>
+                                <div class="form-group">
+                                    <input type="text" placeholder="Número"
+                                        class="form-control" name="numero" id="numero">
+                                </div>
+                                <label for="select_regionmod">Region</label> </label>
+                                <div class="input-group mb-3">
+                                    <label class="input-group-text"
+                                        for="select_regionmod">Comunas</label>
+                                    <select class="form-select" name="select_regionmod" id="select_regionmod">
                                         <option value=""></option>
+                                            <?php 
+                                                foreach($comunas as $com)
+                                                {
+                                                    echo '<option value="'.$com->id.'">'.$com->nombre.'</option>';
+                                                }
+                                            ?>  
                                     </select>
+                                </div>
+                                <label for="select_comunamod">Comuna</label> </label>
+                                <div class="input-group mb-3">
+                                    <label class="input-group-text"
+                                        for="select_comunamod">Comunas</label>
+                                        <select class="form-select" name="select_comunamod" id="select_comunamod">
+                                            <option value=""></option>
+                                        </select>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-light-secondary"
+                                    data-bs-dismiss="modal">
+                                    <i class="bx bx-x d-block d-sm-none"></i>
+                                    <span class="d-none d-sm-block">Cancelar</span>
+                                </button>
+                                <input type="submit" value="Modificar"  class="submit btn btn-primary ml-1"
+                                    >
+                                    <i class="bx bx-check d-block d-sm-none"></i>
+                                    <span class="d-none d-sm-block"></span>
+                                </input>
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-light-secondary"
-                                data-bs-dismiss="modal">
-                                <i class="bx bx-x d-block d-sm-none"></i>
-                                <span class="d-none d-sm-block">Cancelar</span>
-                            </button>
-                            <button type="submit" value="submit"  class="submit btn btn-primary ml-1"
-                                data-bs-dismiss="modal">
-                                <i class="bx bx-check d-block d-sm-none"></i>
-                                <span class="d-none d-sm-block">Modificar</span>
-                            </button>
-                        </div>
-                    </form>
+                    </div>
                 </div>
-            </div>
 
-        </div>
+            </form>
    <!-- Footer contiene div de main app div -->
    <?php
         include_once('../nclientesv2/include/footer.php')
@@ -366,7 +376,10 @@ include_once('../nclientesv2/include/head.php');
         })
 
         ().ready(function(){
-            $("#formmodificar").validate({
+            
+            
+            $("#ModForm").validate(
+                {
                 rules:{
                     nombre:{
                         required : true
@@ -405,6 +418,8 @@ include_once('../nclientesv2/include/head.php');
                 }
             })
         })
+
+        
     </script>
 
 </html>

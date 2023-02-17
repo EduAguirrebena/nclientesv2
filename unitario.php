@@ -15,12 +15,13 @@
                             bo.numero_bodega as numero,
                             bo.principal_bodega as principal, 
                             co.nombre_comuna as comuna,
-                            re.nombre_region as region
+                            re.nombre_region as region,
+                            bo.id_bodega as id
                         FROM bodega bo
                         inner join comuna co on co.id_comuna = bo.id_comuna
                         inner join provincia pro on pro.id_provincia = co.id_provincia
                         inner join region re on re.id_region = pro.id_region
-                        where bo.id_cliente = 1394';
+                        where bo.id_cliente ='.$id_cliente;
 
     if($res = $conn->mysqli->query($query))
     {
@@ -64,35 +65,14 @@
         <?php
             include_once('../nclientesv2/include/sidebar.php');
         ?>
-        <div id="headpage" class="d-flex">
-
-            <div>
-                <a href="#" class="burger-btn d-block d-xl-none">
-                    <i class="bi bi-justify fs-3"></i>
-                </a>
-                <h3>Inicio || Spread</h3>
-            </div>
-
-            <div>
-                <h1> <?php print_r($id_cliente); ?> </h1>
-            </div>
-
-            <div class="session_close card">
-                <i class="fa-solid fa-user"></i>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fa-solid fa-arrow-down"></i>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/ws/phplogout.php">Cerrar Sesión</a></li>
-                        
-                    </ul>
-                </div>
-        </div>
+            
 
 </div>
 
-        <div id="main">
+        <div id="main"  class="layout-navbar">
+            <?php
+                include_once('./include/topbar.php');
+            ?>
             
             <div class="page-content" >
                 
@@ -149,8 +129,8 @@
                                                         <div class="row">
                                                             <div class="col-6">
                                                                 <div class="form-group">
-                                                                    <label for="first-name-column">Dirección</label>
-                                                                    <input type="text" id="first-name-column" class="form-control"
+                                                                    <label for="dirchose">Dirección</label>
+                                                                    <input type="text" id="dirchose" class="form-control"
                                                                         placeholder="" name="fname-column" <?php
 
                                                                                                                     foreach($bodegas as $bodega):
@@ -165,7 +145,9 @@
                                                                                                                     ?>
                                                                 </div>
                                                             </div>
-                                                            <div class="row">
+                                                            
+                                                            <form >
+                                                                <div class="row carddireccion" id="<?php echo $bodega->id?>">
                                                                     <?php
                                                                         foreach($bodegas as $bodega):
                                                                         $main = $bodega->principal;
@@ -177,15 +159,15 @@
                                                                                             <div class="row">
                                                                                                 <h4 class="card-title col-10"><?php echo $bodega->nombre?></h4>
                                                                                                 <?php if($main==1):?>
-                                                                                                    <input class="col-2" style="align-items: flex-start;" type="checkbox" name="Usar" id="usardir" checked>
+                                                                                                    <input class="col-2" style="align-items: flex-start;" value="<?php echo $bodega->id?>" type="radio" name="Usar" id="usardir" checked>
 
                                                                                                 <?php else:?>
-                                                                                                    <input class="col-2" style="align-items: flex-start;" type="checkbox" name="Usar" id="usardir" >
+                                                                                                    <input class="col-2" style="align-items: flex-start;" value="<?php echo $bodega->id?>" type="radio" name="Usar" id="usardir" >
                                                                                                     
                                                                                                 <?php endif;?>
                                                                                             </div>
                                                                                             
-                                                                                            <p style="flex-direction: column-reverse;"><?php echo $bodega->calle?></p>
+                                                                                            <p style="flex-direction: column-reverse;"><?php echo $bodega->calle.' '.$bodega->numero?></p>
                                                                                             <p class="card-text">
                                                                                             <?php echo $bodega->comuna.', '.$bodega->region?>
                                                                                             </p>
@@ -196,8 +178,9 @@
                                                                     <?php
                                                                             endforeach;                                                                    
                                                                     ?>
-                                                                
-                                                            </div>
+                                                                </div>
+                                                            </form>
+                                                            
                                                           
                                                                 <div class="row collapse  form" id=collapseotherdir>
                                                                 <form class="form" id="formdir">
@@ -285,8 +268,8 @@
                                         <div class="row">
                                             <div class="col-6">
                                             <div class="form-group">
-                                                <label for="first-name">Nombre</label>
-                                                <input type="text" id="fname " class="form-control" name="fname" placeholder="Nombre destinatario"/>
+                                                <label for="gg">Nombre</label>
+                                                <input type="text" id="nombredestinatario" class="form-control" name="nombredestinatario" placeholder="Nombre Destinatario"/>
                                             </div>
                                             </div>
                                             <div class="col-6">
@@ -310,7 +293,7 @@
                                             </div>
                                             
                                             <div class="col-6">
-                                                <label for="Comuna">Región </label>
+                                                <label for="select_region">Región </label>
                                                 <select name="select_region" class="form-select" id="select_region">
                                                     <option value=""></option>
                                                     <?php 
@@ -344,14 +327,14 @@
                                                 <label for="Costo"> Tipo envío </label>
                                                     <select name="select_type" class="form-select" id="select_type" value="">
                                                         <option value="1"></option>
-                                                        <option value="mini">mini</option>
-                                                        <option value="medium">medio</option>
+                                                        <option value="1">mini</option>
+                                                        <option value="2">medio</option>
                                                     </select>
                                                 </div>
                                                 <label id="tipoenvio">Rango de peso</label>
                                             </div>
                                             <div class="col-4 justify-content-start">
-                                                <button  type="submit" class="submit btn btn-primary me-1 mb-1 col-12" value="Submit"> Enviar </button>
+                                                <button type="submit" class="submit btn btn-primary me-1 mb-1 col-12" value="Submit"> Enviar </button>
                                             </div>
                                         </div>
                                     </form>
@@ -362,35 +345,71 @@
                         
                         </div>
                     </section> 
-
-                    <form id="testform">
-                        <input type="text" name="texttest" id="texttest">
-                        <input type="submit" class="submit" value="submittest">
-                    </form>
             </div>
+            <button id="buttonsubmit">
+                 pressme                                       
+            </button>
 
             <?php
                 include_once('../nclientesv2/include/footer.php')
             ?>
-
             <script src="assets/js/jquery-validation/jquery.validate.js"></script>
 
-            <script src="./js/validatenewbodega.js"></script>
-
+            <script src="./js/newPedido.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 
+    <?php 
+        foreach($bodegas as $bodega):
+            if($bodega->principal == 1):
+    ?>
+
+    var id_bodega=<?=$bodega->id?>;
+    
+    <?php
+            endif;
+        endforeach;
+    ?>
     // var select_box_element = document.querySelector('#select_box');
 
     // dselect(select_box_element, {
     //     search: true
     // });
+    document.querySelectorAll("#usardir").forEach(el => {
+            el.addEventListener("click", e => {
+                let id = e.target.getAttribute("value");
+                id_bodega = id;
+                // alert(id);
+                $.ajax({
+                    type: "POST",
+                    url: "ws/bodega/getbodegaById.php",
+                    dataType: 'json',
+                    data: {
+                        "id_bodega" : id
+                    },
+                    success: function(data) {
+                        console.log(data);
 
+                        $.each(data, function (key, value){
+                            
+                            document.getElementById("dirchose").innerHTML = ""+value.direccion+' '+value.numero+', '+value.comuna+', '+value.region+"";
+                            
+                            document.getElementById("resumemyData").innerHTML = ""+value.nombre+'| '+value.direccion+' '+value.numero+"";
+                            
+                        })
+                        
+                    },
+                        error: function(data){
+                    }
+                })
+            });
+        });
     
         $("#select_type").change(function(){
            console.log(this.value);
            var value = this.value; 
            var x = document.getElementById("tipoenvio");
-           //alert(x.textContent +"   " +value);
+        //    alert(x.textContent +"   " +value);
            
             if(value==="1"){
                 x.innerHTML = "Rango de peso";
@@ -457,79 +476,6 @@ $("#select_regioncli").on('change',function(){
                     }
     })
 })
-
-    $().ready(function(){
-        $('#toValdiateBulto').validate({
-            rules:{
-                fname:{
-                    required :true,
-                    minlength:4
-                },
-                dir:{
-                    required :true,
-                    minlength :8
-                },
-                numtel:{
-                    required: true,
-                    minlength:9
-                },
-                correo:{
-                    required:true,
-                    email:true
-                },
-                select_region:{
-                    required:true
-                },
-                select_comuna:{
-                    required:true
-                },
-                item:{
-                    required : true
-                },
-                cost:{
-                    required:true
-                },
-                select_type:{
-                    required:true
-                }
-            },
-            messages:{
-                fname:{
-                    required : "Debe ingresar un destinatario",
-                    minlength : "El nombre debe tener al menos 4 caracteres"
-                },
-                dir:{
-                    required :"Debe ingresar una direccion valida",
-                    minlength :"la direccióndebe tener al menos 8 caracteres"
-                },
-                numtel:{
-                    required: "Debe ingresar el télefono del destinatario",
-                    minlength:"El teléfono debe tener al menos 9 números"
-                },
-                correo:{
-                    required:"Debe ingresar un correo",
-                    email:"Formato de correo no valido ej:'ejemplo@correo.com'"
-                },
-                select_comuna:{
-                    required:"Debe seleccionar una Región",
-                },
-                select_comuna:{
-                    required:"Debe ingresar la comuna de destino"
-                },
-                item:{
-                    required : "Ingrese el objeto que se va a despachar"
-                },
-                cost:{
-                    required:"Ingrese costo del Item a despachar"
-                },
-                select_type:{
-                    required:"Debe Seleccionar el tipo de envío"
-                }
-            }   
-        })
-       
-    })
-
     
         $('#formdir').validate({
                     rules:{
@@ -586,12 +532,13 @@ $("#select_regioncli").on('change',function(){
                                             region: vregion};
                             
                     
-                            alert(JSON.stringify(dataajax));
+                            //alert(JSON.stringify(dataajax));
                                     $.ajax({
                                     url: "ws/bodega/newBodega.php",
                                     type: "POST",
                                     data: JSON.stringify(dataajax),
                                     success:function(resp){
+                                        
                                         if(resp==="error"){
                                             console.log("creado");
                                             return false; 
@@ -660,6 +607,7 @@ $("#select_regioncli").on('change',function(){
             }
         }
     })
+
 
 </script>
     
