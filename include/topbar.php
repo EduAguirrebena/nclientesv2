@@ -22,7 +22,7 @@
                                     </div>
                                     <div class="user-img d-flex align-items-center">
                                         <div class="avatar avatar-md">
-                                            <img src="assets/images/faces/1.jpg">
+                                            <img src="../assets/images/faces/1.jpg">
                                         </div>
                                     </div>
                                 </div>

@@ -1,13 +1,13 @@
 <?php 
-        if(!isset($_SESSION['cliente'])):
-            header("Location: index.php");
-        endif;
+    if(!isset($_SESSION['cliente'])):
+        header("Location: index.php");
+    endif;
 
-        $id_cliente = $_SESSION['cliente']->id_cliente;
+    $id_cliente = $_SESSION['cliente']->id_cliente;
 
-        require_once('ws/bd/dbconn.php');
-        $conexion = new bd();
-        $conexion->conectar();
+    require_once('ws/bd/dbconn.php');
+    $conexion = new bd();
+    $conexion->conectar();
 
 ?>
 
@@ -35,7 +35,7 @@
        
 
             <div class="page-content" style="color:3e3e3f;">
-                <div class="resumen-envios row">
+                <div class="resumen-envios row mt-2">
                     <div class="row">
                         <h4 style="color:#3e3e3f">Mis envíos</h4>
                     </div>
@@ -93,25 +93,29 @@
                 <section class="row imgrowmenu" >
                     <div class="col-12 col-lg-12">
                         <div class="row ">
-                            <div class="singleimgmenu col-lg-4 col-sm-6 col-md-6" data-url="seleccionBultos.php">
-                                <div class="card">
-                                        <div class="card-body px-3 py-4-5" id="imgmenu">
-                                            <div class="row " >
-                                                <div class="col-md-4" id="cardicon">
-                                                    <div class="stats-icon green">
-                                                        <i class="fa-solid fa-paper-plane"></i>
+
+                            <div class="singleimgmenu col-lg-3 col-sm-6 col-md-6">
+                                <a href="./seleccionBultos.php">
+                                    <div class="card" style="height: 200px; overflow-y: auto">
+                                            <div class="card-body px-3 py-4-5" id="imgmenu">
+                                                <div class="row " >
+                                                    <div class="col-md-4" id="cardicon">
+                                                        <div class="stats-icon green">
+                                                            <i class="fa-solid fa-paper-plane"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-8 menutxt">
+                                                        <h4 class="font-semibold"> Nuevo Envío </h4>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-8 menutxt">
-                                                    <h4 class="font-semibold"> Nuevo Envío </h4>
-                                                </div>
                                             </div>
-                                        </div>
-                                </div>
+                                    </div>
+                                </a>
                             </div>
-                            <div class="singleimgmenu col-lg-4 col-sm-6 col-md-6">
-                                <div class="card">
-                                    <a href="Bodegas.php">
+
+                            <div class="singleimgmenu col-lg-3 col-sm-6 col-md-6">
+                                <a href="Bodegas.php">
+                                    <div class="card" style="height: 200px; overflow-y: auto">
                                         <div class="card-body"  id="imgmenu">
                                             <div class="row">
                                                 <div class="col-md-4" id="cardicon">
@@ -127,12 +131,13 @@
                                                 <p>(Lugar donde iremos a retirar)</p>
                                             </div>
                                         </div>
-                                    </a>
-                                </div>
+                                    </div>
+                                </a>
                             </div>
-                            <div class="singleimgmenu col-lg-4 col-sm-6 col-md-6">
-                                <div class="card">
-                                    <a href="PedidosRealizados.php">
+
+                            <div class="singleimgmenu col-lg-3 col-sm-6 col-md-6">
+                                <a href="PedidosRealizados.php">
+                                    <div class="card" style="height: 200px; overflow-y: auto">
                                         <div class="card-body px-3 py-4-5" id="imgmenu">
                                             <div class="row">
                                                 <div class="col-md-4 "id="cardicon">
@@ -145,12 +150,13 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </a>
-                                </div>
+                                    </div>
+                                </a>
                             </div>
-                            <div class="singleimgmenu col-lg-4 col-sm-6 col-md-6">
-                                <div class="card">
-                                    <a href="misDatos.php">
+
+                            <div class="singleimgmenu col-lg-3 col-sm-6 col-md-6">
+                                <a href="misDatos.php">
+                                    <div class="card" style="height: 200px; overflow-y: auto">
                                         <div class="card-body px-3 py-4-5" id="imgmenu">
                                             <div class="row">
                                                 <div class="col-md-4" id="cardicon">
@@ -163,10 +169,11 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </a>
-                                </div>
+                                    </div>
+                                </a>
                             </div>
-                            <div class="singleimgmenu col-lg-4 col-sm-6 col-md-6">
+
+                            <!-- <div class="singleimgmenu col-lg-4 col-sm-6 col-md-6">
                                 <div class="card">
                                     <a href="datosComerciales.php">
                                         <div class="card-body px-3 py-4-5" id="imgmenu">
@@ -183,22 +190,11 @@
                                         </div>
                                     </a>
                                 </div>
-                            </div>
+                            </div> -->
                            
-                            
                         </div>
                         
                     </div>
-                    <!-- <div class="col-12 col-lg-3">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Resumen Comunas</h4>
-                            </div>
-                            <div class="card-body">
-                                <div id="chart-visitors-profile"></div>
-                            </div>
-                        </div>
-                    </div> -->
                 </section>
             </div>
 
@@ -207,7 +203,7 @@
             ?>
            
 
-<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script> -->
 
 </body>
 <script>
