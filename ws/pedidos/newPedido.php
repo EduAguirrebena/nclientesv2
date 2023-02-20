@@ -84,8 +84,7 @@
                     VALUES (null,'".$nombre."','".$direccion."',".$telefono.",'".$correo."','".$item."',".$costo.",".$valor.",'".$tipo_servicio."','abc',".$barcode.",".$idpaquete.",".$comuna.",".$id_pedido.",0,NULL);";
 
         if($conn->mysqli->query($querybulto)){
-            print_r(json_encode(array("success" => 1, "id_pedido" => $conn->mysqli->insert_id)));
-
+           echo $id_pedido;
         }else{
             // echo $querybulto;
             echo $conn->mysqli->error;

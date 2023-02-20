@@ -18,7 +18,7 @@
     </div>
     <div class="container-fluid">
         <row class="col-12">
-            <table id="excel-table" border="1">
+            <table id="excel-table">
                 <thead> 
                     <tr>
 

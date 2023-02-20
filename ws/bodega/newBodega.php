@@ -26,7 +26,7 @@
               VALUES(null,'$nombre','$direccion','$numero','0','0',null,null,'$id_cliente','$comuna')";
               
         if($conn->mysqli->query($query)){
-            echo true;
+            
         } else {
             echo false;
         }

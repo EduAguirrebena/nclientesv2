@@ -8,7 +8,7 @@
     <!-- <link rel="stylesheet" href="assets/css/bootstrap.css"> -->
 
     <link rel="stylesheet" href="/">
-    
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/92ca8b0db6.js" crossorigin="anonymous"></script>
     <!-- <link rel="stylesheet" href="dist/assets/vendors/perfect-scrollbar/perfect-scrollbar.css"> -->

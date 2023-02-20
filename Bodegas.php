@@ -79,13 +79,12 @@ include_once('../nclientesv2/include/head.php');
                         <h3>Bodegas || Spread</h3>
                     </div>
                     <div class="col-sm-3">
-                        <!-- Button trigger for Crear form modal -->
-                        <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
-                            data-bs-target="#inlineForm">
-                            Agregar bodega
-                        </button>
-                    </div>
-                
+                    <!-- Button trigger for Crear form modal -->
+                    <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
+                        data-bs-target="#inlineForm">
+                        Agregar bodega
+                    </button>
+                </div>
             </div>
             <div class="page-content">
 
@@ -107,19 +106,17 @@ include_once('../nclientesv2/include/head.php');
                                                         <?php echo $bodega->comuna.', '.$bodega->region?>
                                                         </p>
                                                         <div class="row" style="justify-content: center;">
-                                                            <div class="col-4">
-                                                                <button type="button" class="btn btn-warning" data-bs-toggle="tooltip" title="Modificar" data-bs-toggle="modal"
-                                                                    data-bs-target="#ModForm">
+                                                        </div>
+                                                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#ModForm"
+                                                                        data-bs-toggle="tooltip" title="Modificar">
                                                                     <i class="fa-solid fa-pen-to-square"></i>
                                                                 </button>
-                                                            </div>
-                                                            <div class="col-4">
-                                                                <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" title="Eliminar" data-bs-toggle="modal"
-                                                                    data-bs-target="#ModForm">
+                                                            
+                                                                <button type="button" class="btn btn-danger"  data-bs-target="#danger"data-bs-toggle="modal" data-bs-toggle="tooltip" title="Eliminar" 
+                                                                   >
                                                                     <i class="fa-solid fa-trash"></i>
                                                                 </button>
-                                                            </div>
-                                                        </div>
+                                                        
                                                     </div>
                                                     
                                                 </div>
@@ -174,7 +171,7 @@ include_once('../nclientesv2/include/head.php');
                 </div>
                 <!--Crear Bodega form Modal -->
                 <div class="modal fade text-left" id="inlineForm"  tabindex="-1" role="dialog"
-                aria-labelledby="myModalLabel33" aria-hidden="true">
+                    aria-labelledby="myModalLabel33" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
                         role="document">
                         <div class="modal-content">
@@ -190,24 +187,24 @@ include_once('../nclientesv2/include/head.php');
                                     <label>Nombre </label>
                                     <div class="form-group">
                                         <input type="text" placeholder="Nombre"
-                                            class="form-control">
+                                            class="form-control" id="bodnombre" required>
                                     </div>
                                     <label>Calle </label>
                                     <div class="form-group">
                                         <input type="text" placeholder="Dirección"
-                                            class="form-control">
+                                            class="form-control" id="boddireccion" required>
                                     </div>
                                     <label>Número </label>
                                     <div class="form-group">
                                         <input type="text" placeholder="Número"
-                                            class="form-control">
+                                            class="form-control" id="bodnumero" required>
                                     </div>
                                     <label>Comuna</label> </label>
                                     <label for="select_regioncre">Region</label> </label>
                                     <div class="input-group mb-3">
                                         <label class="input-group-text"
                                             for="select_regioncre">Comunas</label>
-                                        <select class="form-select" name="select_regioncre" id="select_regioncre">
+                                        <select class="form-select" name="select_regioncre" id="select_regioncre" required>
                                             <option value=""></option>
                                                 <?php 
                                                     foreach($comunas as $com)
@@ -221,7 +218,7 @@ include_once('../nclientesv2/include/head.php');
                                     <div class="input-group mb-3">
                                         <label class="input-group-text"
                                             for="select_comunacre">Comunas</label>
-                                            <select class="form-select" name="select_comunacre" id="select_comunacre">
+                                            <select class="form-select" name="select_comunacre" id="select_comunacre" required>
                                                 <option value=""></option>
                                             </select>
                                     </div>
@@ -232,11 +229,11 @@ include_once('../nclientesv2/include/head.php');
                                         <i class="bx bx-x d-block d-sm-none"></i>
                                         <span class="d-none d-sm-block">Cancelar</span>
                                     </button>
-                                    <button type="button" class="btn btn-primary ml-1"
-                                        data-bs-dismiss="modal">
-                                        <i class="bx bx-check d-block d-sm-none"></i>
-                                        <span class="d-none d-sm-block">Agregar</span>
-                                    </button>
+                                    <input type="submit" value="Agregar" class="submit btn btn-primary ml-1"
+                                    >
+                                    <i class="bx bx-check d-block d-sm-none"></i>
+                                    <span class="d-none d-sm-block"></span>
+                                </input>
                                 </div>
                             </form>
                     </div>
@@ -247,7 +244,7 @@ include_once('../nclientesv2/include/head.php');
             </div>
             <!--Modificar Bodega form Modal -->
             <form action="" class="modal fade text-left" id="ModForm"  tabindex="-1" role="dialog"
-            aria-labelledby="myModalLabel33" aria-hidden="true">
+                aria-labelledby="myModalLabel33" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
                     role="document">
                     <div class="modal-content">
@@ -268,18 +265,18 @@ include_once('../nclientesv2/include/head.php');
                                 <label for="calle">Calle </label>
                                 <div class="form-group">
                                     <input type="text" placeholder="Dirección"
-                                        class="form-control" name="calle" id="calle">
+                                        class="form-control" name="calle" id="calle" required>
                                 </div>
                                 <label for="numero">Número </label>
                                 <div class="form-group">
                                     <input type="text" placeholder="Número"
-                                        class="form-control" name="numero" id="numero">
+                                        class="form-control" name="numero" id="numero" required>
                                 </div>
                                 <label for="select_regionmod">Region</label> </label>
                                 <div class="input-group mb-3">
                                     <label class="input-group-text"
-                                        for="select_regionmod">Comunas</label>
-                                    <select class="form-select" name="select_regionmod" id="select_regionmod">
+                                        for="select_regionmod">Region</label>
+                                    <select class="form-select" name="select_regionmod" id="select_regionmod" required>
                                         <option value=""></option>
                                             <?php 
                                                 foreach($comunas as $com)
@@ -292,8 +289,8 @@ include_once('../nclientesv2/include/head.php');
                                 <label for="select_comunamod">Comuna</label> </label>
                                 <div class="input-group mb-3">
                                     <label class="input-group-text"
-                                        for="select_comunamod">Comunas</label>
-                                        <select class="form-select" name="select_comunamod" id="select_comunamod">
+                                        for="select_comunamod">Comuna</label>
+                                        <select class="form-select" name="select_comunamod" id="select_comunamod" required>
                                             <option value=""></option>
                                         </select>
                                 </div>
@@ -321,10 +318,49 @@ include_once('../nclientesv2/include/head.php');
     ?>
     <script src="assets/js/jquery-validation/jquery.validate.js"></script>
 
-    <script>
+
+</body>
+<script>
+
+    $("#crearBodega").click(function(){
+            try{
+                let vdir = document.getElementById('boddireccion').value
+                let vnumero = document.getElementById('bodnumero').value
+                let vnombre = document.getElementById('bodnumero').value
+                let vcomuna = document.getElementById('select_comunaccre').value
+                let vregion = document.getElementById('select_regioncre').value
+
+                let dataajax = {direccion : vdir,
+                                numero: vnumero,
+                                nombre : vnombre,
+                                comuna : vcomuna,
+                                region: vregion};
+
+                        $.ajax({
+                        url: "ws/bodega/newBodega.php",
+                        type: "POST",
+                        data: JSON.stringify(dataajax),
+                        success:function(resp){
+                            console.log(resp)
+                            return false
+                            
+                            // if(resp==="error"){
+                            //     console.log("creado");
+                            //     return false; 
+                            // }
+                            // else{
+                            //     return false;
+                            // }
+                        }
+                    })
+            }
+            catch(error){
+                console.log(error);
+            }    
+    })
+
 
         $("#select_regioncre").on('change',function(){
-            
             var idregion = this.value;
             var comuna = document.getElementById("select_comunacre");
             comuna.options = new Option("");
@@ -376,8 +412,7 @@ include_once('../nclientesv2/include/head.php');
         })
 
         ().ready(function(){
-            
-            
+
             $("#ModForm").validate(
                 {
                 rules:{
@@ -420,6 +455,5 @@ include_once('../nclientesv2/include/head.php');
         })
 
         
-    </script>
-
+</script>
 </html>

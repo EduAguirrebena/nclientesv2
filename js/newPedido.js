@@ -102,18 +102,18 @@
                             type: "POST",
                             data: JSON.stringify(dataajax),
                             success:function(resp){
-                                    // console.log(resp);
+                                console.log(resp);
                                 swal.fire({
                                     title : "Hecho",
                                     text : "Tú pedido fue creado exitosamente!",
                                     icon: "success",
                                     showConfirmButton: false,
                                     type : "success",
-                                    timer : 15000
+                                    timer : 100
                                     
                                 }).then(function() {
-                                    window.location = "inicio.php";
-                                });;
+                                    window.location = "confirmarpedido.php?id_pedido="+resp;
+                                })
                             },
                             error : function(resp){
                                     return false;

@@ -548,7 +548,7 @@ $("#select_regioncli").on('change',function(){
                                         }
                                     }
                                     
-                                });
+                                })
                         }
                         catch(error){
                             console.log(error);
@@ -565,7 +565,8 @@ $("#select_regioncli").on('change',function(){
    
 
     // function getclientData() {
-    //         let idcliente = <?php echo $id_cliente?>;
+    //         let idcliente = <?php
+                                // echo $id_cliente?>;
            
 	// 		$.ajax({
     //                 type: "POST",

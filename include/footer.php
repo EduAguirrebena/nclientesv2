@@ -1,4 +1,4 @@
-        <footer style="">
+        <footer >
                         <div class="footer clearfix mb-0 text-muted">
                             <div class="float-start">
                                 <p>2023 &copy; Spread</p>
@@ -9,7 +9,6 @@
 </div>
     <script src="/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <!-- <script src="/dist/assets/js/bootstrap.min.js"></script>-->
-    <script src="/assets/extensions/apexcharts/apexcharts.js"></script>
     <script src="/assets/js/pages/dashboard.js"></script>
     <!-- <script src="/assets/js/main.js"></script> -->
     <script src="/assets/js/bootstrap.js"></script>
