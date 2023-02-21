@@ -58,37 +58,45 @@
                             </a>
                         </li>
         
-                        <li class="sidebar-item  ">
+                        <!-- <li class="sidebar-item  ">
                             <a href="../datosComerciales.php" class='sidebar-link'>
                                 <i class="fa-solid fa-file-invoice"></i>
                                 <span>Datos Comerciales</span>
                             </a>
-                        </li>
+                        </li> -->
 
-                        <li class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-gear-wide-connected"></i>
-                                <span>Administración</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="/administracion/pedidos.php">Pedidos</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="../administracion/clientes.php">Clientes</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="../administracion/transacciones.php">Transacciones</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="../administracion/credito.php">Crédito</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="../administracion/cierreMensual.php">Cierrre Mensual Crédito</a>
-                                </li>
-                                
-                            </ul>
-                        </li>
+                        <?php
+                        $administrador = $_SESSION['cliente']->rol;
+
+                        if($administrador == 1) { ?>
+
+                            <li class="sidebar-item  has-sub">
+                                <a href="#" class='sidebar-link'>
+                                    <i class="bi bi-gear-wide-connected"></i>
+                                    <span>Administración</span>
+                                </a>
+                                <ul class="submenu ">
+                                    <li class="submenu-item ">
+                                        <a href="/administracion/pedidos.php">Pedidos</a>
+                                    </li>
+                                    <li class="submenu-item ">
+                                        <a href="../administracion/clientes.php">Clientes</a>
+                                    </li>
+                                    <li class="submenu-item ">
+                                        <a href="../administracion/transacciones.php">Transacciones</a>
+                                    </li>
+                                    <li class="submenu-item ">
+                                        <a href="../administracion/credito.php">Crédito</a>
+                                    </li>
+                                    <li class="submenu-item ">
+                                        <a href="../administracion/cierreMensual.php">Cierrre Mensual Crédito</a>
+                                    </li>
+                                    
+                                </ul>
+                            </li>
+
+                        <?php } ?>
+
 
                         <li class="sidebar-item  ">
                             <a href="/querytest.php" class='sidebar-link'>
