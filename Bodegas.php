@@ -20,7 +20,7 @@
                         inner join comuna co on co.id_comuna = bo.id_comuna
                         inner join provincia pro on pro.id_provincia = co.id_provincia
                         inner join region re on re.id_region = pro.id_region
-                        where bo.id_cliente = 1394';
+                        where bo.id_cliente = '.$id_cliente;
 
 
 

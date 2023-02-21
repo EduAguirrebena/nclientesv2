@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <?php
-    include_once('include/head.php')
+    include_once('./include/head.php')
   ?>
 
   <body>
@@ -10,8 +10,7 @@
         <div class="col-lg-5 col-12">
           <div id="auth-left">
             <div class="auth-logo">
-              <a href=""
-                ><img src="" alt="Logo"
+              <a href=""><img src="" alt="Logo"
               /></a>
             </div>
             <h1 class="auth-title">Log in.</h1>
@@ -69,9 +68,9 @@
       </div>
     </div>
 
-  <script src="assets/extensions/jquery/jquery.js"></script>
-  <script src="assets/js/jquery-validation/jquery.validate.js"></script>
-  <script src="assets/extensions/sweetalert2/sweetalert2.min.js"></script>
+  <script src="./assets/extensions/jquery/jquery.js"></script>
+  <script src="./assets/js/jquery-validation/jquery.validate.js"></script>
+  <script src="./assets/extensions/sweetalert2/sweetalert2.min.js"></script>
   
   <!-- <script src="assets/js/bootstrap.min.js"></script>
 <script src="assets/js/pages/pcoded.min.js"></script>
@@ -118,7 +117,7 @@
                 $(".btn").prop('disabled', true);
                 $.ajax({
                     type: "POST",
-                    url: "ws/cliente/ingresar.php",
+                    url: "./ws/cliente/ingresar.php",
                     data: $("#ingreso").serialize(),
                     success: function(data) {
                         if(data.success==1) {

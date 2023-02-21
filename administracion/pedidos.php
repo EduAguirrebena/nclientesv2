@@ -4,7 +4,12 @@ if(!isset($_SESSION['cliente'])):
     header("Location: ../index.php");
 endif;
 
-$id_cliente = $_SESSION['cliente']->id_cliente;
+// $id_cliente = $_SESSION['cliente']->id_cliente;
+
+// if($id_cliente!=3 && $id_cliente!=1) { 
+//     echo $id_cliente;
+//     exit();
+// }
 
 require_once('../ws/bd/dbconn.php');
 $conexion = new bd();

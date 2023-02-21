@@ -4,23 +4,22 @@
 
     $id_cliente = $_SESSION['cliente']->id_cliente;
     $conn = new bd();
-
     $conn -> conectar();
 
-    $query='Select Nombre_region as nombre,id_region as id from region';
+    // $query='Select Nombre_region as nombre,id_region as id from region';
 
-    if($res = $conn->mysqli->query($query))
-    {
-        $comunas = array();
+    // if($res = $conn->mysqli->query($query))
+    // {
+    //     $comunas = array();
         
-        while($datares = $res ->fetch_object())
-        {
-            $comunas [] = $datares;
-        }
-    }
-    else{
-        echo $conn->mysqli->error;
-    }
+    //     while($datares = $res ->fetch_object())
+    //     {
+    //         $comunas [] = $datares;
+    //     }
+    // }
+    // else{
+    //     echo $conn->mysqli->error;
+    // }
 
     
 
@@ -63,10 +62,16 @@
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="form-group">
-                                                        <label for="first-name-vertical">Nombre</label>
+                                                        <label for="first-name-vertical">Nombres</label>
                                                         <input type="text" id="first-name-vertical"
-                                                            class="form-control" name="fname"
-                                                            placeholder="Nombre" value="Jose Miguel Loyola Vargas">
+                                                            class="form-control" name="fName"
+                                                            placeholder="Nombre" value="<?php echo $_SESSION['cliente']->nombres_datos_contacto ?>">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="first-name-vertical">Apellidos</label>
+                                                        <input type="text" id="first-name-vertical"
+                                                            class="form-control" name="fLastName"
+                                                            placeholder="Apellidos" value="<?php echo $_SESSION['cliente']->apellidos_datos_contacto ?>">
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
@@ -74,15 +79,15 @@
                                                         <label for="email-id-vertical">Correo</label>
                                                         <input type="email" id="email-id-vertical"
                                                             class="form-control" name="email-id"
-                                                            placeholder="Correo Electronico" value="coteloyola@hotmail.com">
+                                                            placeholder="Correo Electronico" value="<?php echo $_SESSION['cliente']->email_datos_contacto ?>">
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="contact-info-vertical">Rut</label>
-                                                        <input type="number" id="contact-info-vertical"
+                                                        <input type="text" id="contact-info-vertical"
                                                             class="form-control" name="contact"
-                                                            placeholder="Rut" value="20.136.448-5">
+                                                            placeholder="Rut" value="<?php echo $_SESSION['cliente']->rut_datos_contacto ?>">
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
@@ -90,14 +95,11 @@
                                                         <label for="password-vertical">Celular</label>
                                                         <input type="text" id="password-vertical"
                                                             class="form-control" name="contact"
-                                                            placeholder="Celular" value="953061585">
+                                                            placeholder="Celular" value="<?php echo $_SESSION['cliente']->telefono_datos_contacto ?>">
                                                     </div>
                                                 </div>
                                                 <div class="col-12 d-flex justify-content-end">
-                                                    <button type="submit"
-                                                        class="btn btn-primary me-1 mb-1">Submit</button>
-                                                    <button type="reset"
-                                                        class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                                                    <input type="submit" class="btn btn-primary me-1 mb-1" value="Guardar"></input>
                                                 </div>
                                             </div>
                                         </div>
