@@ -4,9 +4,6 @@
         require_once('ws/bd/dbconn.php');
         $conexion = new bd();
         $conexion->conectar();
-
-
-        $comunas = Array("Algarrobo","Buin","Cabildo","Calera de Tango","Calle Larga","Cartagena","Casablanca","Catemu","Cerrillos","Cerro Navia","Colina","Conchalí","Concón","Curacavi","El Bosque","El Monte","El Quisco","El Tabo","Estación Central","Hijuelas","Huechuraba","Independencia","Isla de Maipo","La Calera","La Cisterna","La Cruz","La Florida","La Granja","La Ligua","La Pintana","La Reina","Lampa","Las Condes","Limache","Llay Llay","Lo Barnechea","Lo Espejo","Lo Prado","Los Andes","Macul","Maipú","María Pinto","Melipilla","Nogales","Ñuñoa","Olmué","Padre Hurtado","Paine","Panquehue","Papudo","Pedro Aguirre Cerda","Peñaflor","Peñalolén","Petorca","Pirque","Providencia","Puchuncaví","Pudahuel","Puente Alto","Putaendo","Quilicura","Quillota","Quilpué","Quinta Normal","Quintero","Recoleta","Renca","Rinconada","San Antonio","San Bernardo","San Esteban","San Felipe","San Joaquín","San José de Maipo","San Miguel","San Ramón","Santa María","Santiago","Santo Domingo","Talagante","Valparaíso","Villa Alemana","Viña del Mar","Vitacura","Zapallar")
 ?>
 
 
@@ -41,11 +38,22 @@
 
     <div style="background-color: beige; margin: 15px">
         <div class="card-header">
-            Resumen Pedido
+            <h3>Resumen Pedido</h3>
+            <h6>Si existen errores podrás editarlos en la misma tabla!</h6>
         </div>
         <div id="tablepp">
             <table class="table table-striped" id="excel_table">
                 <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Dirección</th>
+                        <th>Teléfono</th>
+                        <th>Correo</th>
+                        <th>Comuna</th>
+                        <th>Item</th>
+                        <th>Valor</th>
+                        <th>Tipo Envío</th>
+                    </tr>
                 </thead>
                 <tbody>
                     
@@ -64,29 +72,25 @@
     <div class="collapse" id="modexcelrow">
         <h1>HOLAAAAAAAAA</h1>
     </div>
-
-
-   
-
-
-
-       
-
     <div class="page-content" style="color:3e3e3f;">
-            <?php
-                include_once('../nclientesv2/include/footer.php')
-            ?>
-           
-
-<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-
+    <?php
+        include_once('../nclientesv2/include/footer.php')
+    ?>
 
 </body>
 <script>
+$('#excel-table td').on('click',function(){
+    console.log("eiii")
+})
+
+
+$('#select_comuna').on('click', function(){
+    comunas.forEach(function(comunas){
+        $(this).add(new Option(comunas))
+    })
+    
+})
     $('#pressme').click(function(){
-        
-        console.log(desastre);
-      
     })
     function ExportToExcel(type, fn, dl) {
         var elt = document.getElementById('excel-table');

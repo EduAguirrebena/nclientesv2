@@ -91,7 +91,7 @@
                         </li>
 
                         <li class="sidebar-item  ">
-                            <a href="../querytest.php" class='sidebar-link'>
+                            <a href="/querytest.php" class='sidebar-link'>
                                 <i class="fa-solid fa-warehouse"></i>
                                 <span>Test Query</span>
                             </a>

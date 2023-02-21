@@ -95,99 +95,9 @@ excelInput.addEventListener('change',async function(){
         counter = 0
         let ingresados = 0 
         let countererr = 0
-
+        var arrayerr = []
         var filatabla = ""
         //console.log(rows);
-        var formularioModificar= `<section class="collapse" id="modexcelrow">`+
-        `<div class="row match-height">`+
-        `<div class="col-12">`+
-        `<div class="card">`+
-        `<div class="card-header">`+
-        `<h4 class="card-title">Modificar Datos</h4>`+
-        `</div>`+
-        `<div class="card-content">`+
-        `<div class="card-body">`+
-        `<form class="form">`+
-        `<div class="row">`+
-        `<div class="col-md-6 col-12">`+
-        `<div class="form-group">`+
-        `<label for="first-name-column">Nombre</label>`+
-        `<input type="text" id="first-name-column" class="form-control"`+
-        `placeholder="First Name" name="fname-column">`+
-        `</div>`+
-        `</div>`+
-        `<div class="col-md-6 col-12">`+
-        `<div class="form-group">`+
-        `<label for="direccion-column">Direccion</label>`+
-        `<input type="text" id="direccion-column" class="form-control"`+
-        `placeholder="Dirección" name="direccion-column">`+
-        `</div>`+
-        `</div>`+
-        `<div class="col-md-6 col-12">`+
-        `<div class="form-group">`+
-        `<label for="telefono-column">Teléfono</label>`+
-        `<input type="text" id="telefono-column" class="form-control" placeholder="Teléfono"`+
-        `name="telefono-column">`+
-        `</div>`+
-        `</div>`+
-        `<div class="col-md-6 col-12">`+
-        `<div class="form-group">`+
-        `<label for="correo-floating">Correo</label>`+
-        `<input type="email" id="correo-floating" class="form-control"`+
-        `name="correo-floating" placeholder="Correo">`+
-        `</div>`+
-        `</div>`+
-        `<div class="col-md-6 col-12">`+
-        `<div class="form-group">`+
-        `<label for="comuna-column">Comuna</label>`+
-        `<select name="select_comuna" class="form-select" id="select_region">`+
-        `<option value=""></option>`+
-        `<?php`+
-        `foreach($comunas as $comuna):`+
-        `?>`+
-        `<option value=""><?php echo $comuna?></option>`+
-        `<?php`+
-        `endforeach;`+
-        `?>`+
-        `</select>`+
-        `</div>`+
-        `</div>`+
-        `<div class="col-md-6 col-12">`+
-        `<div class="form-group">`+
-        `<label for="item-column">Nombre Item</label>`+
-        `<input type="text" id="item-column" class="form-control"`+
-        `name="item-column" placeholder="Item">`+
-        `</div>`+
-        `</div>`+
-        `<div class="col-md-6 col-12">`+
-        `<div class="form-group">`+
-        `<label for="precio-column">Precio</label>`+
-        `<input type="text" id="precio-column" class="form-control"`+
-        `name="precio-column" placeholder="Precio">`+
-        `</div>`+
-        `</div>`+
-        `<div class="form-group col-md-6 col-12">`+
-        `<div class='form-group'>`+
-        `<label for="type_select">Tipo paquete</label>`+
-        `<select name="type_select" id="type_select" class="form-select">`+
-        `<option value=""></option>`+
-        `<option value="1">Mini</option>`+
-        `<option value="2">Medium</option>`+
-        `</select>`+
-        `</div>`+
-        `</div>`+
-        `<div class="col-12 d-flex justify-content-end">`+
-        `<button type="button" class="btn btn-primary me-1 mb-1">Modificar</button>`+
-        `</div>`+
-        `</div>`+
-        `</form>`+
-        `</div>`+
-        `</div>`+
-        `</div>`+
-        `</div>`+
-        `</div>`+
-        `</section>`
-
         //CAPTURADORES DE ERORRES
         var nombre = ""
         var nomerr = ""        
@@ -241,97 +151,151 @@ excelInput.addEventListener('change',async function(){
                                 countererr = 0
                                 console.log("FILA 2 COUNTER = 0");
                                 tdrow =[]
+                                filatabla = ""
+                                arrayerr = []
+                                nomerr = ""
+                                direrr = ""
+                                telerr = ""
+                                corerr = ""
+                                comerr = ""
+                                deserr = ""
+                                coserr = ""
+                                typeerr = ""
                             }
+                            counter ++
+                            console.log("EL CONTADOR VA EN"+counter)
                             console.log(row[i])
-
                             tdrow.push(row[i])
-                            
-
                             //console.log(verifynombre(row[i]))
 
                             if(i==0 && row[i] == null)
                             {
                                 nomerr = "Debe ingresar un nombre";
                                 console.log(nomerr);
+                                arrayerr.push(nomerr)
                                 countererr++
                             }
                             else if(i==0 && row[i].length < 5){
                                 nomerr = "El nombre debe tener al menos 5 caracteres";
+                                arrayerr.push(nomerr)
                                 //console.log(direrr);
                             }
-                            else{
-                                nombre = row[i]
+                            else if(i==0 && nomerr == ""){
+                                
+                                arrayerr.push("")
+
                             }
 
                             if(i==1 && row[i] == null)
                             {
                                 direrr = "Debe ingresar una dirección";
                                 console.log(direrr);
+                                arrayerr.push(direrr)
                                 countererr++
                             }
                             else if(i==1 && row[i].length < 5){
                                 direrr = "La dirección debe tener al menos 5 caracteres";
+                                arrayerr.push(direrr)
                                 //console.log(direrr);
+                            }
+                            else if(i==1 && direrr == ""){
+                                
+                                arrayerr.push("")
+
                             }
 
                             if(i==2 && row[i] == null)
                             {
                                 telerr = "Debe ingresar un telefono";
                                 console.log(telerr);
+                                arrayerr.push(telerr)
+
                                 countererr++
                             }
                             else if(i==2 && row[i].length < 5){
                                 telerr = "El teléfono debe tener al menos 9 caracteres";
+                                arrayerr.push(telerr)
+                            }
+                            else if(i==2 && telerr == ""){
+                                
+                                arrayerr.push("")
+
                             }
 
                             if(i==3 && row[i] == null)
                             {
                                 corerr = "Debe ingresar un correo";
                                 console.log(corerr);
+                                arrayerr.push(corerr)
                                 countererr++
                             }else if(i==3 && row[i].length < 7){
                                 corerr = "El correo debe tener al menos 7 caracteres";
+                                arrayerr.push(corerr)
+                            }
+                            else if(i==3 && corerr == ""){
                                 
+                                arrayerr.push("")
+
                             }
 
                             if(i==4 && row[i] == null)
                             {
                                 comerr = "Debe ingresar una comuna";
                                 console.log(comerr);
+                                arrayerr.push(comerr)
                                 countererr++
+                            }
+                            else if(i==4 && comerr == ""){
+                                
+                                arrayerr.push("")
+
                             }
 
                             if(i==5 && row[i] == null)
                             {
                                 deserr = "Debe ingresar una descripcion";
                                 console.log(deserr);
+                                arrayerr.push(deserr)
                                 countererr++
                             }else if(i==5 && row[i].length < 3){
                                 deserr = "La descripción debe tener al menos 3 caracteres";
-                               
+                                arrayerr.push(deserr)
+                            }
+                            else if(i==5 && deserr == ""){
+                                
+                                arrayerr.push("")
+
                             }
 
                             if(i==6 && row[i] == null)
                             {
                                 coserr = "Debe ingresar el costo";
                                 console.log(coserr);
+                                arrayerr.push(coserr)
+
                                 countererr++
                             }else if(i==6 && row[i] > 500000){
                                 coserr = "El valor declarado no puede superar los $500.000";
+                                arrayerr.push(coserr)
+                            }
+                            else if(i==6 && coserr == ""){
                                 
+                                arrayerr.push("")
+
                             }
 
                             if(i==7 && row[i] == null)
                             {
                                 typeerr = "Debe ingresar el tipo de envio";
                                 console.log(typeerr);
+                                arrayerr.push(typeerr)
                                 countererr++
                             }
+                            else if(i==7 && typeerr == ""){
+                                
+                                arrayerr.push("")
 
-                            
-                            counter ++
-
-                            console.log("EL CONTADOR VA EN"+counter)
+                            }
                             console.log("EL CONTADOR DE ERRORES VA EN "+countererr);
 
                             if(countererr > 4)
@@ -339,50 +303,135 @@ excelInput.addEventListener('change',async function(){
                                 break
                             }
                             else if(counter == 8 && countererr <= 4){
-                                
-                                let json_error = {
-                                    "nombre" : nomerr,
-                                    "direccion" : direrr,
-                                    "telefono" : telerr,
-                                    "correo" : corerr,
-                                    "comuna" : comerr,
-                                    "descripcion" : deserr,
-                                    "costo" : coserr,
-                                    "tipo" : typeerr
-                                }
                                 //console.log(json_error);
+                                // console.log(tdrow);
+                                 console.log(arrayerr);
+                                let index =0
                                 
-
                                 tdrow.forEach(td=>{
+                                    index++
                                     if(td == null){
                                         td = ""
                                     }
-                                    filatabla += "<td>"+ td +"</td>"
+                                    
+                                    if(index == 1){
+                                        let arrerr = arrayerr[0]
+                                        if(arrerr != ""){
+                                            filatabla += `<td class="tdnom" style="border:1px solid red" title="${arrerr}" contenteditable>`+ td +"</td>"
+                                        }
+                                        else{
+                                            filatabla += `<td class="tdnom" contenteditable>`+ td +"</td>"
+                                        }
+                                    }
+                                    if(index == 2){
+                                        let arrerr = arrayerr[1]
+                                        if(arrerr != ""){
+                                            filatabla += `<td class="tddir" style="border:1px solid red" title="${arrerr}" contenteditable>`+ td +"</td>"
+                                        }
+                                        else{
+                                            filatabla += `<td class="tddir" contenteditable>`+ td +"</td>"
+                                        }
+                                    }
+                                    if(index == 3){
+                                        let arrerr = arrayerr[2]
+                                        if(arrerr != ""){
+                                            filatabla += `<td class="tdtel" style="border:1px solid red" title="${arrerr}" contenteditable onfocusout="validatedir()>`+ td +"</td>"
+                                        }
+                                        else{
+                                            filatabla += `<td class="tdtel" contenteditable>`+ td +"</td>"
+                                        }
+                                    }
+                                    if(index == 4){
+                                        let arrerr = arrayerr[3]
+                                        if(arrerr != ""){
+                                            filatabla += `<td class="tdcorr" style="border:1px solid red" title="${arrerr}" contenteditable>`+ td +"</td>"
+                                        }
+                                        else{
+                                            filatabla += `<td class="tdcorr" contenteditable>`+ td +"</td>"
+                                        }
+                                    }
+                                    if(index == 5){
+                                        let comunas = ["","Algarrobo","Buin","Cabildo","Calera de Tango","Calle Larga","Cartagena","Casablanca","Catemu","Cerrillos","Cerro Navia","Colina","Conchalí","Concón","Curacavi","El Bosque","El Monte","El Quisco","El Tabo","Estación Central","Hijuelas","Huechuraba","Independencia","Isla de Maipo","La Calera","La Cisterna","La Cruz","La Florida","La Granja","La Ligua","La Pintana","La Reina","Lampa","Las Condes","Limache","Llay Llay","Lo Barnechea","Lo Espejo","Lo Prado","Los Andes","Macul","Maipú","María Pinto","Melipilla","Nogales","Ñuñoa","Olmué","Padre Hurtado","Paine","Panquehue","Papudo","Pedro Aguirre Cerda","Peñaflor","Peñalolén","Petorca","Pirque","Providencia","Puchuncaví","Pudahuel","Puente Alto","Putaendo","Quilicura","Quillota","Quilpué","Quinta Normal","Quintero","Recoleta","Renca","Rinconada","San Antonio","San Bernardo","San Esteban","San Felipe","San Joaquín","San José de Maipo","San Miguel","San Ramón","Santa María","Santiago","Santo Domingo","Talagante","Valparaíso","Villa Alemana","Viña del Mar","Vitacura","Zapallar"]
+                                        let options =""
+                                        let arrerr = arrayerr[4]
+                                        console.log(arrerr);
+                                        if(arrerr != ""){
+                                            comunas.forEach(comuna => {
+                                                    options += "<option>"+comuna+"</option>"
+                                                
+                                            });
+                                            filatabla += `<td class="tdcom" style="border:1px solid red" title="Debe seleccionar una comuna"><select >`+options+"</select></td>"
+                                        }
+                                        else{
+                                            comunas.forEach(comuna => {
+                                                if(comuna == td){
+                                                    options += "<option selected>"+comuna+"</option>"
+                                                }
+                                                else{
+                                                    options += "<option>"+comuna+"</option>"
+                                                }
+                                            });
+                                            filatabla += `<td class="tdcom"><select>`+options+"</select></td>"
+                                        }
+                                    }
+                                    if(index == 6){
+                                        let arrerr = arrayerr[5]
+                                        if(arrerr != ""){
+                                            filatabla += `<td class="tditem" style="border:1px solid red" title="${arrerr}" contenteditable>`+ td +"</td>"
+                                        }
+                                        else{
+                                            filatabla += `<td class="tditem" contenteditable>`+ td +"</td>"
+                                        }
+                                    }
+                                    if(index == 7){
+                                        let arrerr = arrayerr[6]
+                                        if(arrerr != ""){
+                                            filatabla += `<td class="tdval" style="border:1px solid red" title="${arrerr}" contenteditable>`+ td +"</td>"
+                                        }
+                                        else{
+                                            filatabla += `<td class="tdval" contenteditable>`+ td +"</td>"
+                                        }
+                                    }
+                                    if(index == 8){
+                                        let arrerr = arrayerr[7]
+                                        if(arrerr != ""){
+                                            filatabla += `<td class="tdtype" style="border:1px solid red" title="${arrerr}" contenteditable>`+ td +"</td>"
+                                        }
+                                        else{
+                                            filatabla += `<td class="tdtype" contenteditable>`+ td +"</td>"
+                                        }
+                                    }
+
+                                    if(index == 5){
+                                        
+                                    }
+                                    else if(index == 8){
+                                        let tipoenvio = ["Mini", "Medium"]
+                                        let options = "";
+                                        tipoenvio.forEach(tipo => {
+                                            if(tipo == td){
+                                                options += "<option selected>"+tipo+"</option>"
+                                            }
+                                            else{
+                                                options += "<option>"+tipo+"</option>"
+                                            }
+                                             
+                                        });
+                                        filatabla += "<td><select>"+options+"</select></td>"
+                                    }
+                                    else{
+                                        
+                                        //filatabla +="<td><select><option>Comuna aqui</option></select></td>"
+                                    }
                                 })
 
-                                console.log("------------------------");
-                                console.log("VER ARREGLO DE DATOS PARA TABLA");
-                                console.log(filatabla);
-                                console.log("-------------------------");
+                                // console.log("------------------------");
+                                // console.log("VER ARREGLO DE DATOS PARA TABLA");
+                                // console.log(filatabla);
+                                // console.log("-------------------------");
                                 
-
-
-                                $('#excel_table > thead').append(   "<tr>"+
-                                                                        "<th>Nombre</th>"+
-                                                                        "<th>Dirección</th>"+
-                                                                        "<th>Teléfono</th>"+
-                                                                        "<th>Correo</th>"+
-                                                                        "<th>Comuna</th>"+
-                                                                        "<th>Item</th>"+
-                                                                        "<th>Valor</th>"+
-                                                                        "<th>Tipo Envío</th>"+
-                                                                    "</tr>") 
-
-
                                                                     
-                                $('#excel_table > tbody:last').append("<tr>"+ filatabla +"<td>"+`<button data-bs-toggle="collapse" data-bs-target="#modexcelrow" aria-expanded="false" aria-controls="modexcelrow" class="modexceldata" title="Modificar">
-                                                                                                    <i class="fa-solid fa-pen-to-square" ></i>
-                                                                                                    </button>`+"</td>"+"</tr>"+"<tr>"+ formularioModificar+"</tr>");
+                                $('#excel_table > tbody:last').append("<tr>"+ filatabla +"<td>");
                             }
                         }
                     }

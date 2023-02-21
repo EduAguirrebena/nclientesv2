@@ -1,3 +1,0 @@
-$(".modexceldata").on('click',function(){
-    
-})
