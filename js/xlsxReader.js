@@ -1,3 +1,8 @@
+
+
+
+
+
 class Excel{
 
     constructor(content){
@@ -88,35 +93,136 @@ excelInput.addEventListener('change',async function(){
         let rows = excel.rows()
         let length = excel.rows().count()
         counter = 0
-        let countererr =0
-        //console.log(rows);
+        let ingresados = 0 
+        let countererr = 0
 
-        const heads = [];
+        var filatabla = ""
+        //console.log(rows);
+        var formularioModificar= `<section class="collapse" id="modexcelrow">`+
+        `<div class="row match-height">`+
+        `<div class="col-12">`+
+        `<div class="card">`+
+        `<div class="card-header">`+
+        `<h4 class="card-title">Modificar Datos</h4>`+
+        `</div>`+
+        `<div class="card-content">`+
+        `<div class="card-body">`+
+        `<form class="form">`+
+        `<div class="row">`+
+        `<div class="col-md-6 col-12">`+
+        `<div class="form-group">`+
+        `<label for="first-name-column">Nombre</label>`+
+        `<input type="text" id="first-name-column" class="form-control"`+
+        `placeholder="First Name" name="fname-column">`+
+        `</div>`+
+        `</div>`+
+        `<div class="col-md-6 col-12">`+
+        `<div class="form-group">`+
+        `<label for="direccion-column">Direccion</label>`+
+        `<input type="text" id="direccion-column" class="form-control"`+
+        `placeholder="Dirección" name="direccion-column">`+
+        `</div>`+
+        `</div>`+
+        `<div class="col-md-6 col-12">`+
+        `<div class="form-group">`+
+        `<label for="telefono-column">Teléfono</label>`+
+        `<input type="text" id="telefono-column" class="form-control" placeholder="Teléfono"`+
+        `name="telefono-column">`+
+        `</div>`+
+        `</div>`+
+        `<div class="col-md-6 col-12">`+
+        `<div class="form-group">`+
+        `<label for="correo-floating">Correo</label>`+
+        `<input type="email" id="correo-floating" class="form-control"`+
+        `name="correo-floating" placeholder="Correo">`+
+        `</div>`+
+        `</div>`+
+        `<div class="col-md-6 col-12">`+
+        `<div class="form-group">`+
+        `<label for="comuna-column">Comuna</label>`+
+        `<select name="select_comuna" class="form-select" id="select_region">`+
+        `<option value=""></option>`+
+        `<?php`+
+        `foreach($comunas as $comuna):`+
+        `?>`+
+        `<option value=""><?php echo $comuna?></option>`+
+        `<?php`+
+        `endforeach;`+
+        `?>`+
+        `</select>`+
+        `</div>`+
+        `</div>`+
+        `<div class="col-md-6 col-12">`+
+        `<div class="form-group">`+
+        `<label for="item-column">Nombre Item</label>`+
+        `<input type="text" id="item-column" class="form-control"`+
+        `name="item-column" placeholder="Item">`+
+        `</div>`+
+        `</div>`+
+        `<div class="col-md-6 col-12">`+
+        `<div class="form-group">`+
+        `<label for="precio-column">Precio</label>`+
+        `<input type="text" id="precio-column" class="form-control"`+
+        `name="precio-column" placeholder="Precio">`+
+        `</div>`+
+        `</div>`+
+        `<div class="form-group col-md-6 col-12">`+
+        `<div class='form-group'>`+
+        `<label for="type_select">Tipo paquete</label>`+
+        `<select name="type_select" id="type_select" class="form-select">`+
+        `<option value=""></option>`+
+        `<option value="1">Mini</option>`+
+        `<option value="2">Medium</option>`+
+        `</select>`+
+        `</div>`+
+        `</div>`+
+        `<div class="col-12 d-flex justify-content-end">`+
+        `<button type="button" class="btn btn-primary me-1 mb-1">Modificar</button>`+
+        `</div>`+
+        `</div>`+
+        `</form>`+
+        `</div>`+
+        `</div>`+
+        `</div>`+
+        `</div>`+
+        `</div>`+
+        `</section>`
+
+        //CAPTURADORES DE ERORRES
+        var nombre = ""
+        var nomerr = ""        
+        var direrr = ""
+        var telerr = ""
+        var corerr = ""
+        var comerr = ""
+        var deserr = ""
+        var coserr = ""
+        var typeerr = ""
+
+        const heads = []
+        let tdrow = []
         let incorrecto = 0
         for(i=0; i < 7;i++ )
         {
-            // if(arrays.row[i] == null){
-            //     heads.push(arrays.row[i]);
-            // }
+            heads.push(arrays.row[i]);
 
-            console.log(arrays.row[i])
+            //console.log(arrays.row[i])
             if(headcorrect[i] == heads[i]){
-                console.log("correcto")
-                
+                //console.log("correcto")
             }
             else if(heads[i] == null){
-                console.log("incorrecto");
+                //console.log("incorrecto");
                 incorrecto ++
             }else{
-                console.log("incorrecto");
+                //console.log("incorrecto");
                 incorrecto ++
             }
         }
-        console.log(incorrecto);
+        //console.log(incorrecto);
         // 
         if(incorrecto>0)
         {
-            console.log("ARCHIVO NO CUMPLE CON EL FORMATO")
+            //console.log("ARCHIVO NO CUMPLE CON EL FORMATO")
             let alerta = ("El formato del documento es incorrecto, por favor descargue nuestro excel tipo para continuar") 
             document.getElementById('comprobador').value = alerta
         }
@@ -130,90 +236,164 @@ excelInput.addEventListener('change',async function(){
                     }
                     else{
                         for(i=0 ; i<8 ; i++){
-                        if(counter == 8){
-                            counter = 0
-                            console.log("fila 2 contador en 0");
-                        }
-                        console.log(row[i])
+                            if(counter == 8){
+                                counter = 0
+                                countererr = 0
+                                console.log("FILA 2 COUNTER = 0");
+                                tdrow =[]
+                            }
+                            console.log(row[i])
 
-                        if(i==0 && row[i] == null)
-                        {
-                            let nomerr = "Debe ingresar un nombre";
-                            console.log(nomerr);
-                            countererr++
-                        }
-                        if(i==1 && row[i] == null)
-                        {
-                            let direrr = "Debe ingresar una direccion";
-                            console.log(direrr);
-                            countererr++
-                        }
-                        if(i==2 && row[i] == null)
-                        {
-                            let telerr = "Debe ingresar un telefono";
-                            console.log(telerr);
-                            countererr++
-                        }
-                        if(i==3 && row[i] == null)
-                        {
-                            let corerr = "Debe ingresar un correo";
-                            console.log(corerr);
-                            countererr++
-                        }
-                        if(i==4 && row[i] == null)
-                        {
-                            let comerr = "Debe ingresar una comuna";
-                            console.log(comerr);
-                            countererr++
-                        }
-                        if(i==5 && row[i] == null)
-                        {
-                            let deserr = "Debe ingresar una descripcion";
-                            console.log(deserr);
-                            countererr++
-                        }
-                        if(i==6 && row[i] == null)
-                        {
-                            let coserr = "Debe ingresar el costo";
-                            console.log(coserr);
-                            countererr++
-                        }
-                        if(i==7 && row[i] == null)
-                        {
-                            let typeerr = "Debe ingresar el tipo de envio";
-                            console.log(typeerr);
-                            countererr++
-                        }
+                            tdrow.push(row[i])
+                            
 
-                        if(countererr > 4)
-                        {
-                            break
+                            //console.log(verifynombre(row[i]))
+
+                            if(i==0 && row[i] == null)
+                            {
+                                nomerr = "Debe ingresar un nombre";
+                                console.log(nomerr);
+                                countererr++
+                            }
+                            else if(i==0 && row[i].length < 5){
+                                nomerr = "El nombre debe tener al menos 5 caracteres";
+                                //console.log(direrr);
+                            }
+                            else{
+                                nombre = row[i]
+                            }
+
+                            if(i==1 && row[i] == null)
+                            {
+                                direrr = "Debe ingresar una dirección";
+                                console.log(direrr);
+                                countererr++
+                            }
+                            else if(i==1 && row[i].length < 5){
+                                direrr = "La dirección debe tener al menos 5 caracteres";
+                                //console.log(direrr);
+                            }
+
+                            if(i==2 && row[i] == null)
+                            {
+                                telerr = "Debe ingresar un telefono";
+                                console.log(telerr);
+                                countererr++
+                            }
+                            else if(i==2 && row[i].length < 5){
+                                telerr = "El teléfono debe tener al menos 9 caracteres";
+                            }
+
+                            if(i==3 && row[i] == null)
+                            {
+                                corerr = "Debe ingresar un correo";
+                                console.log(corerr);
+                                countererr++
+                            }else if(i==3 && row[i].length < 7){
+                                corerr = "El correo debe tener al menos 7 caracteres";
+                                
+                            }
+
+                            if(i==4 && row[i] == null)
+                            {
+                                comerr = "Debe ingresar una comuna";
+                                console.log(comerr);
+                                countererr++
+                            }
+
+                            if(i==5 && row[i] == null)
+                            {
+                                deserr = "Debe ingresar una descripcion";
+                                console.log(deserr);
+                                countererr++
+                            }else if(i==5 && row[i].length < 3){
+                                deserr = "La descripción debe tener al menos 3 caracteres";
+                               
+                            }
+
+                            if(i==6 && row[i] == null)
+                            {
+                                coserr = "Debe ingresar el costo";
+                                console.log(coserr);
+                                countererr++
+                            }else if(i==6 && row[i] > 500000){
+                                coserr = "El valor declarado no puede superar los $500.000";
+                                
+                            }
+
+                            if(i==7 && row[i] == null)
+                            {
+                                typeerr = "Debe ingresar el tipo de envio";
+                                console.log(typeerr);
+                                countererr++
+                            }
+
+                            
+                            counter ++
+
+                            console.log("EL CONTADOR VA EN"+counter)
+                            console.log("EL CONTADOR DE ERRORES VA EN "+countererr);
+
+                            if(countererr > 4)
+                            {
+                                break
+                            }
+                            else if(counter == 8 && countererr <= 4){
+                                
+                                let json_error = {
+                                    "nombre" : nomerr,
+                                    "direccion" : direrr,
+                                    "telefono" : telerr,
+                                    "correo" : corerr,
+                                    "comuna" : comerr,
+                                    "descripcion" : deserr,
+                                    "costo" : coserr,
+                                    "tipo" : typeerr
+                                }
+                                //console.log(json_error);
+                                
+
+                                tdrow.forEach(td=>{
+                                    if(td == null){
+                                        td = ""
+                                    }
+                                    filatabla += "<td>"+ td +"</td>"
+                                })
+
+                                console.log("------------------------");
+                                console.log("VER ARREGLO DE DATOS PARA TABLA");
+                                console.log(filatabla);
+                                console.log("-------------------------");
+                                
+
+
+                                $('#excel_table > thead').append(   "<tr>"+
+                                                                        "<th>Nombre</th>"+
+                                                                        "<th>Dirección</th>"+
+                                                                        "<th>Teléfono</th>"+
+                                                                        "<th>Correo</th>"+
+                                                                        "<th>Comuna</th>"+
+                                                                        "<th>Item</th>"+
+                                                                        "<th>Valor</th>"+
+                                                                        "<th>Tipo Envío</th>"+
+                                                                    "</tr>") 
+
+
+                                                                    
+                                $('#excel_table > tbody:last').append("<tr>"+ filatabla +"<td>"+`<button data-bs-toggle="collapse" data-bs-target="#modexcelrow" aria-expanded="false" aria-controls="modexcelrow" class="modexceldata" title="Modificar">
+                                                                                                    <i class="fa-solid fa-pen-to-square" ></i>
+                                                                                                    </button>`+"</td>"+"</tr>"+"<tr>"+ formularioModificar+"</tr>");
+                            }
                         }
-                        
-                        counter ++
-                        console.log("EL CONTADOR VA EN"+counter);
                     }
-
-                    }
-                    
-
                 })
-                console.log("HE SALIDO DEL INFIERNO ->> AHORA SE REINICIAR[A EL CONTADOR DE ERRORES");
+                console.log("HE SALIDO DEL INFIERNO => DEMASIADOS ERRORES");
+               
+
+                
         }
 
-        
-
-        
-
-       
-        
-
-     
-   
-    
     //console.log(excelPrinter.printexc('excel-table',excel));
-    
-
     //console.log(excel.header());
     // console.log(excel.header().trackid());
     // console.log(excel.header().documentNumber());
@@ -231,4 +411,7 @@ excelInput.addEventListener('change',async function(){
     // }
 
 })
+
+
+
 
