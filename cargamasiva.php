@@ -4,6 +4,9 @@
         require_once('ws/bd/dbconn.php');
         $conexion = new bd();
         $conexion->conectar();
+
+
+        $comunas = Array("Algarrobo","Buin","Cabildo","Calera de Tango","Calle Larga","Cartagena","Casablanca","Catemu","Cerrillos","Cerro Navia","Colina","Conchalí","Concón","Curacavi","El Bosque","El Monte","El Quisco","El Tabo","Estación Central","Hijuelas","Huechuraba","Independencia","Isla de Maipo","La Calera","La Cisterna","La Cruz","La Florida","La Granja","La Ligua","La Pintana","La Reina","Lampa","Las Condes","Limache","Llay Llay","Lo Barnechea","Lo Espejo","Lo Prado","Los Andes","Macul","Maipú","María Pinto","Melipilla","Nogales","Ñuñoa","Olmué","Padre Hurtado","Paine","Panquehue","Papudo","Pedro Aguirre Cerda","Peñaflor","Peñalolén","Petorca","Pirque","Providencia","Puchuncaví","Pudahuel","Puente Alto","Putaendo","Quilicura","Quillota","Quilpué","Quinta Normal","Quintero","Recoleta","Renca","Rinconada","San Antonio","San Bernardo","San Esteban","San Felipe","San Joaquín","San José de Maipo","San Miguel","San Ramón","Santa María","Santiago","Santo Domingo","Talagante","Valparaíso","Villa Alemana","Viña del Mar","Vitacura","Zapallar")
 ?>
 
 
@@ -12,9 +15,6 @@
     <?php
         include_once('../nclientesv2/include/head.php');
     ?>
-
-
-
 <body>
     <div id="app">
         <!-- SideBar -->
@@ -39,25 +39,34 @@
     <input type="text" name="" value="123" id="comprobador"/><button id="pressme">PressMe</button>
     <a download href="./xlsx/books.xlsx">Enlace para descargar mp3 con su nombre original</a>
 
-    <div class="container-fluid">
-        <row class="col-12">
-            <table id="excel-table">
-                <thead> 
-                    <tr>
-
-                    </tr>
+    <div style="background-color: beige; margin: 15px">
+        <div class="card-header">
+            Resumen Pedido
+        </div>
+        <div id="tablepp">
+            <table class="table table-striped" id="excel_table">
+                <thead>
                 </thead>
                 <tbody>
                     
                 </tbody>
+                
             </table>
-        </row>
+        </div>
     </div>
     <button onclick="ExportToExcel('xlsx')">Export table to excel</button>
     <script src="js/xlsxReader.js"></script>
     <script src="https://unpkg.com/read-excel-file@5.x/bundle/read-excel-file.min.js"></script>
 
     <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+
+
+    <div class="collapse" id="modexcelrow">
+        <h1>HOLAAAAAAAAA</h1>
+    </div>
+
+
+   
 
 
 
