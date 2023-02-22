@@ -87,6 +87,7 @@ const excelInput = document.getElementById('excel-input');
 
 excelInput.addEventListener('change',async function(){
     const content = await readXlsxFile(excelInput.files[0])
+        $('tbody tr').remove();
         const excel = new Excel(content);
         let arrays = excel.header();
         let headcorrect = ["NOMBRE CLIENTE FINAL","DIRECCION ENTREGA","TELEFONO","Email cliente (opcion)","COMUNA ENTREGA","NOMBRE ITEM","COSTO ITEM","PAQUETE"]
@@ -400,28 +401,6 @@ excelInput.addEventListener('change',async function(){
                                         else{
                                             filatabla += `<td class="tdtype" contenteditable>`+ td +"</td>"
                                         }
-                                    }
-
-                                    if(index == 5){
-                                        
-                                    }
-                                    else if(index == 8){
-                                        let tipoenvio = ["Mini", "Medium"]
-                                        let options = "";
-                                        tipoenvio.forEach(tipo => {
-                                            if(tipo == td){
-                                                options += "<option selected>"+tipo+"</option>"
-                                            }
-                                            else{
-                                                options += "<option>"+tipo+"</option>"
-                                            }
-                                             
-                                        });
-                                        filatabla += "<td><select>"+options+"</select></td>"
-                                    }
-                                    else{
-                                        
-                                        //filatabla +="<td><select><option>Comuna aqui</option></select></td>"
                                     }
                                 })
 

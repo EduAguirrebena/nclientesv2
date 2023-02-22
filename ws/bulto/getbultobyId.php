@@ -51,9 +51,6 @@
             }
             $conn->desconectar();
             echo json_encode($return_array);
-           
-           
-            
         }
         else{
             echo $conn->mysqli->error;

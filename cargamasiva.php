@@ -55,7 +55,7 @@
                         <th>Tipo Envío</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="tbodyclick">
                     
                 </tbody>
                 
@@ -79,16 +79,56 @@
 
 </body>
 <script>
-$('#excel-table td').on('click',function(){
-    console.log("eiii")
-})
 
+$('.tbodyclick').on('click','td',function(){
+    $(this).css('border', 'none')
+})
+$('.tbodyclick').on('blur','td',function(){
+    $(this).css('border', 'none')
+    let clase = $(this).attr('class')
+    let valor = $(this).html()
+    console.log(valor);
+
+    //VALIDAR NOMBRE
+    if(clase == "tdnom" && valor == "" ){
+
+        $(this).css('border', '1px solid red')
+        $(this).prop('title','Debe ingresar un nombre')
+
+    }else if(clase == "tdnom" && valor.length < 5 ){
+
+        $(this).css('border', '1px solid red')
+        $(this).prop('title','El nombre debe tener 5 caracteres como min')
+    }
+    else{
+        $(this).css('border', 'none')
+        $(this).prop('title','')
+    }
+    //VALIDAR DIRECCION
+    if(clase == "tddir" && valor == "" ){
+
+        $(this).css('border', '1px solid red')
+        $(this).prop('title','Debe ingresar una dirección')
+
+        }else if(clase == "tdnom" && valor.length < 5 ){
+
+        $(this).css('border', '1px solid red')
+        $(this).prop('title','El nombre debe tener 5 caracteres como min')
+        }
+        else{
+        $(this).css('border', 'none')
+        $(this).prop('title','')
+    }
+
+    
+
+   
+})
 
 $('#select_comuna').on('click', function(){
     comunas.forEach(function(comunas){
         $(this).add(new Option(comunas))
     })
-    
 })
     $('#pressme').click(function(){
     })
