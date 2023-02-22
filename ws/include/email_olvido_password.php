@@ -3,7 +3,8 @@
 include('mailer/PHPMailerAutoload.php');
 header("Content-Type: text/html; charset=utf-8");
 
-function mail_activacion ($asunto, $email, $url) {
+function mail_olvido_password ($asunto, $email, $url) {
+	
 	$html = '';
 	include_once('../../include/email_header.php');
 	$html = $html.' '.email_header($asunto);
@@ -17,6 +18,7 @@ function mail_activacion ($asunto, $email, $url) {
 	include_once('../../include/email_footer.php');
 	$html = $html.' '.$email_footer;
 
+
 	$mail = new PHPMailer;
 
 	$mail->SMTPOptions = array(
@@ -26,28 +28,18 @@ function mail_activacion ($asunto, $email, $url) {
 			'allow_self_signed' => true
 		)
 	);
-
-	// $mail->SMTPDebug = 1;
+	//$mail->SMTPDebug = 1;
 	$mail->CharSet = 'UTF-8';
 	$mail->isSMTP();
 
-	$mail->Host = 'smtp.gmail.com';
+	$mail->Host = getenv('smtp_host');
 	$mail->SMTPAuth = true;
-	$mail->Username = 'noreply2@spread.cl';
-	$mail->Password = 'Spread_22';
+	$mail->Username = getenv('smtp_username');
+	$mail->Password = getenv('smtp_pass');
 	$mail->SMTPSecure = 'tls';
-	$mail->Port = 587;
+	$mail->Port = getenv('smtp_port');
 
-	$mail->From = 'noreply2@spread.cl';
-
-    // $mail->Host = getenv('smtp_host');
-    // $mail->SMTPAuth = true;
-    // $mail->Username = getenv('smtp_username');
-    // $mail->Password = getenv('smtp_pass');
-    // $mail->SMTPSecure = 'tls';
-    // $mail->Port = getenv('smtp_port');
-
-    // $mail->From = getenv('smtp_username');
+	$mail->From = getenv('smtp_username');
 
 	$mail->FromName = 'Spread';
 	$mail->addAddress($email);
