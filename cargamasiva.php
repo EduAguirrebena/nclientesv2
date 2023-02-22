@@ -88,6 +88,7 @@ $('.tbodyclick').on('blur','td',function(){
     let clase = $(this).attr('class')
     let valor = $(this).html()
     console.log(valor);
+    console.log(clase);
 
     //VALIDAR NOMBRE
     if(clase == "tdnom" && valor == "" ){
@@ -100,30 +101,70 @@ $('.tbodyclick').on('blur','td',function(){
         $(this).css('border', '1px solid red')
         $(this).prop('title','El nombre debe tener 5 caracteres como min')
     }
-    else{
-        $(this).css('border', 'none')
-        $(this).prop('title','')
-    }
-    //VALIDAR DIRECCION
-    if(clase == "tddir" && valor == "" ){
+    else if(clase == "tddir" && valor.trim == ""){
 
         $(this).css('border', '1px solid red')
         $(this).prop('title','Debe ingresar una dirección')
 
-        }else if(clase == "tdnom" && valor.length < 5 ){
+    }else if(clase == "tddir" && valor.trim.length < 5 ){
 
         $(this).css('border', '1px solid red')
-        $(this).prop('title','El nombre debe tener 5 caracteres como min')
+        $(this).prop('title','La dirección debe tener al menos 5 caracteres')
         }
-        else{
+    else if(clase == "tdtel" && valor.trim == ""){
+
+        $(this).css('border', '1px solid red')
+        $(this).prop('title','Debe ingresar una dirección')
+
+    }else if(clase == "tdtel" && valor.trim.length < 9 ){
+
+        $(this).css('border', '1px solid red')
+        $(this).prop('title','El teléfono debe tener al menos 9 caracteres')
+    }
+    else if(clase == "tdcorr" && valor.trim == "" ){
+
+        $(this).css('border', '1px solid red')
+        $(this).prop('title','Debe ingresar un correo')
+
+    }else if(clase == "tdcorr" && valor.length < 7){
+
+        $(this).css('border', '1px solid red')
+        $(this).prop('title','El correo debe tener al menos 7 caracteres')
+    }else if(clase == "tdcom" && valor == "" ){
+
+        $(this).css('border', '1px solid red')
+        $(this).prop('title','Debe ingresar una comuna')
+
+    }else if(clase == "tditem" && valor == "" ){
+
+        $(this).css('border', '1px solid red')
+        $(this).prop('title','Debe ingresar un item')
+
+    }else if(clase == "tditem" && valor.length < 3){
+
+        $(this).css('border', '1px solid red')
+        $(this).prop('title','El item debe tener al menos 3 caracteres')
+    }else if(clase == "tdval" && valor == "" ){
+
+        $(this).css('border', '1px solid red')
+        $(this).prop('title','Debe ingresar un correo')
+
+    }else if(clase == "tdval" && valor > 500000){
+
+        $(this).css('border', '1px solid red')
+        $(this).prop('title','El valor no puede exceder los $500000')
+
+    } else if(clase == "tdtype" && valor == "" ){
+
+        $(this).css('border', '1px solid red')
+        $(this).prop('title','Debe ingresar un tipo de envío')
+
+    } else{
         $(this).css('border', 'none')
         $(this).prop('title','')
     }
-
-    
-
-   
 })
+    
 
 $('#select_comuna').on('click', function(){
     comunas.forEach(function(comunas){
