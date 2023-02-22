@@ -10,9 +10,17 @@
     $conexion->conectar();
 
     include('./include/busquedas/busquedaEnvios.php');
-    $cantEnvios = totalEnvios($id_cliente);
-    $cantEnviosEntregados = totalEnviosEntregados($id_cliente);
-    $cantEnviosNoEntregados = totalEnviosNoEntregados($id_cliente);
+    $inicio = date("Y-m-01");
+    $timestamp1 = strtotime($inicio);
+
+    $fin = date("Y-m-t");
+    $timestamp2 = strtotime($fin);
+
+    $cantEnvios = totalEnvios($id_cliente,$timestamp1,$timestamp2);
+    $cantEnviosEntregados = totalEnviosEntregados($id_cliente,$timestamp1,$timestamp2);
+    $cantEnviosNoEntregados = totalEnviosNoEntregados($id_cliente,$timestamp1,$timestamp2);
+
+
 ?>
 
 
