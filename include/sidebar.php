@@ -1,13 +1,8 @@
 <div id="sidebar" class="active">
             <div class="sidebar-wrapper active">
                 <div class="sidebar-header">
-                    <div class="d-flex justify-content-between">
-                        <div class="logo">
-                            <a href="/index.php"><img src="/assets/images/logo/logo_horizontal - copia (2).png"  alt="logo"></a>
-                        </div>
-                        <div class="toggler">
-                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
-                        </div>
+                    <div class="d-flex justify-content-center">
+                            <a href="./index.php"><img src="../include/img/logo_horizontal.png"></a>
                     </div>
                 </div>
                 <div class="sidebar-menu">
