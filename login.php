@@ -82,9 +82,9 @@
   
   <script>
     $(document).ready(function(){
-      $("#btn-ingresar").click(function() {
-    		$("#ingreso").submit();
-    	});
+      // $("#btn-ingresar").click(function() {
+    	// 	$("#ingreso").submit();
+    	// });
 
       $('#ingreso').validate({
         rules: {
@@ -123,6 +123,7 @@
                     type: "POST",
                     url: "./ws/cliente/ingresar.php",
                     data: $("#ingreso").serialize(),
+                    dataType: 'json',
                     success: function(data) {
                       console.log(data);
                         if(data.success==1) {
