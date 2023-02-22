@@ -22,7 +22,7 @@ function totalEnviosEntregados($id){
     $conn -> conectar();
 
     $queryCantBultosEntregados = "SELECT count(id_bulto) as suma FROM bulto b inner JOIN pedido p on p.id_pedido = b.id_pedido 
-                                where p.id_cliente = 1373 and p.estado_pedido in (2,3) and b.estado_logistico = 5";
+                                where p.id_cliente = $id and p.estado_pedido in (2,3) and b.estado_logistico = 5";
 
     if($res = $conn->mysqli->query($queryCantBultosEntregados))
     {
@@ -40,7 +40,7 @@ function totalEnviosNoEntregados($id){
     $conn -> conectar();
 
     $queryCantBultosEntregados = "SELECT count(id_bulto) as suma FROM bulto b inner JOIN pedido p on p.id_pedido = b.id_pedido 
-                                where p.id_cliente = 1373 and p.estado_pedido in (2,3) and b.estado_logistico != 5";
+                                where p.id_cliente = $id and p.estado_pedido in (2,3) and b.estado_logistico != 5";
 
     if($res = $conn->mysqli->query($queryCantBultosEntregados))
     {
