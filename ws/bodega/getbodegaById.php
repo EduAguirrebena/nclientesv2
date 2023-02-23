@@ -3,8 +3,8 @@
     $id_cliente = $_SESSION['cliente']->id_cliente;
     include_once('../bd/dbconn.php');
     $idbodega = $_POST['id_bodega'];
-        $conn = new bd();
-        $conn->conectar();
+    $conn = new bd();
+    $conn->conectar();
 
 
         $querybodega =  'SELECT bo.nombre_bodega as nombre,

@@ -112,7 +112,7 @@
                 </table>
             </div>
             <div style="width: 100%; display:flex; justify-content: end;">
-                <button onclick="updateDiv()" class="btn btn-success" data-bs-toggle="tooltip"  title="Continuar" >
+                <button id="checkpay" onclick="updateDiv()" class="btn btn-success" data-url="invoice.php" data-bs-toggle="tooltip"  title="Continuar" >
                                 <i class="fa-solid fa-file-invoice"></i>
                                 <p>Procesar Pago</p>
                 </button>
@@ -227,6 +227,13 @@
 <script>
     var idbulto = "";
 
+    $('#checkpay').on('click',function(e){
+        e.preventDefault()
+        var url = $(this).attr('data-url');
+        window.location.href = url+"?id_pedido="+<?=$id_pedido?>;
+
+    })
+
     
     $(".editbulto").click(function(){
 
@@ -235,7 +242,7 @@
         // $("#xlarge").find('input').val("");
         // $("#xlarge").find('input').val("");
         var idbulto = $(this).closest('tr').find(".id_bulto").text();
-         alert(idbulto);
+        // alert(idbulto);
       
         $.ajax({
             url: "ws/bulto/getbultobyId.php",
@@ -259,6 +266,8 @@
                     $("#xlarge").find('input[name="cost"]').val(value.valor);
                     $("#xlarge").find('input[name="select_type"]').val(value.servicio);
                 })
+            },error:function(resp){
+                console.log(resp.responseText);
             }
         })
     })
