@@ -246,7 +246,7 @@
             },
             success:function(resp){
                 console.log(resp);
-            $.each(resp,function(key,value){
+                $.each(resp,function(key,value){
                     console.log(value.nombre);
                     // document.getElementById("nombredestinatario").innerHTML = ""+value.nombre+""
                     $("#xlarge").find('input[name="nombredestinatario"]').val(value.nombre);
@@ -259,7 +259,7 @@
                     $("#xlarge").find('input[name="cost"]').val(value.valor);
                     $("#xlarge").find('input[name="select_type"]').val(value.servicio);
                 })
-             }
+            }
         })
     })
 
