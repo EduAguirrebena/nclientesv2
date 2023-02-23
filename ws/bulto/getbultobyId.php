@@ -22,11 +22,9 @@
                 where bu.id_bulto = $id_bulto;";
 
     
-    try{
+   
         if($bulto = $conn->mysqli->query($query)){
-
-            while($datares = mysqli_fetch_array($bulto))
-            {
+            while($datares = mysqli_fetch_array($bulto)){
                 $nombre = $datares['nombre'];
                 $direccion = $datares['direccion'];
                 $telefono = $datares['telefono'];
@@ -36,8 +34,8 @@
                 $servicio = $datares['servicio'];
                 $region = $datares['region'];
                 $comuna = $datares['comuna'];
-
-                $return_array[]=array(
+    
+                $return_arrays[]=array(
                     "nombre" => $nombre,
                     "direccion"=>$direccion,
                     "correo" => $correo,
@@ -48,20 +46,12 @@
                     "region" => $region,
                     "comuna" => $comuna
                 );
+                echo json_encode($return_arrays, JSON_FORCE_OBJECT);
             }
-            $conn->desconectar();
-            echo json_encode($return_array);
         }
-        else{
-            echo $conn->mysqli->error;
-        }
-    }
-    catch(Error $e){
-        return $e;
-    }
-    
 
-
-    
-
+        
+       
+       
+        $conn->desconectar();
 ?>

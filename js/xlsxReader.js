@@ -212,7 +212,7 @@ excelInput.addEventListener('change',async function(){
 
                                 countererr++
                             }
-                            else if(i==2 && row[i].length < 5){
+                            else if(i==2 && row[i].length <= 9){
                                 telerr = "El teléfono debe tener al menos 9 caracteres";
                                 arrayerr.push(telerr)
                             }
@@ -245,7 +245,7 @@ excelInput.addEventListener('change',async function(){
                                 arrayerr.push(comerr)
                                 countererr++
                             }
-                            else if(i==4 && comerr == null){
+                            else if(i==4 && comerr == ""){
                                 
                                 arrayerr.push("")
 
@@ -279,13 +279,14 @@ excelInput.addEventListener('change',async function(){
                                 coserr = "El valor declarado no puede superar los $500.000";
                                 countererr ++
                                 arrayerr.push(coserr)
+                                console.log(coserr);
                             }
                             else if(i==6 && coserr == ""){
                                 
                                 arrayerr.push("")
 
                             }
-
+                            console.log("PUSHEAR EL ERROR DE TIPO ENVIO");
                             if(i==7 && row[i] == null)
                             {
                                 typeerr = "Debe ingresar el tipo de envio";
@@ -321,7 +322,7 @@ excelInput.addEventListener('change',async function(){
                                     if(index == 1){
                                         let arrerr = arrayerr[0]
                                         if(arrerr != ""){
-                                            filatabla += `<td class="tdnom" style="border:1px solid red" title="${arrerr}" contenteditable>`+ td +"</td>"
+                                            filatabla += `<td class="tdnom err" style="border:1px solid red" title="${arrerr}" contenteditable>`+ td +"</td>"
                                         }
                                         else{
                                             filatabla += `<td class="tdnom" contenteditable>`+ td +"</td>"
@@ -330,7 +331,7 @@ excelInput.addEventListener('change',async function(){
                                     if(index == 2){
                                         let arrerr = arrayerr[1]
                                         if(arrerr != ""){
-                                            filatabla += `<td class="tddir" style="border:1px solid red" title="${arrerr}" contenteditable>`+ td +"</td>"
+                                            filatabla += `<td class="tddir err" style="border:1px solid red" title="${arrerr}" contenteditable>`+ td +"</td>"
                                         }
                                         else{
                                             filatabla += `<td class="tddir" contenteditable>`+ td +"</td>"
@@ -339,7 +340,7 @@ excelInput.addEventListener('change',async function(){
                                     if(index == 3){
                                         let arrerr = arrayerr[2]
                                         if(arrerr != ""){
-                                            filatabla += `<td class="tdtel" style="border:1px solid red" title="${arrerr}" contenteditable>`+ td +"</td>"
+                                            filatabla += `<td class="tdtel err" style="border:1px solid red" title="${arrerr}" contenteditable>`+ td +"</td>"
                                             console.log("SE CREO LA FILA DE TELEFONO ERRONEO");
                                         }
                                         else{
@@ -349,9 +350,9 @@ excelInput.addEventListener('change',async function(){
                                     if(index == 4){
                                         let arrerr = arrayerr[3]
                                         if(arrerr != ""){
-                                            filatabla += `<td class="tdcorr" style="border:1px solid red" title="${arrerr}" contenteditable>`+ td +"</td>"
+                                            filatabla += `<td class="tdcorr err" style="border:1px solid red" title="${arrerr}" contenteditable>`+ td +"</td>"
                                             console.log(arrerr);
-                                            console.log("SE CREO LA FILA DE CORREO ERRONEO");
+                                            //console.log("SE CREO LA FILA DE CORREO ERRONEO");
                                         }
                                         else{
                                             filatabla += `<td class="tdcorr" contenteditable>`+ td +"</td>"
@@ -361,13 +362,13 @@ excelInput.addEventListener('change',async function(){
                                         let comunas = ["","Algarrobo","Buin","Cabildo","Calera de Tango","Calle Larga","Cartagena","Casablanca","Catemu","Cerrillos","Cerro Navia","Colina","Conchalí","Concón","Curacavi","El Bosque","El Monte","El Quisco","El Tabo","Estación Central","Hijuelas","Huechuraba","Independencia","Isla de Maipo","La Calera","La Cisterna","La Cruz","La Florida","La Granja","La Ligua","La Pintana","La Reina","Lampa","Las Condes","Limache","Llay Llay","Lo Barnechea","Lo Espejo","Lo Prado","Los Andes","Macul","Maipú","María Pinto","Melipilla","Nogales","Ñuñoa","Olmué","Padre Hurtado","Paine","Panquehue","Papudo","Pedro Aguirre Cerda","Peñaflor","Peñalolén","Petorca","Pirque","Providencia","Puchuncaví","Pudahuel","Puente Alto","Putaendo","Quilicura","Quillota","Quilpué","Quinta Normal","Quintero","Recoleta","Renca","Rinconada","San Antonio","San Bernardo","San Esteban","San Felipe","San Joaquín","San José de Maipo","San Miguel","San Ramón","Santa María","Santiago","Santo Domingo","Talagante","Valparaíso","Villa Alemana","Viña del Mar","Vitacura","Zapallar"]
                                         let options =""
                                         let arrerr = arrayerr[4]
-                                        console.log(arrerr);
+                                        //console.log(arrerr);
                                         if(arrerr != ""){
                                             comunas.forEach(comuna => {
                                                     options += "<option>"+comuna+"</option>"
                                                 
                                             });
-                                            filatabla += `<td class="tdcom" style="border:1px solid red" title="Debe seleccionar una comuna"><select >`+options+"</select></td>"
+                                            filatabla += `<td class="tdcom err" style="border:1px solid red" title="Debe seleccionar una comuna"><select id="select_comuna">`+options+"</select></td>"
                                         }
                                         else{
                                             comunas.forEach(comuna => {
@@ -378,13 +379,13 @@ excelInput.addEventListener('change',async function(){
                                                     options += "<option>"+comuna+"</option>"
                                                 }
                                             });
-                                            filatabla += `<td class="tdcom"><select>`+options+"</select></td>"
+                                            filatabla += `<td class="tdcom"><select id="select_comuna">`+options+"</select></td>"
                                         }
                                     }
                                     if(index == 6){
                                         let arrerr = arrayerr[5]
                                         if(arrerr != ""){
-                                            filatabla += `<td class="tditem" style="border:1px solid red" title="${arrerr}" contenteditable>`+ td +"</td>"
+                                            filatabla += `<td class="tditem err" style="border:1px solid red" title="${arrerr}" contenteditable>`+ td +"</td>"
                                         }
                                         else{
                                             filatabla += `<td class="tditem" contenteditable>`+ td +"</td>"
@@ -393,7 +394,7 @@ excelInput.addEventListener('change',async function(){
                                     if(index == 7){
                                         let arrerr = arrayerr[6]
                                         if(arrerr != ""){
-                                            filatabla += `<td class="tdval" style="border:1px solid red" title="${arrerr}" contenteditable>`+ td +"</td>"
+                                            filatabla += `<td class="tdval err" style="border:1px solid red" title="${arrerr}" contenteditable>`+ td +"</td>"
                                         }
                                         else{
                                             filatabla += `<td class="tdval" contenteditable>`+ td +"</td>"
@@ -403,12 +404,11 @@ excelInput.addEventListener('change',async function(){
                                         let arrerr = arrayerr[7]
                                         let tipos = ["","Mini","Medium"]
                                         let options =""
-                                        //console.log(arrerr);
                                         if(arrerr != ""){
                                             tipos.forEach(tipo => {
                                                     options += "<option>"+tipo+"</option>"
                                             });
-                                            filatabla += `<td class="tdtype" style="border:1px solid red" title="Debe seleccionar una comuna"><select >`+options+"</select></td>"
+                                            filatabla += `<td class="tdtype err" style="border:1px solid red" title="${arrerr}"><select id="select_type">`+options+"</select></td>"
                                         }
                                         else{
                                             tipos.forEach(tipo =>{
@@ -418,12 +418,8 @@ excelInput.addEventListener('change',async function(){
                                                 else{
                                                     options += "<option>"+tipo+"</option>"
                                                 }
-
-                                                console.log("--------------");
-                                                console.log(tipo +"      comparado con       "+ td)
-                                                console.log("--------------"+ arrerr);
                                             });
-                                            filatabla += `<td class="tdtype"><select>`+options+"</select></td>"
+                                            filatabla += `<td class="tdtype"><select id="select_type">`+options+"</select></td>"
                                             
                                         }
                                     }
@@ -434,7 +430,7 @@ excelInput.addEventListener('change',async function(){
                                 // console.log(filatabla);
                                 // console.log("-------------------------");
 
-                                $('#excel_table > tbody:last').append("<tr>"+ filatabla +"<td>");
+                                $('#excel_table > tbody:last').append("<tr>"+ filatabla +'<td> <button id="btnEliminar" class="btn btn-danger" data-bs-toggle="tooltip" title="Eliminar"> <i class="fa-solid fa-trash"></i></button></td>' +"<tr>");
                             }
                         }
                     }

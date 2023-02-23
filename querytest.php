@@ -63,6 +63,8 @@ $timestamp1 = strtotime($inicio);
 $fin = date("Y-m-t");
 $timestamp2 = strtotime($fin);
 
+
+
 // $timestamp2 = strtotime($date2);
 // echo $timestamp2;
 

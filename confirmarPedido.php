@@ -5,8 +5,7 @@
     $conn = new bd();
     $conn ->conectar();
 
-    $id_pedido = 35566;
-    //$_GET['id_pedido'];
+    $id_pedido = $_GET['id_pedido'];
 
     
     $querybultos = "Select * from bulto where id_pedido = $id_pedido and Deleted = 0";
