@@ -1,11 +1,8 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+<?php
+  require_once('./include/head.php')
+?>
 <body>
     <div class="container">
         <div class="row">
@@ -31,6 +28,18 @@
         </row>
     </div>
     <button onclick="ExportToExcel('xlsx')">Export table to excel</button>
+
+
+    
+<div>
+  <button id="pressme">PRESSME</button>
+</div>
+
+<?php
+require_once('./include/footer.php')
+?>
+
+<script src="./js/testjs.js"></script>
 <script src="js/xlsxReader.js"></script>
 <script src="https://unpkg.com/read-excel-file@5.x/bundle/read-excel-file.min.js"></script>
 
@@ -47,13 +56,15 @@
 </script>
 
 </body>
-</html> -->
+</html>
 
 
 
    
 
 <?php
+
+
 
 $date1 = "2023-02-01";
 
@@ -131,11 +142,11 @@ $timestamp2 = strtotime($fin);
       </div>
     </div> -->
 
-    <div class="auth-wrapper col-3">
+    <!-- <div class="auth-wrapper col-3">
   <div class="auth-content">
     <div class="card text-center">
       <div class="card-body">
-        <div class="row">
+        <div class="row"> -->
 
           <!-- <div class="col-md-12">
           <div class="alert alert-info">
@@ -143,10 +154,10 @@ $timestamp2 = strtotime($fin);
           No realizaremos envíos este 31 de octubre y 01 de noviembre. Planifica tus envíos desde el 02 de noviembre
           </div> -->
 
-          <h3 class="mb-3">Bienvenido a <br><span class="text-c-blue">SPREAD</span></h3>
-          <p>Soluciones de Última Milla.</p>
+          <!-- <h3 class="mb-3">Bienvenido a <br><span class="text-c-blue">SPREAD</span></h3>
+          <p>Soluciones de Última Milla.</p> -->
           <!-- ingreso -->
-          <div class="toggle-block">
+          <!-- <div class="toggle-block">
             <ol class="position-relative carousel-indicators justify-content-center">
             <li class="toggle-btn"></li>
             <li class="active"></li>
@@ -169,4 +180,6 @@ $timestamp2 = strtotime($fin);
       </div>
     </div>
   </div>
-</div>
+</div> -->
+
+

@@ -109,7 +109,7 @@ $id_cliente = $_SESSION['cliente']->id_cliente;
                     {
                         $idpaquete = 2;
                     }
-                    
+                    //BUSCAR PRECIOS EN BD
                     if($idpaquete == 1){
                         $valor = 3570;
                     }
@@ -121,7 +121,7 @@ $id_cliente = $_SESSION['cliente']->id_cliente;
                         $idbultotemporal = $conn ->mysqli->insert_id;
                     }
                     $barcode = 78472947729 + $idbultotemporal;
-
+                       
                     $querybulto = "INSERT INTO bulto (id_bulto, nombre_bulto, direccion_bulto, telefono_bulto,email_bulto,descripcion_bulto,
                     valor_declarado_bulto, precio_bulto, tipo_servicio_bulto, codigo_bulto, codigo_barras_bulto,id_paquete, id_comuna, id_pedido, estado_logistico,track_spread)
                     VALUES (null,'".

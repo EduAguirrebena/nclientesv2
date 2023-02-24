@@ -451,17 +451,17 @@ function getTableData(){
             success:function(data){
                 console.log(data);
                 console.log("Estoy de vuelta");
-                swal.fire({
-                        title : "Hecho",
-                        text : "Tú pedido fue creado exitosamente!",
-                        icon: "success",
-                        showConfirmButton: false,
-                        type : "success",
-                        timer : 2500
+                // swal.fire({
+                //         title : "Hecho",
+                //         text : "Tú pedido fue creado exitosamente!",
+                //         icon: "success",
+                //         showConfirmButton: false,
+                //         type : "success",
+                //         timer : 2500
                         
-                    }).then(function() {
-                        window.location = "confirmarpedido.php?id_pedido="+data;
-                })
+                //     }).then(function() {
+                //         window.location = "confirmarpedido.php?id_pedido="+data;
+                // })
             },error:function(data){
                 console.log("Volvi, pero no sirvo para nada");
                 console.log(data.responseText);
@@ -476,7 +476,7 @@ $('.tbodyclick').on('blur','td',function(){
     let valor = $(this).text().trim()    
     
     // console.log("El valor de comuna es "+comuna);
-    // console.log(clase);
+     console.log(clase);
     console.log("VALOR DEL TD INGRESADO" + valor+"|");
 
 
@@ -484,123 +484,109 @@ $('.tbodyclick').on('blur','td',function(){
         let response = validatenombre(valor,clase)
         if(response == "vacio")
         {
-            $(this).css('border', '1px solid red')
-            $(this).prop('title','Debe ingresar un nombre')
-            $(this).addClass('err')
+          
         }
         if(response == "corto")
         {
-            $(this).css('border', '1px solid red')
-            $(this).prop('title','El nombre debe tener 5 caracteres como min')
-            $(this).addClass('err')
+           
         }
         if(response = "bien")
         {
-            $(this).css('border', 'none')
-            $(this).prop('title','')
-            $(this).removeClass('err')
+           
         }
     }
 
     console.log("cadena mide "+valor.trim().length);
 
-    // console.log("este es el valor del select tipo "+tipo);
-        // if(clase == "tdnom" && valor == "" ){
-        //     
-        //     console.log("verificacion nombre nulo");
-        // }
-        // if(clase == "tdnom" && valor.length < 5){
+    console.log("este es el valor del select tipo "+tipo);
+        if(clase == "tdnom" && valor == "" ){
+            
+            $(this).css('border', '1px solid red')
+            $(this).prop('title','Debe ingresar un nombre')
+            $(this).addClass('err')
+        }
+        if(clase == "tdnom" && valor.length < 5){
 
-        //     
-        //     console.log("verificacion nombre corto");
+            $(this).css('border', '1px solid red')
+            $(this).prop('title','El nombre debe tener 5 caracteres como min')
+            $(this).addClass('err')
         
-        // } else{
-        //     $(this).css('border', 'none')
-        //     $(this).prop('title','')
-        //     $(this).removeClass('err')
-        // }
+        } else if(clase == "tddir" && valor == ""){
 
-        // if(clase == "tddir" && valor == ""){
+            $(this).css('border', '1px solid red')
+            $(this).prop('title','Debe ingresar una dirección')
+            $(this).addClass('err')
 
-        //     $(this).css('border', '1px solid red')
-        //     $(this).prop('title','Debe ingresar una dirección')
-        //     $(this).addClass('err')
-
-        // }else if(clase == "tddir" && valor.trim().length < 5 ){
+        }else if(clase == "tddir" && valor.trim().length < 5 ){
            
-        //     $(this).css('border', '1px solid red')
-        //     $(this).prop('title','La dirección debe tener al menos 5 caracteres')
-        //     $(this).addClass('err')
-        // }
-        // else{
-        //     $(this).css('border', 'none')
-        //     $(this).prop('title','')
-        //     $(this).removeClass('err')
-        // }
-        // else if(clase == "tdtel" && valor.trim == ""){
+            $(this).css('border', '1px solid red')
+            $(this).prop('title','La dirección debe tener al menos 5 caracteres')
+            $(this).addClass('err')
+        }
+        else if(clase == "tdtel" && valor.trim == ""){
 
-        //     $(this).css('border', '1px solid red')
-        //     $(this).prop('title','Debe ingresar una dirección')
-        //     $(this).addClass('err')
+            $(this).css('border', '1px solid red')
+            $(this).prop('title','Debe ingresar una dirección')
+            $(this).addClass('err')
 
-        // }else if(clase == "tdtel" && valor.trim.length < 9 ){
+        }else if(clase == "tdtel" && valor.trim.length < 9 ){
 
-        //     $(this).css('border', '1px solid red')
-        //     $(this).prop('title','El teléfono debe tener al menos 9 caracteres')
-        //     $(this).addClass('err')
-        // }
-        // else if(clase == "tdcorr" && valor.trim == "" ){
+            $(this).css('border', '1px solid red')
+            $(this).prop('title','El teléfono debe tener al menos 9 caracteres')
+            $(this).addClass('err')
+        }
+        else if(clase == "tdcorr" && valor.trim == "" ){
 
-        //     $(this).css('border', '1px solid red')
-        //     $(this).prop('title','Debe ingresar un correo')
-        //     $(this).addClass('err')
+            $(this).css('border', '1px solid red')
+            $(this).prop('title','Debe ingresar un correo')
+            $(this).addClass('err')
 
-        // }else if(clase == "tdcorr" && valor.length < 7){
+        }else if(clase == "tdcorr" && valor.length < 7){
 
-        //     $(this).css('border', '1px solid red')
-        //     $(this).prop('title','El correo debe tener al menos 7 caracteres')
-        //     $(this).addClass('err')
+            $(this).css('border', '1px solid red')
+            $(this).prop('title','El correo debe tener al menos 7 caracteres')
+            $(this).addClass('err')
 
-        // }else if(clase == "tdcom" && comuna == "" || comuna == null){
-        //     $(this).css('border', '1px solid red')
-        //     $(this).prop('title','Debe ingresar una comuna')
-        //     $(this).addClass('err')
+        }else if(clase == "tdcom" && comuna == "" || comuna == null){
+            $(this).css('border', '1px solid red')
+            $(this).prop('title','Debe ingresar una comuna')
+            $(this).addClass('err')
 
-        // }else if(clase == "tditem" && valor == "" ){
+        }else if(clase == "tditem" && valor == "" ){
 
-        //     $(this).css('border', '1px solid red')
-        //     $(this).prop('title','Debe ingresar un item')
-        //     $(this).addClass('err')
+            $(this).css('border', '1px solid red')
+            $(this).prop('title','Debe ingresar un item')
+            $(this).addClass('err')
 
-        // }else if(clase == "tditem" && valor.length < 3){
+        }else if(clase == "tditem" && valor.length < 3){
 
-        //     $(this).css('border', '1px solid red')
-        //     $(this).prop('title','El item debe tener al menos 3 caracteres')
-        //     $(this).addClass('err')
+            $(this).css('border', '1px solid red')
+            $(this).prop('title','El item debe tener al menos 3 caracteres')
+            $(this).addClass('err')
 
-        // }else if(clase == "tdval" && valor == "" ){
+        }else if(clase == "tdval" && valor == "" ){
 
-        //     $(this).css('border', '1px solid red')
-        //     $(this).prop('title','Debe ingresar un correo')
-        //     $(this).addClass('err')
+            $(this).css('border', '1px solid red')
+            $(this).prop('title','Debe ingresar un correo')
+            $(this).addClass('err')
 
-        // }else if(clase == "tdval" && valor > 500000){
+        }else if(clase == "tdval" && valor > 500000){
 
-        //     $(this).css('border', '1px solid red')
-        //     $(this).prop('title','El valor no puede exceder los $500000')
-        //     $(this).addClass('err')
+            $(this).css('border', '1px solid red')
+            $(this).prop('title','El valor no puede exceder los $500000')
+            $(this).addClass('err')
 
-        // } else if(clase == "tdtype" && tipo == "" ){
+        } else if(clase == "tdtype" && tipo == "" ){
 
-        //     $(this).css('border', '1px solid red')
-        //     $(this).prop('title','Debe ingresar un tipo de envío')
-        //     $(this).addClass('err')
+            $(this).css('border', '1px solid red')
+            $(this).prop('title','Debe ingresar un tipo de envío')
+            $(this).addClass('err')
 
-        // } else{
-        //     $(this).css('border', 'none')
-        //     $(this).prop('title','')
-        //     $(this).removeClass('err')
-        // }
+        } else{
+            $(this).css('border', 'none')
+            $(this).prop('title','')
+            $(this).removeClass('err')
+        }
 
     
 
