@@ -260,10 +260,7 @@
             </div>
         </div>
     </div>
-    <input type="text" name="" value="123" id="comprobador"/><button id="pressme">PressMe</button>
-    <input type="text" name="" value="123" id="comprobador"/><button id="presstest">APACHURRAME</button>
     <a download href="./xlsx/books.xlsx">Enlace para descargar mp3 con su nombre original</a>
-
     <div style="background-color: beige; margin: 15px">
         <div class="card-header">
             <h3>Resumen Pedido</h3>
@@ -290,7 +287,6 @@
             </table>
         </div>
     </div>
-    <button onclick="ExportToExcel('xlsx')">Export table to excel</button>
     <button onclick="getTableData()">Enviar</button>
     <script src="js/xlsxReader.js"></script>
     <script src="https://unpkg.com/read-excel-file@5.x/bundle/read-excel-file.min.js"></script>
@@ -298,9 +294,7 @@
     <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
 
 
-    <div class="collapse" id="modexcelrow">
-        <h1>HOLAAAAAAAAA</h1>
-    </div>
+    
     <div class="page-content" style="color:3e3e3f;">
     <?php
         include_once('../nclientesv2/include/footer.php')
@@ -451,17 +445,17 @@ function getTableData(){
             success:function(data){
                 console.log(data);
                 console.log("Estoy de vuelta");
-                // swal.fire({
-                //         title : "Hecho",
-                //         text : "Tú pedido fue creado exitosamente!",
-                //         icon: "success",
-                //         showConfirmButton: false,
-                //         type : "success",
-                //         timer : 2500
+                swal.fire({
+                        title : "Hecho",
+                        text : "Tú pedido fue creado exitosamente!",
+                        icon: "success",
+                        showConfirmButton: false,
+                        type : "success",
+                        timer : 2500
                         
-                //     }).then(function() {
-                //         window.location = "confirmarpedido.php?id_pedido="+data;
-                // })
+                    }).then(function() {
+                        window.location = "confirmarpedido.php?id_pedido="+data;
+                })
             },error:function(data){
                 console.log("Volvi, pero no sirvo para nada");
                 console.log(data.responseText);
@@ -472,32 +466,13 @@ function getTableData(){
 
 $('.tbodyclick').on('blur','td',function(){
     //$(this).css('border', 'none')
-    let clase = $(this).attr('class')
+    let clase = $(this).attr('class').split(' ')[0]
     let valor = $(this).text().trim()    
     
     // console.log("El valor de comuna es "+comuna);
-     console.log(clase);
+    console.log(clase);
     console.log("VALOR DEL TD INGRESADO" + valor+"|");
-
-
-    if(clase = 'tdnom'){
-        let response = validatenombre(valor,clase)
-        if(response == "vacio")
-        {
-          
-        }
-        if(response == "corto")
-        {
-           
-        }
-        if(response = "bien")
-        {
-           
-        }
-    }
-
     console.log("cadena mide "+valor.trim().length);
-
     console.log("este es el valor del select tipo "+tipo);
         if(clase == "tdnom" && valor == "" ){
             
@@ -721,8 +696,7 @@ document.querySelectorAll("#usardir").forEach(el => {
                                             nombre : vnombre,
                                             comuna : vcomunavalue,
                                             region: vregion};
-                            
-                    
+
                             //alert(JSON.stringify(dataajax));
                                     $.ajax({
                                     url: "ws/bodega/newBodega.php",
@@ -738,20 +712,13 @@ document.querySelectorAll("#usardir").forEach(el => {
                                             return false;
                                         }
                                     }
-                                    
                                 })
                         }
                         catch(error){
                             console.log(error);
                             return false;
-                        }    
-                        
-                           
-                           
-                            
+                        }      
                     }
-                        
-                    
                 })
    
 </script>

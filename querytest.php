@@ -1,3 +1,46 @@
+<?php
+require_once('./ws/bd/dbconn.php');
+$conn = new bd();
+$conn->conectar();
+ $id_pedido = 35812;
+  $querybulto = 'SELECT bu.id_bulto as guide, bu.nombre_bulto as nombre, bu.email_bulto as correo, bu.telefono_bulto as telefono,
+  bu.direccion_bulto as direccion, co.nombre_comuna as comuna,re.nombre_region as region, bu.precio_bulto as precio,
+  bu.codigo_barras_bulto as barcode
+  FROM bulto bu 
+  INNER JOIN comuna co on co.id_comuna = bu.id_comuna
+  INNER JOIN provincia pro on pro.id_provincia = co.id_provincia
+  INNER JOIN region re on re.id_region = pro.id_region
+  where bu.id_pedido ='. $id_pedido;
+
+  if($resdatabulto = $conn->mysqli->query($querybulto)){
+  while($datares = $resdatabulto->fetch_object())
+  {
+  $datosbultos [] = $datares;
+  }
+  $dataAppolo =[];
+  foreach($datosbultos as $databul){
+  $dataAppolo[]= Array(
+  "guide" => $databul->barcode,
+  "name_client" => $databul->nombre,
+  "email" => $databul->correo,
+  "phone"=> $databul->telefono ,
+  "street"=> $databul->direccion,
+  "number"=> "" ,
+  "commune" => $databul->comuna,
+  "region"=> $databul->region,
+  "dpto_bloque"=> "",
+  "id_pedido"=> $id_pedido,
+  "valor"=> "",
+  "descripcion"=> ""
+  );
+  }
+  }
+
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <?php
@@ -18,7 +61,7 @@
             <table id="excel-table">
                 <thead> 
                     <tr>
-
+                  <?php print_r($dataAppolo);?>
                     </tr>
                 </thead>
                 <tbody>
@@ -28,6 +71,11 @@
         </row>
     </div>
     <button onclick="ExportToExcel('xlsx')">Export table to excel</button>
+
+    <a href="https://<?php echo $_SERVER['HTTP_HOST']?>/ws/pdf/?id_pedido=<?=$id_pedido?>&token=<?=md5($id_pedido."pdf_etiquetas")?>" 
+       type="button" class="btn btn-lg btn-block btn-success"><i class="fa fa-download" aria-hidden="true">
+       </i> Descargue aquí el archivo para imprimir las etiquetas que debe adherir en los bultos
+    </a>
 
 
     

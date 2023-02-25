@@ -134,7 +134,10 @@
                                             aria-label="Close">
                                             <i data-feather="x"></i>
                                         </button>
+
+                                        <input disabled type="text" name="vid_bulto"/>
                                     </div>
+
                                     <div class="row">
                                         <div class="col-6">
                                         <div class="form-group">
@@ -198,15 +201,15 @@
                                             <div class="form-group">
                                             <label for="Costo"> Tipo envío </label>
                                                 <select name="select_type" class="form-select" id="select_type" value="">
-                                                    <option value="1"></option>
-                                                    <option value="1">mini</option>
-                                                    <option value="2">medio</option>
+                                                    <option value="0"></option>
+                                                    <option>Mini</option>
+                                                    <option>Medium</option>
                                                 </select>
                                             </div>
                                             <label id="tipoenvio">Rango de peso</label>
                                         </div>
                                         <div class="col-4 justify-content-start">
-                                            <button data-bs-toggle="modal" data-bs-target="#xlarge" id="closemodal" type="submit" class="btn btn-primary me-1 mb-1 col-12"> Modificar Bulto </button>
+                                            <button  data-bs-toggle="modal" data-bs-target="#xlarge" id="closemodal"> Modificar Bulto </button>
                                         </div>
                                     </div>
                                 </div>
@@ -226,23 +229,31 @@
 
 <script>
     var idbulto = "";
-
+    
+    let comunas = ["Algarrobo","Buin","Cabildo","Calera de Tango","Calle Larga","Cartagena","Casablanca","Catemu","Cerrillos","Cerro Navia","Colina","Conchalí","Concón","Curacavi","El Bosque","El Monte","El Quisco","El Tabo","Estación Central","Hijuelas","Huechuraba","Independencia","Isla de Maipo","La Calera","La Cisterna","La Cruz","La Florida","La Granja","La Ligua","La Pintana","La Reina","Lampa","Las Condes","Limache","Llay Llay","Lo Barnechea","Lo Espejo","Lo Prado","Los Andes","Macul","Maipú","María Pinto","Melipilla","Nogales","Ñuñoa","Olmué","Padre Hurtado","Paine","Panquehue","Papudo","Pedro Aguirre Cerda","Peñaflor","Peñalolén","Petorca","Pirque","Providencia","Puchuncaví","Pudahuel","Puente Alto","Putaendo","Quilicura","Quillota","Quilpué","Quinta Normal","Quintero","Recoleta","Renca","Rinconada","San Antonio","San Bernardo","San Esteban","San Felipe","San Joaquín","San José de Maipo","San Miguel","San Ramón","Santa María","Santiago","Santo Domingo","Talagante","Valparaíso","Villa Alemana","Viña del Mar","Vitacura","Zapallar"]
+    $(document).ready(function(){
+        comunas.forEach(comuna => {
+            $('#select_comuna').append('<option>'+comuna+'</option>')
+        })
+    })
     $('#checkpay').on('click',function(e){
         e.preventDefault()
         var url = $(this).attr('data-url');
         window.location.href = url+"?id_pedido="+<?=$id_pedido?>;
-
     })
 
     
     $(".editbulto").click(function(){
-
+       
         $("#xlarge input").val("");
         $("#xlarge select").val("");
         // $("#xlarge").find('input').val("");
         // $("#xlarge").find('input').val("");
-        var idbulto = $(this).closest('tr').find(".id_bulto").text();
-        // alert(idbulto);
+        idbulto = $(this).closest('tr').find(".id_bulto").text();
+        $("#xlarge").find('input[id="idbulto"]').val(idbulto);
+
+
+        //  alert(idbulto);
       
         $.ajax({
             url: "ws/bulto/getbultobyId.php",
@@ -253,19 +264,32 @@
             },
             success:function(resp){
                 console.log(resp);
-                $.each(resp,function(key,value){
-                    console.log(value.nombre);
-                    // document.getElementById("nombredestinatario").innerHTML = ""+value.nombre+""
-                    $("#xlarge").find('input[name="nombredestinatario"]').val(value.nombre);
-                    $("#xlarge").find('input[name="numtel"]').val(parseInt(value.telefono));
-                    $("#xlarge").find('input[name="dir"]').val(value.direccion);
-                    $("#xlarge").find('input[name="correo"]').val(value.correo);
-                    $("#xlarge").find('select[name="select_region"]').val(value.region);
-                    $("#xlarge").find('select[name="select_comuna"]').val(value.comuna);
-                    $("#xlarge").find('input[name="item"]').val(value.item);
-                    $("#xlarge").find('input[name="cost"]').val(value.valor);
-                    $("#xlarge").find('input[name="select_type"]').val(value.servicio);
-                })
+                 $.each(resp,function(key,value){
+                     console.log(value.nombre);
+                     //document.getElementById("nombredestinatario").innerHTML = ""+value.nombre+""
+                    $("#xlarge").find('input[name="nombredestinatario"]').val(value.nombre)
+                    $("#xlarge").find('input[name="numtel"]').val(parseInt(value.telefono))
+                    $("#xlarge").find('input[name="dir"]').val(value.direccion)
+                    $("#xlarge").find('input[name="correo"]').val(value.correo)
+                    $("#xlarge").find('select[name="select_region"]').val(value.region)
+                    $("#xlarge").find('select[name="select_comuna"]').val(value.comuna)
+                    $("#xlarge").find('input[name="item"]').val(value.item)
+                    $("#xlarge").find('input[name="cost"]').val(value.valor)
+                    if(value.servicio == 1){
+                        $("#xlarge").find('select[name="select_type"]').val("Mini").change()
+                    }
+                    if(value.servicio == 2){
+                        $("#xlarge").find('select[name="select_type"]').val("Medium").change()
+                    }
+              
+                   
+                    
+                    
+                    
+                   
+                    
+                 })
+                 
             },error:function(resp){
                 console.log(resp.responseText);
             }
@@ -300,6 +324,48 @@
 })
 
 
+    $('#closemodal').on('click',function(){
+
+        let vnombre =$("#xlarge").find('input[name="nombredestinatario"]').val()
+        let vtelefono =$("#xlarge").find('input[name="numtel"]').val()
+        let vdireccion =$("#xlarge").find('input[name="dir"]').val()
+        let vcorreo =$("#xlarge").find('input[name="correo"]').val()
+        let vregion =$("#xlarge").find('select[name="select_region"]').val()
+        let vcomuna =$("#xlarge").find('select[name="select_comuna"]').val()
+        let vitem =$("#xlarge").find('input[name="item"]').val()
+        let vcosto =$("#xlarge").find('input[name="cost"]').val()
+        let vtipo =$("#xlarge").find('select[name="select_type"]').val()
+        //let id_bulto = $("#xlarge").find('input[name="vid_bulto"]').val();
+
+
+        let Arraymod = {
+            "nombre" : vnombre,
+            "telefono": vtelefono,
+            "direccion": vdireccion,
+            "correo": vcorreo,
+            "comuna": vcomuna,
+            "item": vitem,
+            "costo": vcosto,
+            "tipo" :vtipo,
+            "id_bulto": idbulto
+        }
+        //console.log(Arraymod)
+
+
+            $.ajax({
+                type: "POST",
+                url: "ws/bulto/modBulto.php",
+                data: JSON.stringify(Arraymod),
+                success: function(data) {
+                    console.log(data);
+                    $("#reloadiv").load(window.location.href +" #reloadiv");
+                },
+                    error: function(data){
+                        console.log(data);
+                }
+        })
+        return false;
+    })
     function updateDiv()
     { 
         $("#reloadiv").load(window.location.href +" #reloadiv");

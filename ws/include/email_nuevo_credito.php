@@ -1,6 +1,6 @@
 <?php
 
-include('mailer/PHPMailerAutoload.php');
+include('../include/mailer/PHPMailerAutoload.php');
 header("Content-Type: text/html; charset=utf-8");
 
 function mail_nuevo_credito ($asunto, $email, $html) {

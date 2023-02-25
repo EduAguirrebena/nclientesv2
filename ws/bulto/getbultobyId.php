@@ -13,7 +13,7 @@
                        bu.email_bulto as correo,
                        bu.valor_declarado_bulto as valor,
                        bu.descripcion_bulto as item,
-                       bu.tipo_servicio_bulto as servicio,
+                       bu.id_paquete as servicio,
                        re.id_region as region,
                        bu.id_comuna as comuna
               from bulto bu 
@@ -23,11 +23,13 @@
               where bu.id_bulto ='. $id_bulto;
 
 
-    echo json_encode( $query);
+    //echo json_encode( $query);
 
     if($res = $conn -> mysqli->query($query)){
         while($datares = mysqli_fetch_array($res))
             {
+                
+
                 $nombre    = $datares['nombre'];
                 $direccion = $datares['direccion'];
                 $telefono  = $datares['telefono'];
@@ -36,7 +38,13 @@
                 $correo    = $datares['correo'];
                 $servicio  = $datares['servicio'];
                 $region    = $datares['region'];
-                $comuna    = $datares['comuna'];
+                
+                $idcomuna    = $datares['comuna'];
+                $querycomuna = 'SELECT nombre_comuna from comuna where id_comuna ='.$idcomuna;
+                $rescomunaname = $conn -> mysqli->query($querycomuna)->fetch_object();
+                
+               
+               
                 $return_array[]=array(
                     "nombre" => $nombre,
                     "direccion"=>$direccion,
@@ -46,31 +54,9 @@
                     "item" => $item,
                     "servicio" => $servicio,
                     "region" => $region,
-                    "comuna" => $comuna
+                    "comuna" => $rescomunaname->nombre_comuna
                 );
         }
         echo json_encode($return_array);
-    }
-
-    
-  
-        // if($bulto = $conn->mysqli->query($query)){
-        //     while($datares = $bulto -> fetch_object()){
-
-        //         //$respuesta[] = $datares; 
-
-                
-        //         $return_array[]=array(
-                    
-        //         );  
-        //     }
-        //    //echo "NADA";
-        // //    echo $respuesta;
-        
-        // }
-        // else{
-        //     echo json_encode($conn->mysqli->error);
-        // }
-    
- 
+    } 
 ?>
