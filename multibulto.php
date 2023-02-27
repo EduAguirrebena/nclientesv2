@@ -52,8 +52,6 @@
 
 				
 				<div >
-			
-					<form>
 						<div class="">
 							<div class="col-lg-12">
 								<div class="everyclass" id="row">
@@ -68,13 +66,13 @@
 													</div>
 													<div class="card-content">
 														<div class="form-bodyenvio">
-														<form class="form form" id="toValdiateBulto">
+														<form class="form form formvalidar" id="toValidateBulto1">
 															<div class="form-body">
 															<div class="row">
 																<div class="col-6">
 																<div class="form-group">
 																	<label for="gg">Nombre</label>
-																	<input type="text" id="nombredestinatario" class="form-control" name="nombredestinatario" placeholder="Nombre Destinatario"/>
+																	<input type="text" id="nombredestinatario" class="form-control nombre" name="nombredestinatario[0]" placeholder="Nombre Destinatario"/>
 																</div>
 																</div>
 																<div class="col-6">
@@ -163,14 +161,19 @@
 								
 			
 								<div id="newinput"></div>
-								<button id="rowAdder" type="button"
-									class="btn btn-dark">
-									<span class="bi bi-plus-square-dotted">
-									</span> ADD
-								</button>
+									<button id="rowAdder" type="button"
+										class="btn btn-dark">
+										<span class="bi bi-plus-square-dotted">
+										</span> ADD
+									</button>
+									<button id="formValidate" type="submit"
+										class="btn btn-dark">
+										<span class="bi bi-plus-square-dotted">
+										</span> VALIDAR
+									</button>
 							</div>
 						</div>
-					</form>
+					
 				</div>
 
 			</div>
@@ -178,16 +181,57 @@
 	<?php
 		include_once('./include/footer.php')
 	?>
+	  <script src="assets/js/jquery-validation/jquery.validate.js"></script>
 
+	
 	<script type="text/javascript">
 			counter = 1;
+			counterelementindex= 0 ;
 
 			// '<div id="row"> <div class="input-group m-3" >'+
             // '<div class="input-group-prepend">' +
             // '<button class="btn btn-danger" id="DeleteRow" type="button">' +
             // '<i class="bi bi-trash"></i> Delete</button> </div>' +
             // `<input type="text" class="form-control m-input" value="${counter} "></div> </div>`;
- 
+		$(document).ready(function(){
+			let options = {rules:{
+						'nombredestinatario[]': {
+							required : true,
+							minlength:5
+						},
+						numtel:{
+							required:true}
+						}}
+
+			$( "#toValdiateBulto" ).each( function() {
+				$( this ).validate( options );
+			} );
+
+			
+				// 	$('#Valdiarmulti').validate(
+				// 		{rules:{
+				// 		'nombredestinatario[]': {
+				// 			required : true,
+				// 			minlength:5
+				// 		},
+				// 		numtel:{
+				// 			required:true}
+					// },messages:{
+					// 	'nombredestinatario[]':{
+					// 			required:"Debe ingresar un nombre",
+					// 			minlength:"El largo minimo son 5 caracteres"
+					// 		}
+					// },submitHandler: function(form){
+						
+				// 	}
+				// })
+			
+		})
+			
+
+
+			
+		
  
         $("#rowAdder").click(function () {
 
@@ -195,9 +239,25 @@
 			{
 				counter ++
 				console.log(counter);
+				let index = counter - 1
 
 				let clone = $('#row').clone()
-				clone.find("#nombredestinatario").val("") 
+				clone.find("#nombredestinatario").val("")
+				let nombre = clone.find(".nombre").attr('name')
+				let nombrenew = nombre.replace('['+(0)+']', '['+index+']')  
+				let form = clone.find(".formvalidar")
+				let idform = form.attr('id')
+				console.log(idform);
+				let newformid = idform.replace( idform,"toValidateBulto"+counter)
+				console.log(newformid);
+
+				form.attr('id', newformid);
+
+				
+
+				clone.find(".nombre").attr('name',nombrenew);
+				console.log(nombrenew);
+				clone.attr('name',name)
 				clone.find("#numtel").val("") 
 				clone.find("#dir").val("") 
 				clone.find("#correo").val("") 
@@ -227,104 +287,48 @@
 					let actual = $(this).closest('#row').find('.m-input').val();
 					// console.log(actual);
 					let minput = document.getElementsByClassName('m-input')
+					
+					var nombreind = document.getElementsByClassName('nombre')
+					var formgetid = document.getElementsByClassName("formvalidar")
 					//let substarter = actual; 
 
 					for(var index=0;index < minput.length;index++){
 
 						if(index+1>actual){
 							minput[index].value = index
+
+							//console.log(nombreind);
+							let indexfixed = index-1
+							let indexplus = index+1
+							let nombre = nombreind[index].getAttribute('name')
+							let nombrenew = nombre.replace('['+(index)+']', '['+indexfixed+']')  
+							//console.log("El nuevo nombre a Asignar es "+nombrenew);
+							nombreind[index].name = nombrenew;
+							//console.log("El nuevo nombre es: "+ nombrenew);
+							let idform = formgetid[index].id;
+						    console.log("EL ID ENTRANTE ES "+idform+" VAMOS EN EL INDEX "+index);
+							console.log("SE INTENTARA REEMPLAZAR ESTO "+"toValidateBulto"+indexplus);
+							console.log("SE INTENTARA REEMPLAZAR ESTO "+"toValidateBulto"+index);
+							let newformid = idform.replace( "toValidateBulto"+indexplus, "toValidateBulto"+index )
+							console.log("LA NUEVA CADENA DE FORM ES " + newformid);
+							idform[index].id = newformid; 
 						}	
 					}
 					$(this).parents("#row").remove();
-					
-					
-					//console.log(actual);
 				}
         })
 
-
-
-		// $("#select_comuna").click(function(){
-		// 	$("#newinput").load(window.location.href +" #newinput");
-		// 	console.log("exito");
-			
-		// })
-
 		$(".clonedcom").on('click',function(){
-			//let idregion = $(this).closest("#row").find(".sel_region").val();
 			let idregion = $(this).closest("#row").find(".clonedreg").val();
 			console.log(idregion);
-			// let comuna = $(this)
-			// comuna.empty();
-			// $(this).options = new Option("");
-    		
-
-			// $.ajax({
-			// 	type: "POST",
-			// 	url: "ws/pedidos/getComunaByRegion.php",
-			// 	dataType: 'json',
-			// 	data: {
-			// 		"idregion" : idregion
-			// 	},
-			// 	success: function(data) {
-			// 		//console.log(data);
-
-			// 		$.each(data, function (key, value){
-						
-			// 			comuna.append(new Option(value.nombre, value.id))
-			// 			//var idregion = $(this).closest("#row").find(".sel_region").val();
-			// 			//let select = $(this).options
-			// 			//console.log(select);
-
-						
-            //             // select.options[select.options.length] = new Option(value.nombre,value.id);
-					
-			// 		})
-					
-			// 	},
-			// 		error: function(data){
-			// 	}
-			// })
+			
 
 		})
 
 
 		$(".sel_comuna").on('click',function(){
-			//let idregion = $(this).closest("#row").find(".sel_region").val();
 			let idregion = $(this).closest("#row").find(".sel_region").val();
 			console.log(idregion);
-			// let comuna = $(this)
-			// comuna.empty();
-			// $(this).options = new Option("");
-    		
-
-			// $.ajax({
-			// 	type: "POST",
-			// 	url: "ws/pedidos/getComunaByRegion.php",
-			// 	dataType: 'json',
-			// 	data: {
-			// 		"idregion" : idregion
-			// 	},
-			// 	success: function(data) {
-			// 		//console.log(data);
-
-			// 		$.each(data, function (key, value){
-						
-			// 			comuna.append(new Option(value.nombre, value.id))
-			// 			//var idregion = $(this).closest("#row").find(".sel_region").val();
-			// 			//let select = $(this).options
-			// 			//console.log(select);
-
-						
-            //             // select.options[select.options.length] = new Option(value.nombre,value.id);
-					
-			// 		})
-					
-			// 	},
-			// 		error: function(data){
-			// 	}
-			// })
-
 		})
     </script>
 	

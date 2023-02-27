@@ -11,6 +11,7 @@
 
 
     $querybodega =  'SELECT bo.nombre_bodega as nombre,
+                            bo.id_bodega,
                             bo.calle_bodega as calle, 
                             bo.numero_bodega as numero,
                             bo.principal_bodega as principal, 
@@ -20,7 +21,7 @@
                         inner join comuna co on co.id_comuna = bo.id_comuna
                         inner join provincia pro on pro.id_provincia = co.id_provincia
                         inner join region re on re.id_region = pro.id_region
-                        where bo.id_cliente = '.$id_cliente;
+                        where bo.id_cliente = '.$id_cliente.' and isDelete = 0';
 
 
 
@@ -88,7 +89,7 @@ include_once('../nclientesv2/include/head.php');
             </div>
             <div class="page-content">
 
-                <div class="resumen-bodegas">
+                <div class="resumen-bodegas" id="resumen-bodegas">
                     <div class="row">
                                 <?php
                                     foreach($bodegas as $bodega):
@@ -100,20 +101,21 @@ include_once('../nclientesv2/include/head.php');
                                                     <div class="card-body" id="cardbodywarehouse" >
                                                         <div class="row">
                                                             <h4 class="card-title col-10"><?php echo $bodega->nombre?></h4>
+                                                            <input type="text" name="" id="idbod" value="<?=$bodega->id_bodega?>">
+                                                            
                                                         </div>
                                                         <p style="flex-direction: column-reverse;"><?php echo $bodega->calle?></p>
                                                         <p class="card-text">
-                                                        <?php echo $bodega->comuna.', '.$bodega->region?>
+                                                        <?php echo $bodega->comuna?>
                                                         </p>
                                                         <div class="row" style="justify-content: center;">
                                                         </div>
-                                                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#ModForm"
+                                                                <button type="button" class="modbtn btn btn-warning" data-bs-toggle="modal" data-bs-target="#ModForm"
                                                                         data-bs-toggle="tooltip" title="Modificar">
                                                                     <i class="fa-solid fa-pen-to-square"></i>
                                                                 </button>
                                                             
-                                                                <button type="button" class="btn btn-danger"  data-bs-target="#danger"data-bs-toggle="modal" data-bs-toggle="tooltip" title="Eliminar" 
-                                                                   >
+                                                                <button type="button" class="deletebodega btn btn-danger"  data-bs-toggle="tooltip" title="Eliminar">
                                                                     <i class="fa-solid fa-trash"></i>
                                                                 </button>
                                                         
@@ -224,8 +226,7 @@ include_once('../nclientesv2/include/head.php');
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-light-secondary"
-                                        data-bs-dismiss="modal">
+                                    <button type="button" class="btn closemodalcrear btn-light-secondary">
                                         <i class="bx bx-x d-block d-sm-none"></i>
                                         <span class="d-none d-sm-block">Cancelar</span>
                                     </button>
@@ -260,23 +261,23 @@ include_once('../nclientesv2/include/head.php');
                                 <label for="nombre">Nombre </label>
                                 <div class="form-group">
                                     <input type="text" placeholder="Nombre"
-                                        class="form-control" name="nombre" id="nombre" required>
+                                        class="form-control" name="nombre" id="nombre" >
                                 </div>
                                 <label for="calle">Calle </label>
                                 <div class="form-group">
                                     <input type="text" placeholder="Dirección"
-                                        class="form-control" name="calle" id="calle" required>
+                                        class="form-control" name="calle" id="calle" >
                                 </div>
                                 <label for="numero">Número </label>
                                 <div class="form-group">
                                     <input type="text" placeholder="Número"
-                                        class="form-control" name="numero" id="numero" required>
+                                        class="form-control" name="numero" id="numero" >
                                 </div>
                                 <label for="select_regionmod">Region</label> </label>
                                 <div class="input-group mb-3">
                                     <label class="input-group-text"
                                         for="select_regionmod">Region</label>
-                                    <select class="form-select" name="select_regionmod" id="select_regionmod" required>
+                                    <select class="form-select" name="select_regionmod" id="select_regionmod" >
                                         <option value=""></option>
                                             <?php 
                                                 foreach($comunas as $com)
@@ -290,19 +291,17 @@ include_once('../nclientesv2/include/head.php');
                                 <div class="input-group mb-3">
                                     <label class="input-group-text"
                                         for="select_comunamod">Comuna</label>
-                                        <select class="form-select" name="select_comunamod" id="select_comunamod" required>
+                                        <select class="form-select" name="select_comunamod" id="select_comunamod" >
                                             <option value=""></option>
                                         </select>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-light-secondary"
-                                    data-bs-dismiss="modal">
+                                <button type="button" class="btn closemodalmod btn-light-secondary">
                                     <i class="bx bx-x d-block d-sm-none"></i>
                                     <span class="d-none d-sm-block">Cancelar</span>
                                 </button>
-                                <input type="submit" value="Modificar"  class="submit btn btn-primary ml-1"
-                                    >
+                                <input type="submit" value="Modificar"  class="btn btn-primary ml-1">
                                     <i class="bx bx-check d-block d-sm-none"></i>
                                     <span class="d-none d-sm-block"></span>
                                 </input>
@@ -321,6 +320,44 @@ include_once('../nclientesv2/include/head.php');
 
 </body>
 <script>
+    var id_bodega = 0
+    var selectcomuna = 0
+    var comunacheck = false
+    $('.closemodalmod').on('click',function(){
+        $('#ModForm').modal('hide')
+    })
+    $('.closemodalcrear').on('click',function(){
+        $('#inlineForm').modal('hide')
+    })
+
+
+
+    $('.modbtn').on('click',function(){
+        id_bodega = $(this).closest('.card_bodegas').find('#idbod').val()
+        console.log(id_bodega)
+        $.ajax({
+            url: "ws/bodega/getbodegaById.php",
+            type: "POST",
+            dataType :'json',
+            data: {"id_bodega" : id_bodega},
+            success:function(resp){
+                console.log(resp)
+                let form = document.getElementById('ModForm')
+                $.each(resp,function(key,value){
+                    // console.log(value.comuna);
+                    // console.log(value.region);
+                    $('#ModForm').find('input[name="nombre"]').val(value.nombre)
+                    $('#ModForm').find('input[name="calle"]').val(value.direccion)
+                    $('#ModForm').find('input[name="numero"]').val(value.numero)
+                    $('#ModForm').find('#select_regionmod').val(value.region).change()
+                    selectcomuna = value.comuna
+                    comunacheck = true
+                })
+                
+            }
+        })
+    })
+
 
     $("#crearBodega").click(function(){
             try{
@@ -343,14 +380,6 @@ include_once('../nclientesv2/include/head.php');
                         success:function(resp){
                             console.log(resp)
                             return false
-                            
-                            // if(resp==="error"){
-                            //     console.log("creado");
-                            //     return false; 
-                            // }
-                            // else{
-                            //     return false;
-                            // }
                         }
                     })
             }
@@ -361,6 +390,7 @@ include_once('../nclientesv2/include/head.php');
 
 
         $("#select_regioncre").on('change',function(){
+            
             var idregion = this.value;
             var comuna = document.getElementById("select_comunacre");
             comuna.options = new Option("");
@@ -373,11 +403,11 @@ include_once('../nclientesv2/include/head.php');
                                 "idregion" : idregion
                             },
                             success: function(data) {
-                                console.log(data);
+                                //console.log(data);
 
                                 $.each(data, function (key, value){
                                     let select = document.getElementById("select_comunacre");
-                                    select.options[select.options.length] = new Option(value.nombre,value.id);
+                                    select.options[select.options.length] = new Option(value.nombre,value.id)
                                 })
                             },
                                 error: function(data){
@@ -398,62 +428,167 @@ include_once('../nclientesv2/include/head.php');
                                 "idregion" : idregion
                             },
                             success: function(data) {
-                                console.log(data);
-
+                                //console.log(data);
                                 $.each(data, function (key, value){
+                                    
                                     let select = document.getElementById("select_comunamod");
-                                    select.options[select.options.length] = new Option(value.nombre);
+                                    
+                                    if(selectcomuna == value.id){
+                                        select.options[select.options.length] = new Option(value.nombre,value.id,false,true)
+                                       
+                                    }
+                                    else{
+                                        select.options[select.options.length] = new Option(value.nombre,value.id,false,false)
+                                    }
+                                    //select.val(selectcomuna)
                                 })
-                                
                             },
                                 error: function(data){
                             }
             })
         })
 
-        ().ready(function(){
-
-            $("#ModForm").validate(
-                {
-                rules:{
-                    nombre:{
-                        required : true
-                    },
-                    calle:{
-                        required: true,
-                        minlength: 4
-                    },
-                    numero: {
-                        required:true
-                    },
-                    select_regioncli:{
-                        required:true
-                    },
-                    select_comunacli:{
-                        required:true
-                    }
+        $("#ModForm").validate({
+            rules:{
+                nombre:{
+                    required : true
                 },
-                messages:{
-                    nombre:{
-                        required : "Debe ingresa un Nombre para el punro de retiro"
-                    },
-                    calle:{
-                        required: "Debe ingresar la dirección del punto de retiro",
-                        minlength: "Debe tener al menos 4 caracteres"
-                    },
-                    numero: {
-                        required:"Debe ingresar la numeración de la dirección"
-                    },
-                    select_regioncli:{
-                        required:"Seleccione una región"
-                    },
-                    select_comunacli:{
-                        required:"Seleccione una comuna"
-                    }
+                calle:{
+                    required: true,
+                    minlength: 4
+                },
+                numero: {
+                    required:true
+                },
+                select_regioncli:{
+                    required:true
+                },
+                select_comunacli:{
+                    required:true
                 }
-            })
+            },
+            messages:{
+                nombre:{
+                    required : "Debe ingresa un Nombre para el punro de retiro"
+                },
+                calle:{
+                    required: "Debe ingresar la dirección del punto de retiro",
+                    minlength: "Debe tener al menos 4 caracteres"
+                },
+                numero: {
+                    required:"Debe ingresar la numeración de la dirección"
+                },
+                select_regioncli:{
+                    required:"Seleccione una región"
+                },
+                select_comunacli:{
+                    required:"Seleccione una comuna"
+                }
+            },submitHandler: function(form){
+                let vnombre =$('#ModForm').find('input[name="nombre"]').val()
+                let vdireccion =$('#ModForm').find('input[name="calle"]').val()
+                let vnumero =$('#ModForm').find('input[name="numero"]').val()
+                let vcomuna =$('#ModForm').find('#select_comunamod').val()
+                $.ajax({
+                        url: "ws/bodega/modbodega.php",
+                        type: "POST",
+                        dataType:'json',
+                        data: JSON.stringify({
+                            "nombre":vnombre,
+                            "direccion":vdireccion,
+                            "numero":vnumero,
+                            "comuna":vcomuna,
+                            "id" : id_bodega
+                        }),
+                        success:function(resp){
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Hecho!',
+                                text: resp.message
+                            })
+                            $('#ModForm').modal('hide')
+                            $(".resumen-bodegas").load(window.location.href +" .resumen-bodegas");
+                            console.log(resp)
+                            return false
+                        }
+                    })
+            }
         })
+
+
+        
+    $(".deletebodega").on('click',function(){
+            id_bodega = $(this).closest('.card_bodegas').find('#idbod').val()
+            Swal.fire({
+                title: 'Quieres Eliminar este punto de retiro?',
+                text: "Se eliminará este punto de retiro",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, borralo!'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "ws/bodega/deletebodega.php",
+                    type: "POST",
+                    data: JSON.stringify({
+                        "id_bodega": id_bodega
+                    }),
+                    dataType : 'json',
+                    beforeSend: function() {
+                        $("#overlay").fadeIn(300);
+                    },
+                    success:function(resp){
+                        //console.log(resp.status)
+                        
+                        if(resp.status == 1 ){
+                            Swal.fire({
+                                title: 'Eliminado!',
+                                text: 'Tú punto de retiro ha sido eliminado exitosamente',
+                                icon: 'success'
+                            }).then((result)=>{
+                                Swal.fire(
+                                'Importante!',
+                                'Tu nueva bodega principal es:  '+resp.namenewmain,
+                                'info').then((result)=>{
+                                    if(result){
+                                        //console.log(resp);
+                                        location.reload()
+                                    }
+                                })
+                            })    
+                        }
+                        if(resp.status==2){
+                            Swal.fire({
+                                title: 'Eliminado!',
+                                text: 'Tú punto de retiro ha sido eliminado exitosamente',
+                                icon: 'success'
+                            }).then((result)=>{
+                                location.reload()
+                            })
+                        }
+                    },error:function(resp){
+                        console.log(resp.responseText);
+                    },complete: function() {
+                        $("#overlay").fadeOut(300);
+                    }
+                })
+                
+            }
+        })
+            
+    })
+        
 
         
 </script>
+<style>
+    .error{
+        color:red;
+    }
+    .form-select option{
+        color:black;
+    }
+</style>
 </html>

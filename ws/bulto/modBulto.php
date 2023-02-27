@@ -6,7 +6,6 @@
 
     $data = json_decode($json);
     
-
     $nombre_bulto = $data->nombre;
     $telefono_bulto = $data->telefono;
     $direccion_bulto = $data->direccion;

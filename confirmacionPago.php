@@ -18,10 +18,7 @@ $dev = false;
 		}
 		$token = filter_input(INPUT_POST, 'token');
 	}
-		
-	
-
-  
+    
 	$params = array(
 		"token" => $token
 	);

@@ -31,7 +31,7 @@
                                 <a href="./unitario.php">
                                     <div class="card-body px-4 py-4-5">
                                         <div class="row">
-                                            <div class="col-4 d-flex justify-content-center">
+                                            <div class="col-4 d-flex justify-content-center" style="padding: 5px;">
                                                 <div class="stats-icon green">
                                                     <i class="fa-solid fa-box"></i>
                                                 </div>
@@ -49,7 +49,7 @@
                                 <a href="./multibulto.php">
                                     <div class="card-body px-4 py-4-5">
                                         <div class="row">
-                                            <div class="col-md-4 d-flex justify-content-center">
+                                            <div class="col-md-4 d-flex justify-content-center" style="padding: 10px;">
                                                 <div class="stats-icon green">
                                                 <i class="fa-solid fa-boxes-stacked"></i>
                                                 </div>

@@ -7,11 +7,6 @@
     
 
     include_once('/xampp/htdocs/nclientesv2/ws/bd/dbconn.php');
-    
-    //                      "direccion": calle,
-    //                     "numero": numero,
-    //                     "nombre":nombre,
-    //                     "comuna":comuna,
 
     $id_cliente = $_SESSION['cliente']->id_cliente;
     $direccion = $data->direccion;
