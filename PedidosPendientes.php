@@ -92,13 +92,13 @@
                                             foreach($datapedido as $pedido):      
                                     ?>
                                         <tr>
-                                            <td><?=$pedido->id_pedido?></td>
+                                            <td class="idpedido"><?=$pedido->id_pedido?></td>
                                             <td><?=date("d-m-Y ", $pedido->timestamp_pedido)?></td>
                                             <td><?=date("H:i:s", $pedido->timestamp_pedido)?></td>
                                             <td><?=$pedido->nombre_bodega?></td>
                                             <td>
                                                 <a href=""><span class="badge bg-light-success">Continuar</span></a>
-                                                <a href=""><span class="badge bg-light-warning">Modificar</span></a>
+                                                <a><span class="badge  modpedido bg-light-warning">Modificar</span></a>
                                                 <span class="badge bg-light-danger"  style="cursor: pointer;" data-bs-toggle="modal"
                                                     data-bs-target="#danger">Eliminar</span>
                                             </td>
@@ -155,5 +155,14 @@
         include_once('../nclientesv2/include/footer.php')
     ?>
 </body>
+
+<script>
+$('.modpedido').on('click',function(){
+    let id_pedido = $(this).closest('tr').find('.idpedido').text()
+    console.log(id_pedido);
+    window.location = "confirmarpedido.php?id_pedido="+id_pedido
+})
+
+</script>
 
 </html>

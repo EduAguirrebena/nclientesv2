@@ -347,52 +347,52 @@
             
         
 
-        // $('#procesarcredito').on('click',function(){
+        $('#procesarcredito').on('click',function(){
            
-        //     Swal.fire({
-        //     title: '¿Quieres procesar este pedido con tú crédito?',
-        //     text: "Esta acción confirmará tú pago ",
-        //     icon: 'warning',
-        //     showCancelButton: true,
-        //     confirmButtonColor: '#3085d6',
-        //     cancelButtonColor: '#d33',
-        //     confirmButtonText: 'Procesar pago!'
-        //     }).then((result) => {
-        //     if (result.isConfirmed) {
+            Swal.fire({
+            title: '¿Quieres procesar este pedido con tú crédito?',
+            text: "Esta acción confirmará tú pago ",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Procesar pago!'
+            }).then((result) => {
+            if (result.isConfirmed) {
                 
 
-        //         $.ajax({
-        //                 type: "POST",
-        //                 url: "ws/pedidos/pedido_credito.php",
-        //                 data: {"id_pedido": <?=$id_pedido?>, "token": "<?=(md5($id_pedido.$id_cliente."pedido_credito#"))?>"},
-        //                 success: function(data) {
-        //                     if(data.success == 1) {
+                $.ajax({
+                        type: "POST",
+                        url: "ws/pedidos/pedido_credito.php",
+                        data: {"id_pedido": <?=$id_pedido?>, "token": "<?=(md5($id_pedido.$id_cliente."pedido_credito#"))?>"},
+                        success: function(data) {
+                            if(data.success == 1) {
                                     
-        //                         Swal.fire(
-        //                         'Pago procesado!',
-        //                         'Tú pedido fue procesado por credito!',
-        //                         'success'
-        //                         )
-        //                         location.reload();
-        //                     }
-        //                     else {
-        //                         swal("Error", data.message, "error");
-        //                         finalizado();
-        //                     }
-        //                 },
-        //                 error: function(data){
-        //                     console.log(data.message);
-        //                 }
-        //             })
-        //     }
-        //     else{ 
-        //         swal("Se ha cancelado el pago de este pedido", {
-        //                     icon: "error",
-        //         })
-        //     }
+                                Swal.fire(
+                                'Pago procesado!',
+                                'Tú pedido fue procesado por credito!',
+                                'success'
+                                )
+                                location.reload();
+                            }
+                            else {
+                                swal("Error", data.message, "error");
+                                finalizado();
+                            }
+                        },
+                        error: function(data){
+                            console.log(data.message);
+                        }
+                    })
+            }
+            else{ 
+                swal("Se ha cancelado el pago de este pedido", {
+                            icon: "error",
+                })
+            }
 
-        //     }) 
-        // })
+            }) 
+        })
     </script>
 </body>
 </html>

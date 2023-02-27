@@ -255,7 +255,7 @@
                 
             </div>
                     <section>
-                        <div class="row match-height">
+                        <div class="row match-height" style="margin-top: 20px;">
                             <div >
                                 <div class="card">
                                 <div class="card-header">
@@ -511,7 +511,7 @@ $("#select_regioncli").on('change',function(){
                             required:"Seleccione una comuna"
                         },
                         form_regioncli:{
-                            reqiured:"Debe Seleccionar una región"
+                            required:"Debe Seleccionar una región"
                         }
                     },
                     submitHandler: function(form){
