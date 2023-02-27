@@ -68,8 +68,8 @@
             
 
 </div>
-
-        <div id="main"  class="layout-navbar">
+    
+    <div id="main" class="layout-navbar" style="background-image: url('./include/img/backgound-forest.jpg');">
             <?php
                 include_once('./include/topbar.php');
             ?>
@@ -84,7 +84,7 @@
                             <div class="row">
                                 <div class="col-4" style="text-align: start;">
                                         <label for="">
-                                                Mis Datos
+                                                Punto de retiro
                                         </label>
                                 </div>
                                 <div class="col-4" style="text-align: start;">
@@ -312,23 +312,23 @@
                                             </div>
                                             <div class="col-6">
                                                 <div class="form-group">
-                                                    <label for="Item">Item a enviar </label>
-                                                    <input type="text" id="item" class="form-control" name="item" placeholder="Item"/>
+                                                    <label for="Item">Describe brevemente lo que estas enviando </label>
+                                                    <input type="text" id="item" class="form-control" name="item" placeholder="producto"/>
                                                 </div>
                                             </div>
                                             <div class="col-3">
                                                 <div class="form-group">
-                                                    <label for="Costo">Costo item </label>
-                                                    <input type="text" id="cost" class="form-control" name="cost" placeholder="Precio Item"/>
+                                                    <label for="Costo">Costo producto </label>
+                                                    <input type="text" id="cost" class="form-control" name="cost" placeholder="Precio"/>
                                                 </div>
                                             </div>
                                             <div class="col-3" style="text-align: center;">
                                                 <div class="form-group">
-                                                <label for="Costo"> Tipo envío </label>
+                                                <label for="Costo"> Tamaño envío </label>
                                                     <select name="select_type" class="form-select" id="select_type" value="">
                                                         <option value="1"></option>
                                                         <option value="1">mini</option>
-                                                        <option value="2">medio</option>
+                                                        <option value="2">medium</option>
                                                     </select>
                                                 </div>
                                                 <label id="tipoenvio">Rango de peso</label>

@@ -55,7 +55,7 @@
                         
                             <div class="col-lg-3 col-sm-6 col-md-6 card colresume">
                                 <div class="row">
-                                    <a href=""><span class="envtitle"><h5>Envíos</h5></span></a>
+                                    <a href=""><span class="envtitle"><h5>Total de envios</h5></span></a>
                                 </div>
                                 <div class="row dataresenv">
                                     <div class="col-lg-6 col-md-6 col-sm-12 co-12 envresitems">
@@ -78,9 +78,10 @@
                                     
                                     
                             </div>
+
                             <div class="col-lg-3 col-sm-6 col-md-6 card colresume">
                                 <div class="row">
-                                    <a href=""><span class="envtitle"><h5>Pendientes</h5></span></a>
+                                    <a href=""><span class="envtitle"><h5>En Transito</h5></span></a>
                                 </div>
                                 <div class="row dataresenv">
                                     <div class="col-lg-6 col-md-6 col-sm-12 co-12 envresitems"> 
@@ -91,6 +92,22 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="col-lg-3 col-sm-6 col-md-6 card colresume">
+                                <div class="row">
+                                    <a href=""><span class="envtitle"><h5>Problemas en la entrega</h5></span></a>
+                                </div>
+                                <div class="row dataresenv">
+                                    <div class="col-lg-6 col-md-6 col-sm-12 co-12 envresitems"> 
+                                        <i class="fa-regular fa-clock"></i>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12 co-12 envresitems">
+                                        <h4><?php echo $cantEnviosNoEntregados->suma ?></h4>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Problemas en la entrega -->
                         </div>
                 </div>
                 <section class="row imgrowmenu" >

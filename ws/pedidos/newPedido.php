@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include_once('/xampp/htdocs/nclientesv2/ws/bd/dbconn.php');
+    include_once('../ws/bd/dbconn.php');
     
     $json = file_get_contents('php://input');
 

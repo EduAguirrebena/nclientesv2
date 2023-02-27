@@ -80,10 +80,11 @@
                             <table class="table table-striped" id="prtable">
                                 <thead>
                                     <tr>
-                                        <th>Nombre</th>
-                                        <th>Correo</th>
-                                        <th>Teléfono</th>
-                                        <th>Ciudad</th>
+                                        <th>Numero Pedido</th>
+                                        <th>Fecha creación pedido</th>
+                                        <th>Dirección retiro</th>
+                                        <th>Cantidad de envios</th>
+                                        <th>Resumen Pedido</th>
                                         <th>Estado</th>
                                     </tr>
                                 </thead>
@@ -115,9 +116,10 @@
                                                                 aria-expanded="false"
                                                                 aria-controls="collapseExample<?php echo$index?>"
                                                             >
-                                                                Resumen Pedido
+                                                                Flecha desplegable
                                                             </button>
                                                         </td>
+                                                        <td>Check verde - Información rojo - reloj (pendientes)</td>
                                                         
                                                     </tr>
                                                     <thead class="collapse exp<?php echo$index?>" id="collapseExample<?php echo$index?>">
@@ -165,9 +167,11 @@
                         dataType: 'JSON',
                          success:  function (response) {
                             var head =  " <tr>"+
-                                        '<td style="font-weight:800">Nombre</th>'+
+                                        '<td style="font-weight:800">Destinatario</th>'+
                                         '<td style="font-weight:800">Direccion</th>'+
-                                        '<td style="font-weight:800">Precio</th>'+
+                                        '<td style="font-weight:800">Correo</th>'+
+                                        '<td style="font-weight:800">Telefono</th>'+
+                                        '<td style="font-weight:800">Estado (beetrack)</th>'+
                                     "</tr>";
                             if(filas > 0)
                             {

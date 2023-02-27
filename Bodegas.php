@@ -76,7 +76,7 @@ include_once('../nclientesv2/include/head.php');
             <div class="page-heading">
                 <div class="row">
                     <div class="col-sm-9">
-                        <h3>Bodegas || Spread</h3>
+                        <h3>Mis Direcciones || Spread</h3>
                     </div>
                     <div class="col-sm-3">
                     <!-- Button trigger for Crear form modal -->
