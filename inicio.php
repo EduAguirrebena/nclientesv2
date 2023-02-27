@@ -115,7 +115,7 @@
                         </div>
 
                         <div class="singleimgmenu col-lg-6 col-sm-12">
-                            <a href="PedidosRealizados.php">
+                            <a href="./PedidosRealizados.php">
                                 <div class="card">
                                     <div class="card-body px-3 py-4-5" id="imgmenu">
                                         <div class="row">
