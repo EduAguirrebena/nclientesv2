@@ -159,10 +159,41 @@
 <script>
 $('.modpedido').on('click',function(){
     let id_pedido = $(this).closest('tr').find('.idpedido').text()
-    console.log(id_pedido);
-    window.location = "confirmarpedido.php?id_pedido="+id_pedido
-})
+    console.log(id_pedido)
+    $.ajax({
+            type: "POST",
+            url: "ws/pedidos/hasrows.php",
+            dataType: 'json',
+            data: JSON.stringify({
+                "id_pedido" : id_pedido
+            }),
+            success: function(data) {
+                console.log(data);
+                if(data.status ==1){
+                    window.location = "confirmarpedido.php?id_pedido="+id_pedido
+                }
+                if(data.status == 0){
+                    Swal.fire({
+                        title: 'Este pedido no posee bultos',
+                        text: "Será redireccionado para que cree un nuevo envío",
+                        icon: 'info',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Vamos!'
+                        }).then((result)=>{
+                            if(result){
+                                window.location = "seleccionBultos.php?"
+                            }
+                            else{
+                                swal.close()
+                            }
+                        })
+                }
 
+            }
+        })
+})
 </script>
 
 </html>

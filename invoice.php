@@ -38,7 +38,7 @@
     }
 
     if($datos_pedido->estado >= 2){
-        header("Location: detalles_pedido.php?id_pedido=$id_pedido");
+        header("Location: detalleFpedido.php?id_pedido=$id_pedido");
         exit();
     }
 
