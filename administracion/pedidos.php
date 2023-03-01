@@ -4,6 +4,7 @@ if(!isset($_SESSION['cliente'])):
     header("Location: ../index.php");
 endif;
 
+date_default_timezone_set("America/Santiago");
 // $administrador = $_SESSION['cliente']->rol;
 
 // if($administrador == 1) { 
@@ -19,9 +20,13 @@ $fecha_busqueda = date("d-m-Y",strtotime($fecha_actual."- 45 days"));
 $fecha_timestamp = strtotime($fecha_busqueda);
 
 
-if($datos_pedidos = $conexion->mysqli->query("SELECT * FROM pedido 
-                                            INNER JOIN datos_contacto ON (pedido.id_cliente=datos_contacto.id_cliente)
-                                            WHERE pedido.timestamp_pedido > $fecha_timestamp ORDER BY timestamp_pedido DESC")) {
+if($datos_pedidos = $conexion->mysqli->query("SELECT p.id_pedido,p.estado_pedido,dc.nombres_datos_contacto,
+                                            dc.apellidos_datos_contacto,dc.telefono_datos_contacto,
+                                            dc.email_datos_contacto,p.timestamp_pedido
+                                            FROM pedido p
+                                            INNER JOIN datos_contacto dc ON (p.id_cliente=dc.id_cliente)
+                                            where p.timestamp_pedido > $fecha_timestamp 
+                                            order by p.timestamp_pedido desc")) {
     $pedidos = array();
     while ($dato = $datos_pedidos->fetch_object()) {
         $pedidos[] = $dato;
@@ -65,13 +70,12 @@ else {
                             <table class="table nowrap" style="max-width: 100%;">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
+                                        <th># Pedido</th>
                                         <th>Cliente</th>
                                         <th>Teléfono</th>
                                         <th>Email</th>
                                         <th>Fecha creación</th>
-                                        <th>Cantidad Bultos</th>
-                                        <th>Cantidad objetados</th>
+                                        <th>Cantidad paquetes</th>
                                         <th>Finalizado</th>
                                         <th>Pagado</th>
                                         <th style="width: 10px"> </th>
@@ -80,10 +84,7 @@ else {
                                 <tbody>
                                 <?php
                                     foreach($pedidos as $pedido):
-                                        $carga_archivos = $conexion->mysqli->query("SELECT * FROM archivo WHERE id_pedido=$pedido->id_pedido")->num_rows;
-                                        $procesado_archivo = $conexion->mysqli->query("SELECT * FROM archivo WHERE procesado_archivo=1 AND id_pedido=$pedido->id_pedido")->num_rows;
-                                        $cantidad_bultos = $conexion->mysqli->query("SELECT * FROM bulto WHERE id_pedido=$pedido->id_pedido")->num_rows + $conexion->mysqli->query("SELECT * FROM bulto_temporal WHERE id_pedido=$pedido->id_pedido")->num_rows;
-                                        $cantidad_objetados = $conexion->mysqli->query("SELECT * FROM bulto_temporal WHERE CHAR_LENGTH(json_error)>5 AND id_pedido=$pedido->id_pedido")->num_rows + $conexion->mysqli->query("SELECT * FROM bulto_temporal WHERE id_pedido=$pedido->id_pedido")->num_rows;
+                                        $cantidad_bultos = $conexion->mysqli->query("SELECT count(id_bulto) as suma FROM bulto WHERE id_pedido=$pedido->id_pedido")->fetch_object()->suma;
                                         $finalizado = $pedido->estado_pedido==1 || $pedido->estado_pedido==2? true: false;
                                         $pagado = $pedido->estado_pedido==2? true: false;
                                     ?>
@@ -102,7 +103,6 @@ else {
                                             <?=date("d-m-Y H:i:s", $pedido->timestamp_pedido)?>
                                         </td>
                                         <td><?=$cantidad_bultos?></td>
-                                        <td><?=$cantidad_objetados?></td>
                                         <td>
                                             <a href="javascript:void(0)" class="btn btn-icon btn-default" data-toggle="tooltip" data-placement="top" title="" data-html="true" data-original-title="<?=$resultado = $finalizado? 'Pedido a la espera de pago' : 'Aún no es posible procesar el pago';?>"><i class="fas fa-<?=$resultado = $finalizado? 'check' : 'times';?>"></i></a>
                                         </td>

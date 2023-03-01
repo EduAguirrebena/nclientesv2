@@ -33,11 +33,11 @@
                         <li class="sidebar-item  has-sub">
                             <a href="#" class='sidebar-link'>
                                 <i class="fa-solid fa-boxes-stacked"></i>
-                                <span>Pedidos</span>
+                                <span>Mis Envios</span>
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="../PedidosRealizados.php">Realizados</a>
+                                    <a href="../PedidosRealizados.php">Envíos Realizados</a>
                                 </li>
                                 <li class="submenu-item ">
                                     <a href="../PedidosPendientes.php">Pendientes</a>

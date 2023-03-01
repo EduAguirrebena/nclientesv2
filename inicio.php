@@ -18,7 +18,8 @@
 
     $cantEnvios = totalEnvios($id_cliente,$timestamp1,$timestamp2);
     $cantEnviosEntregados = totalEnviosEntregados($id_cliente,$timestamp1,$timestamp2);
-    $cantEnviosNoEntregados = totalEnviosNoEntregados($id_cliente,$timestamp1,$timestamp2);
+    $cantEnviosEnTransito = totalEnviosEnTransito($id_cliente,$timestamp1,$timestamp2);
+    $cantEnviosConProblemas = totalEnviosConProblemas($id_cliente,$timestamp1,$timestamp2);
 
 
 ?>
@@ -49,60 +50,62 @@
                 <div class="page-content" style="color:3e3e3f;">
                     <div class="resumen-envios  mt-2">
                         <div class="row">
-                            <h4 style="color:#3e3e3f">Mis envíos</h4>
+                            <h4 style="color:#3e3e3f">Envíos de este mes</h4>
                         </div>
                         <div class="masteresume row">
                             
-                                <div class="col-lg-3 col-sm-6 col-md-6 card colresume">
+                                <div class="col-lg-2 col-12 col-md-6 card colresume">
                                     <div class="row">
                                         <a href=""><span class="envtitle"><h5>Total de envios</h5></span></a>
                                     </div>
                                     <div class="row dataresenv">
-                                        <div class="col-lg-6 col-md-6 col-sm-12 co-12 envresitems">
+                                        <div class="col-lg-6 col-md-6 col-sm-12 envresitems">
                                             <i class="fa-solid fa-truck"></i>
                                         </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-12 co-12 envresitems"> <h4><?php echo $cantEnvios->suma ?></h4></div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12 envresitems"> <h4><?php echo $cantEnvios->suma ?></h4></div>
                                     </div>
                                 </div>
                         
                                     
                                 
-                                <div class="col-lg-3 col-sm-6 col-md-6 card colresume">
+                                <div class="col-lg-2 col-12 col-md-6 card colresume">
                                     <div class="row">
-                                        <a href=""><span class="envtitle"><h5>Entregados</h5></span></a>
+                                        <a href="">
+                                            <span class="envtitle"><h5>Entregados</h5></span>
+                                        </a>
                                     </div>
                                     <div class="row dataresenv">
-                                        <div class="col-lg-6 col-md-6 col-sm-12 co-12 envresitems"> <i class="fa-solid fa-check"></i></div>
-                                        <div class="col-lg-6 col-md-6 col-sm-12 co-12 envresitems"> <h4><?php echo $cantEnviosEntregados->suma ?></h4></div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12 envresitems"> <i class="fa-solid fa-check"></i></div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12 envresitems"> <h4><?php echo $cantEnviosEntregados->suma ?></h4></div>
                                     </div>
                                         
                                         
                                 </div>
 
-                                <div class="col-lg-3 col-sm-6 col-md-6 card colresume">
+                                <div class="col-lg-2 col-12 col-md-6 card colresume">
                                     <div class="row">
                                         <a href=""><span class="envtitle"><h5>En Transito</h5></span></a>
                                     </div>
                                     <div class="row dataresenv">
-                                        <div class="col-lg-6 col-md-6 col-sm-12 co-12 envresitems"> 
+                                        <div class="col-lg-6 col-md-6 col-sm-12 envresitems"> 
                                             <i class="fa-regular fa-clock"></i>
                                         </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-12 co-12 envresitems">
-                                            <h4><?php echo $cantEnviosNoEntregados->suma ?></h4>
+                                        <div class="col-lg-6 col-md-6 col-sm-12 envresitems">
+                                            <h4><?php echo $cantEnviosEnTransito->suma ?></h4>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-lg-3 col-sm-6 col-md-6 card colresume">
+                                <div class="col-lg-2 col-12 col-md-6 card colresume">
                                     <div class="row">
                                         <a href=""><span class="envtitle"><h5>Problemas en la entrega</h5></span></a>
                                     </div>
                                     <div class="row dataresenv">
-                                        <div class="col-lg-6 col-md-6 col-sm-12 co-12 envresitems"> 
+                                        <div class="col-lg-6 col-md-6 col-sm-12 envresitems"> 
                                             <i class="fa-regular fa-clock"></i>
                                         </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-12 co-12 envresitems">
-                                            <h4><?php echo $cantEnviosNoEntregados->suma ?></h4>
+                                        <div class="col-lg-6 col-md-6 col-sm-12 envresitems">
+                                            <h4><?php echo $cantEnviosConProblemas->suma ?></h4>
                                         </div>
                                     </div>
                                 </div>
