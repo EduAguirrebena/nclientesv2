@@ -88,7 +88,7 @@
             // echo $querybulto;
             echo $conn->mysqli->error;
         }
-        echo $querybulto;
+        // echo $querybulto;
     }
     else {
         
