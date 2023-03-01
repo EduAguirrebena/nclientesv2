@@ -30,8 +30,8 @@
    
     $conn ->conectar();
 
-    $query = 'INSERT INTO cliente_frecuente (rut, nombre, direccion, descripciondir, telefono, comuna, id_cliente)
-                    VALUES("'.$rut.'","'.$nombre.'","'.$direccion.'",null,'.$telefono.',"'.$comuna.'",'.$id_cliente.')';
+    $query = 'INSERT INTO cliente_frecuente (rut, nombre, direccion, descripciondir,correo, telefono, comuna, region, id_cliente)
+                    VALUES("'.$rut.'","'.$nombre.'","'.$direccion.'",null,"'.$correo.'",'.$telefono.','.$comuna.','.$region.','.$id_cliente.')';
 
     if($conn->mysqli->query($query))
     {
@@ -39,7 +39,4 @@
     }else{
         echo json_encode(array("status"=>"0","Resultado"=>"Error","Errorlog"=>$conn->mysqli->error));
     }
-
-
-
 ?>

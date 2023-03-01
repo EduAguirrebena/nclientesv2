@@ -19,5 +19,12 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <link href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.css">
+  
+    <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/choices.js/2.8.3/styles/css/choices.css">
+
+
+
     <link rel="stylesheet" href="./assets/css/shared/iconly.css" />
 </head>

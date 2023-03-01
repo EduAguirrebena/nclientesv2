@@ -1,5 +1,6 @@
 <?php
     session_start();
+    date_default_timezone_set("America/Santiago");
     include_once('../bd/dbconn.php');
     
     $json = file_get_contents('php://input');

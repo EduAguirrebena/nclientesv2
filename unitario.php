@@ -10,7 +10,8 @@
     $counterbodegas =0;
     $bodegas = [];
 
-    $query='Select Nombre_region as nombre,id_region as id from region';
+    $queryclientefrecuente='Select * from cliente_frecuente where id_cliente='.$id_cliente;
+    $query='Select Nombre_region as nombre,id_region as id from region where id_region in (6,7,8)';
     $querybodega =  'SELECT bo.nombre_bodega as nombre,
                             bo.calle_bodega as calle, 
                             bo.numero_bodega as numero,
@@ -22,7 +23,7 @@
                         inner join comuna co on co.id_comuna = bo.id_comuna
                         inner join provincia pro on pro.id_provincia = co.id_provincia
                         inner join region re on re.id_region = pro.id_region
-                        where bo.id_cliente ='.$id_cliente.' and IsDelete = 0';
+                        where bo.id_cliente ='.$id_cliente.' and IsDelete = 0 ';
 
 
    
@@ -52,6 +53,17 @@
         echo $conn->mysqli->error;
     }
 
+
+
+    if($resclientefrecuente = $conn->mysqli->query($queryclientefrecuente)){
+        while($clientesfrecuentesdata = $resclientefrecuente ->fetch_object())
+        {
+            $clientesfre [] = $clientesfrecuentesdata;
+        }
+    }
+    else{
+        echo $conn->mysqli->error;
+    }
     
 
 ?>
@@ -315,28 +327,17 @@
                                                     Jquery Datatable
                                                 </div>
                                                 <div class="card-body">
-                                                    <table class="table" id="tablafclientes">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Name</th>
-                                                                <th>Email</th>
-                                                                <th>Phone</th>
-                                                                <th>City</th>
-                                                                <th>Status</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>Graiden</td>
-                                                                <td>vehicula.aliquet@semconsequat.co.uk</td>
-                                                                <td>076 4820 8838</td>
-                                                                <td>Offenburg</td>
-                                                                <td>
-                                                                    <span class="badge bg-success">Active</span>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
+                                                    <div class="form-group">
+                                                        <select class="choices form-select" id="clifreselect">
+                                                            <optgroup label="Clientes Frecuentes">
+                                                                <?php
+                                                                    foreach($clientesfre as $key=>$cliente ):
+                                                                ?>
+                                                                <option value="<?=$cliente->rut?>"><?php echo $cliente->nombre.' | '.$cliente->direccion?></option>
+                                                                <?php endforeach;?>
+                                                            </optgroup>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -521,6 +522,7 @@
     
     var countbodegas = <?php echo $counterbodegas;?>;
     var crearcliente = document.getElementById('savecliente')
+    var selectcomuna = 0;
     $('#buttonsubmit').on('click', function(){
         console.log(crearcliente.checked);
         
@@ -531,6 +533,41 @@
 	    minimumLength: 6,
 		validateOn: 'change'
 	});
+
+    $('#clifreselect').on('change',function(){
+        let rut = $(this).val()
+        console.log(rut);
+
+
+        $.ajax({
+            type: "POST",
+            url: "ws/cliente/getclientefrecuente.php",
+            dataType: 'json',
+            data: {
+                "rut" : rut
+            },
+            success: function(data) {
+                console.log(data);
+
+                $.each(data, function (key, value){
+                    console.log(value.comuna);
+                    document.getElementById("nombredestinatario").value = value.nombre
+                    document.getElementById('dir').value = value.direccion
+                    document.getElementById('numtel').value = value.telefono
+                    document.getElementById('correo').value = value.correo
+                    // let vcomuna = document.getElementById('select_comuna').value;
+                    document.getElementById('select_region').value = value.region;
+                    document.getElementById('select_region').change()
+                    selectcomuna = value.comuna
+                    document.getElementById('rut_datos_contacto').value = value.rut
+                })
+                
+            },
+                error: function(data){
+            }
+        })
+
+    })
 
 
     var existbodegas=<?php echo $existbodegas;?>;
@@ -641,7 +678,17 @@ $("#select_region").on('change',function(){
 
                         $.each(data, function (key, value){
                             let select = document.getElementById("select_comuna");
-                            select.options[select.options.length] = new Option(value.nombre,value.id);
+                                    
+                            if(selectcomuna == value.id){
+                                select.options[select.options.length] = new Option(value.nombre,value.id,false,true)
+                                
+                            }
+                            else{
+                                select.options[select.options.length] = new Option(value.nombre,value.id,false,false)
+                            }
+                            
+                            //let select = document.getElementById("select_comuna");
+                            //select.options[select.options.length] = new Option(value.nombre,value.id);
                         })
                         
                     },
