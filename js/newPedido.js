@@ -1,9 +1,9 @@
 
-
+var tipo = 0;
     $().ready(function(){
         $('#toValdiateBulto').validate({
             rules:{
-                fname:{
+                nombredestinatario:{
                     required :true,
                     minlength:4
                 },
@@ -25,18 +25,23 @@
                 select_comuna:{
                     required:true
                 },
-                item:{
-                    required : true
-                },
-                cost:{
-                    required:true
-                },
-                select_type:{
-                    required:true
+                rut_datos_contacto:{
+                    required: true,
+                    minlength:11
                 }
+                // ,
+                // item:{
+                //     required : true
+                // },
+                // cost:{
+                //     required:true
+                // },
+                // select_type:{
+                //     required:true
+                // }
             },
             messages:{
-                fname:{
+                nombredestinatario:{
                     required : "Debe ingresar un destinatario",
                     minlength : "El nombre debe tener al menos 4 caracteres"
                 },
@@ -58,27 +63,84 @@
                 select_comuna:{
                     required:"Debe ingresar la comuna de destino"
                 },
+                rut_datos_contacto:{
+                    required: "Debe ingresar un RUT",
+                    minlength:"RUT invalido, por favor verificar info."
+                }
+                // ,
+                // item:{
+                //     required : "Ingrese el objeto que se va a despachar"
+                // },
+                // cost:{
+                //     required:"Ingrese costo del Item a despachar"
+                // },
+                // select_type:{
+                //     required:"Debe Seleccionar el tipo de envío"
+                // }
+            },
+            submitHandler: function(form){ 
+                $('.formdisplay').addClass('show');
+                
+                    
+            }   
+        })
+        
+        $('#deployform').validate({
+
+            rules:{
+                item:{
+                    required : true
+                },
+                cost:{
+                    required:true
+                },
+                Usar:{
+                    required:true
+                }
+            },
+            messages:{
                 item:{
                     required : "Ingrese el objeto que se va a despachar"
                 },
                 cost:{
                     required:"Ingrese costo del Item a despachar"
                 },
-                select_type:{
-                    required:"Debe Seleccionar el tipo de envío"
+                Usar:{
+                    required:""
+                }
+            }, errorPlacement: function(error, element) {
+                if (element.type == 'radio') {
+                    error.appendTo(element.parent());
+                }
+                else {
+                    error.insertAfter(element);
                 }
             },
-            submitHandler: function(form){ 
-                try{
+            submitHandler: function(form,event){ 
+                event.preventDefault()
+
+                if (document.getElementById('useMini').checked) {
+                    tipo = 1
+                }
+                if (document.getElementById('useMedium').checked) {
+                    tipo =2;
+                }
+                
+               //console.log(tipo);
+                
+               try{
+                  
+
                     let nombredest = document.getElementById("nombredestinatario").value;
                     let vdir = document.getElementById('dir').value;
                     let vnumero = document.getElementById('numtel').value;
                     let vcorreo = document.getElementById('correo').value;
                     let vitem = document.getElementById('item').value;
                     let vcosto = document.getElementById('cost').value;
-                    let vidpaquete = document.getElementById('select_type').value;
+                    // let vidpaquete = document.getElementById('select_type').value;
                     let vcomuna = document.getElementById('select_comuna').value;
                     let vergion = document.getElementById('select_region').value;
+                    let vrut = document.getElementById('rut_datos_contacto').value;
                   
         
                     let dataajax = {
@@ -88,15 +150,33 @@
                         correo : vcorreo,
                         item: vitem,
                         costo: vcosto,
-                        idpaquete : vidpaquete,
+                        idpaquete : tipo,
                         comuna : vcomuna,
                         region : vergion,
-                        idbodega : id_bodega
-        
+                        idbodega : id_bodega,
+                        rut : vrut
                     };
+
+                    console.log("EL CREAR CLIENTE ES :"+crearcliente.checked);
+                    if(crearcliente.checked){
+                        $.ajax({
+                            url: "ws/cliente/newclienteFrecuente.php",
+                            type: "POST",
+                            data: JSON.stringify(dataajax)
+                            ,success:function(resp){
+                                console.log(resp);
+                            },
+                            error : function(resp){
+                                    console.log(resp);
+                                    return false;
+                                }
+                        });
+                    }else{
+                        console.log("Cliente No guardado");
+                    }
                     
                     
-                    // alert(JSON.stringify(dataajax));
+                    //alert(JSON.stringify(dataajax));
                             $.ajax({
                             url: "ws/pedidos/newPedido.php",
                             type: "POST",
@@ -109,9 +189,11 @@
                                     icon: "success",
                                     showConfirmButton: false,
                                     type : "success",
-                                    timer : 100
+                                    timer : 2500
                                     
                                 }).then(function() {
+                                    document.getElementById("deployform").reset();
+                                    document.getElementById("toValdiateBulto").reset();
                                     window.location = "confirmarpedido.php?id_pedido="+resp;
                                 })
                             },
@@ -119,8 +201,6 @@
                                     return false;
 
                                 }
-                            
-                            
                         });
                        
                 }
@@ -128,18 +208,8 @@
                     console.log(error);
                     return false;
                 }   
+             }
+           
                     
-            }   
         })
-    
-    
-    
-
-
-
     })
-    
-$("#buttonsubmit").click(function(){
-    var vname = document.getElementById('fname').value;
-    console.log(vname);
-})

@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include_once('../ws/bd/dbconn.php');
+    include_once('../bd/dbconn.php');
     
     $json = file_get_contents('php://input');
 
@@ -17,6 +17,7 @@
     $comuna = $data->comuna;
     $region = $data->region;
     $id_bodega = $data->idbodega;
+    $rut = $data->rut;
     $timestamp = time();
 
     $conn = new bd();
@@ -78,16 +79,16 @@
         
         $querybulto = "INSERT INTO bulto (id_bulto, nombre_bulto, direccion_bulto, telefono_bulto,email_bulto,descripcion_bulto,
                     valor_declarado_bulto, precio_bulto, tipo_servicio_bulto, codigo_bulto, codigo_barras_bulto, 
-                    id_paquete, id_comuna, id_pedido, estado_logistico,track_spread)
-                    VALUES (null,'".$nombre."','".$direccion."',".$telefono.",'".$correo."','".$item."',".$costo.",".$valor.",'".$tipo_servicio."','abc',".$barcode.",".$idpaquete.",".$comuna.",".$id_pedido.",0,NULL);";
-
+                    id_paquete, id_comuna, id_pedido,rut_cliente, estado_logistico,track_spread)
+                    VALUES (null,'".$nombre."','".$direccion."',".$telefono.",'".$correo."','".$item."',".$costo.",".$valor.",'".$tipo_servicio."','abc',".$barcode.",".$idpaquete.",".$comuna.",".$id_pedido.',"'.$rut.'",0,NULL)';
+        // echo $querybulto;
         if($conn->mysqli->query($querybulto)){
            echo $id_pedido;
         }else{
             // echo $querybulto;
             echo $conn->mysqli->error;
         }
-        //echo $querybulto;
+        echo $querybulto;
     }
     else {
         

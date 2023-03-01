@@ -45,136 +45,138 @@
                 include_once('./include/topbar.php');
             ?>
        
-
-            <div class="page-content" style="color:3e3e3f;">
-                <div class="resumen-envios row mt-2">
-                    <div class="row">
-                        <h4 style="color:#3e3e3f">Mis envíos</h4>
-                    </div>
-                    <div class="masteresume row">
-                        
-                            <div class="col-lg-3 col-sm-6 col-md-6 card colresume">
-                                <div class="row">
-                                    <a href=""><span class="envtitle"><h5>Total de envios</h5></span></a>
-                                </div>
-                                <div class="row dataresenv">
-                                    <div class="col-lg-6 col-md-6 col-sm-12 co-12 envresitems">
-                                        <i class="fa-solid fa-truck"></i>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-12 co-12 envresitems"> <h4><?php echo $cantEnvios->suma ?></h4></div>
-                                </div>
-                             </div>
-                       
-                                
-                            
-                            <div class="col-lg-3 col-sm-6 col-md-6 card colresume">
-                                <div class="row">
-                                    <a href=""><span class="envtitle"><h5>Entregados</h5></span></a>
-                                </div>
-                                <div class="row dataresenv">
-                                    <div class="col-lg-6 col-md-6 col-sm-12 co-12 envresitems"> <i class="fa-solid fa-check"></i></div>
-                                    <div class="col-lg-6 col-md-6 col-sm-12 co-12 envresitems"> <h4><?php echo $cantEnviosEntregados->suma ?></h4></div>
-                                </div>
-                                    
-                                    
-                            </div>
-
-                            <div class="col-lg-3 col-sm-6 col-md-6 card colresume">
-                                <div class="row">
-                                    <a href=""><span class="envtitle"><h5>En Transito</h5></span></a>
-                                </div>
-                                <div class="row dataresenv">
-                                    <div class="col-lg-6 col-md-6 col-sm-12 co-12 envresitems"> 
-                                        <i class="fa-regular fa-clock"></i>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-12 co-12 envresitems">
-                                        <h4><?php echo $cantEnviosNoEntregados->suma ?></h4>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-3 col-sm-6 col-md-6 card colresume">
-                                <div class="row">
-                                    <a href=""><span class="envtitle"><h5>Problemas en la entrega</h5></span></a>
-                                </div>
-                                <div class="row dataresenv">
-                                    <div class="col-lg-6 col-md-6 col-sm-12 co-12 envresitems"> 
-                                        <i class="fa-regular fa-clock"></i>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-12 co-12 envresitems">
-                                        <h4><?php echo $cantEnviosNoEntregados->suma ?></h4>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Problemas en la entrega -->
+            <div class="container-fluid" id="containermainmenu">
+                <div class="page-content" style="color:3e3e3f;">
+                    <div class="resumen-envios  mt-2">
+                        <div class="row">
+                            <h4 style="color:#3e3e3f">Mis envíos</h4>
                         </div>
-                </div>
-                <section class="row imgrowmenu" >
-                    <div class="row ">
-                        <div class="singleimgmenu col-lg-6 col-sm-12">
-                            <a href="./seleccionBultos.php">
-                                <div class="card">
+                        <div class="masteresume row">
+                            
+                                <div class="col-lg-3 col-sm-6 col-md-6 card colresume">
+                                    <div class="row">
+                                        <a href=""><span class="envtitle"><h5>Total de envios</h5></span></a>
+                                    </div>
+                                    <div class="row dataresenv">
+                                        <div class="col-lg-6 col-md-6 col-sm-12 co-12 envresitems">
+                                            <i class="fa-solid fa-truck"></i>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12 co-12 envresitems"> <h4><?php echo $cantEnvios->suma ?></h4></div>
+                                    </div>
+                                </div>
+                        
+                                    
+                                
+                                <div class="col-lg-3 col-sm-6 col-md-6 card colresume">
+                                    <div class="row">
+                                        <a href=""><span class="envtitle"><h5>Entregados</h5></span></a>
+                                    </div>
+                                    <div class="row dataresenv">
+                                        <div class="col-lg-6 col-md-6 col-sm-12 co-12 envresitems"> <i class="fa-solid fa-check"></i></div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12 co-12 envresitems"> <h4><?php echo $cantEnviosEntregados->suma ?></h4></div>
+                                    </div>
+                                        
+                                        
+                                </div>
+
+                                <div class="col-lg-3 col-sm-6 col-md-6 card colresume">
+                                    <div class="row">
+                                        <a href=""><span class="envtitle"><h5>En Transito</h5></span></a>
+                                    </div>
+                                    <div class="row dataresenv">
+                                        <div class="col-lg-6 col-md-6 col-sm-12 co-12 envresitems"> 
+                                            <i class="fa-regular fa-clock"></i>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12 co-12 envresitems">
+                                            <h4><?php echo $cantEnviosNoEntregados->suma ?></h4>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3 col-sm-6 col-md-6 card colresume">
+                                    <div class="row">
+                                        <a href=""><span class="envtitle"><h5>Problemas en la entrega</h5></span></a>
+                                    </div>
+                                    <div class="row dataresenv">
+                                        <div class="col-lg-6 col-md-6 col-sm-12 co-12 envresitems"> 
+                                            <i class="fa-regular fa-clock"></i>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12 co-12 envresitems">
+                                            <h4><?php echo $cantEnviosNoEntregados->suma ?></h4>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Problemas en la entrega -->
+                            </div>
+                    </div>
+                    <section class="row imgrowmenu" >
+                        <div class="row ">
+                            <div class="singleimgmenu col-lg-6 col-sm-12">
+                                <a href="./seleccionBultos.php">
+                                    <div class="card">
+                                            <div class="card-body px-3 py-4-5" id="imgmenu">
+                                                <div class="row " >
+                                                    <div class="col-md-4" id="cardicon">
+                                                        <div class="stats-icon green">
+                                                            <i class="fa-solid fa-paper-plane"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-8 menutxt">
+                                                        <h4 class="font-semibold"> Envía Ahora </h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="singleimgmenu col-lg-6 col-sm-12">
+                                <a href="./PedidosRealizados.php">
+                                    <div class="card">
                                         <div class="card-body px-3 py-4-5" id="imgmenu">
-                                            <div class="row " >
-                                                <div class="col-md-4" id="cardicon">
+                                            <div class="row">
+                                                <div class="col-md-4 "id="cardicon">
                                                     <div class="stats-icon green">
-                                                        <i class="fa-solid fa-paper-plane"></i>
+                                                        <i class="fa-solid fa-box"></i>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-8 menutxt">
-                                                    <h4 class="font-semibold"> Envía Ahora </h4>
+                                                    <h4 class="font-semibold">Mis Envíos</h4>
                                                 </div>
-                                            </div>
-                                        </div>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="singleimgmenu col-lg-6 col-sm-12">
-                            <a href="./PedidosRealizados.php">
-                                <div class="card">
-                                    <div class="card-body px-3 py-4-5" id="imgmenu">
-                                        <div class="row">
-                                            <div class="col-md-4 "id="cardicon">
-                                                <div class="stats-icon green">
-                                                    <i class="fa-solid fa-box"></i>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-8 menutxt">
-                                                <h4 class="font-semibold">Mis Envíos</h4>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </a>
-                        </div>
+                                </a>
+                            </div>
 
-                        <!-- <div class="singleimgmenu col-lg-3 col-sm-6 col-md-6">
-                            <a href="Bodegas.php">
-                                <div class="card" style="height: 200px; overflow-y: auto">
-                                    <div class="card-body"  id="imgmenu">
-                                        <div class="row">
-                                            <div class="col-md-4" id="cardicon">
-                                                <div class="stats-icon green">
-                                                    <i class="fa-solid fa-warehouse"></i>
+                            <!-- <div class="singleimgmenu col-lg-3 col-sm-6 col-md-6">
+                                <a href="Bodegas.php">
+                                    <div class="card" style="height: 200px; overflow-y: auto">
+                                        <div class="card-body"  id="imgmenu">
+                                            <div class="row">
+                                                <div class="col-md-4" id="cardicon">
+                                                    <div class="stats-icon green">
+                                                        <i class="fa-solid fa-warehouse"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8 menutxt">
+                                                    <h4 class="font-semibold">Mis direcciones</h3>
                                                 </div>
                                             </div>
-                                            <div class="col-md-8 menutxt">
-                                                <h4 class="font-semibold">Mis direcciones</h3>
+                                            <div class="col-12" style="text-align: center; float:inline-end">
+                                                <p>(Lugar donde iremos a retirar)</p>
                                             </div>
                                         </div>
-                                        <div class="col-12" style="text-align: center; float:inline-end">
-                                            <p>(Lugar donde iremos a retirar)</p>
-                                        </div>
                                     </div>
-                                </div>
-                            </a>
-                        </div> -->
-                        
-                    </div>
-                </section>
+                                </a>
+                            </div> -->
+                            
+                        </div>
+                    </section>
+                </div>
             </div>
+            
 
             <?php
                 include_once('../nclientesv2/include/footer.php')
