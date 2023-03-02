@@ -144,7 +144,7 @@
                                             <i data-feather="x"></i>
                                         </button>
 
-                                        <input disabled type="text" name="vid_bulto"/>
+                                        <input  style="display: none;" type="text" name="vid_bulto"/>
                                     </div>
 
                                     <div class="row">

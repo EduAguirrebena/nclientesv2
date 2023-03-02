@@ -18,7 +18,6 @@
     $datosbultos [] = $datares;
     }
   }
-
 ?>
 
 

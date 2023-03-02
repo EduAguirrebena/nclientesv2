@@ -330,8 +330,6 @@ include_once('../nclientesv2/include/head.php');
         $('#inlineForm').modal('hide')
     })
 
-
-
     $('.modbtn').on('click',function(){
         id_bodega = $(this).closest('.card_bodegas').find('#idbod').val()
         console.log(id_bodega)
@@ -353,7 +351,6 @@ include_once('../nclientesv2/include/head.php');
                     selectcomuna = value.comuna
                     comunacheck = true
                 })
-                
             }
         })
     })

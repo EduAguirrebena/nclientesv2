@@ -330,6 +330,7 @@
                                                     <div class="form-group">
                                                         <select class="choices form-select" id="clifreselect">
                                                             <optgroup label="Clientes Frecuentes">
+                                                                <option value=""></option>
                                                                 <?php
                                                                     foreach($clientesfre as $key=>$cliente ):
                                                                 ?>
@@ -402,10 +403,14 @@
                                             <!-- <div class="col-4 justify-content-start">
                                                 <button type="submit" class="submit btn btn-primary me-1 mb-1 col-12" value="Submit"> Enviar </button>
                                             </div> -->
-                                            <div class="row justify-content-end mt-3">
-                                                <div class="col-6">
+                                            <div class="row mt-3" style="justify-content: space-between;">
+                                                <div class="col-md-2 col-2">
+                                                    <a onclick="resetClienteData()" style="cursor: pointer" title="Limpiar formulario"> <i class="fa-solid fa-hand-sparkles" style="font-size: 30px;"></i> </a>
+                                                </div>
+                                                <div class="col-md-6 col-12">
                                                     <button type="submit" class="submit btn btn-primary me-1 mb-1 col-12" id="deploy"> Continuar</button>
                                                 </div>
+                                               
                                             </div>        
                                             
                                         </div>
@@ -523,9 +528,9 @@
     var countbodegas = <?php echo $counterbodegas;?>;
     var crearcliente = document.getElementById('savecliente')
     var selectcomuna = 0;
+
     $('#buttonsubmit').on('click', function(){
         console.log(crearcliente.checked);
-        
     })
 
     $("input#rut_datos_contacto").rut({
@@ -533,6 +538,10 @@
 	    minimumLength: 6,
 		validateOn: 'change'
 	});
+
+    function resetClienteData(){
+        document.getElementById('toValdiateBulto').reset()
+    }
 
     $('#clifreselect').on('change',function(){
         let rut = $(this).val()
@@ -556,10 +565,14 @@
                     document.getElementById('numtel').value = value.telefono
                     document.getElementById('correo').value = value.correo
                     // let vcomuna = document.getElementById('select_comuna').value;
-                    document.getElementById('select_region').value = value.region;
-                    document.getElementById('select_region').change()
-                    selectcomuna = value.comuna
+                    let region = document.getElementById('select_region')
+                    region.value =value.region;
+                    $('#select_region').change();
                     document.getElementById('rut_datos_contacto').value = value.rut
+                    // $('section').find('#select_regionm').val(value.region).change()
+                    // document.getElementById('select_region').trigger('change')
+                    selectcomuna = value.comuna
+                    
                 })
                 
             },
@@ -675,9 +688,10 @@ $("#select_region").on('change',function(){
                     },
                     success: function(data) {
                         console.log(data);
-
+                        let select = document.getElementById("select_comuna");
+                        select.options[select.options.length] = new Option("","",false,false)
                         $.each(data, function (key, value){
-                            let select = document.getElementById("select_comuna");
+                            
                                     
                             if(selectcomuna == value.id){
                                 select.options[select.options.length] = new Option(value.nombre,value.id,false,true)
@@ -762,7 +776,7 @@ $("#select_regioncli").on('change',function(){
                         }
                     },
                     submitHandler: function(form){
-                            console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+                            //console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
                     
                         try{
                             let vdir = document.getElementById('form_dir').value;
